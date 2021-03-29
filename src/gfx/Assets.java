@@ -22,9 +22,9 @@ public class Assets {
             tree[i] = ImageLoader.loadImage("res/textures/tree/tree (" + i + ").png");
         }
         SpriteSheet teleport = new SpriteSheet(ImageLoader.loadImage("res/textures/Teleport.png"));
-        SpriteSheet map_1 = new SpriteSheet(ImageLoader.loadImage("res/textures/Map_1.png"));
-        for(int i = 0; i<29; i++){
-            for(int j = 0; j<23; j++){
+        SpriteSheet map_1 = new SpriteSheet(ImageLoader.loadImage("res/textures/Map1.png"));
+        for(int i = 0; i<20; i++){
+            for(int j = 0; j<25; j++){
                 map1[j][i] = map_1.crop(width*j, height*i, width, height);
             }
         }

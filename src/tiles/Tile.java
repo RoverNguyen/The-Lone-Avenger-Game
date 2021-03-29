@@ -30,7 +30,7 @@ public class Tile {
         clear = new Clear(0);
         checkPoint = new CheckPoint(999);
         rockTile = new RockTile(998);
-        for(int i=1; i<644; i++ )
+        for(int i=1; i<501; i++ )
             Architecture[i] = new ArchitectureMap1(i);
     }
 
