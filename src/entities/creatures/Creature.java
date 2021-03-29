@@ -73,9 +73,12 @@ public abstract class Creature extends Entity {
     }
 
     protected boolean collisionWithTile(int x, int y){
-
-            return handler.getWorld().getTile(x, y).isSolid();
-
+            for(int z = 0; z<handler.getWorld().getLayer(); z++) {
+                if(handler.getWorld().getTile(x, y, z).isSolid()){
+                    return true;
+                }
+            }
+            return false;
     }
 
 

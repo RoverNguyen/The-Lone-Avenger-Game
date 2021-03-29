@@ -22,7 +22,7 @@ public class World {
     private int spawnYPre;
     private int spawnX;
     private int spawnY;
-//    private int layer;
+    private int layer = 3;
     public void setWidth(int width) {
         this.width = width;
     }
@@ -40,7 +40,7 @@ public class World {
     }
 
     private int countWorld;
-    private int[][] tiles;
+    private int[][][] tiles;
 
 
     //Entities
@@ -70,21 +70,21 @@ public class World {
             spawnY = spawnYPre;
         }
         entityManager = new EntityManager(handler, new Player(handler,spawnX, spawnY, 25));
-        for(int i = 0; i < 6; i++){
-            entityManager.addEntity(new Tree(handler, Assets.tree[1], 175 + 100*i, 50));
-            entityManager.addEntity(new Tree(handler, Assets.tree[12], 175 + 100*i, 130));
-        }
-
-        for(int i = 0; i < 4; i++) {
-            entityManager.addEntity(new Tree(handler, Assets.tree[12], 290 + 100 * i, 800));
-        }
+//        for(int i = 0; i < 6; i++){
+//            entityManager.addEntity(new Tree(handler, Assets.tree[1], 175 + 100*i, 50));
+//            entityManager.addEntity(new Tree(handler, Assets.tree[12], 175 + 100*i, 130));
+//        }
+//
+//        for(int i = 0; i < 4; i++) {
+//            entityManager.addEntity(new Tree(handler, Assets.tree[12], 290 + 100 * i, 800));
+//        }
 
     }
 
 
     public void tick() {
         entityManager.tick();
-        spawnEnemy();
+//        spawnEnemy();
     }
 
     public void spawnEnemy(){
@@ -117,19 +117,21 @@ public class World {
         int yStart = (int) (Math.max(0, handler.getGameCamera().getyOffset() / Settings.TILE_HEIGHT));
         int yEnd = (int) (Math.min(height, (handler.getGameCamera().getyOffset() + handler.getHeight()) / Settings.TILE_HEIGHT + 1));
 
-        for (int y = yStart; y < yEnd; y++) {
-            for (int x = xStart; x < xEnd; x++) {
-                //render layer 1
-                getTile(x, y).render(g, (int) (x * Settings.TILE_WIDTH - handler.getGameCamera().getxOffset()),
-                        (int) (y * Settings.TILE_HEIGHT - handler.getGameCamera().getyOffset()));
+        for(int z = 0; z< layer; z++) {
+            for (int y = yStart; y < yEnd; y++) {
+                for (int x = xStart; x < xEnd; x++) {
 
-                //render layer 2
-                getTile(x, y+ height).render(g, (int) (x * Settings.TILE_WIDTH - handler.getGameCamera().getxOffset()),
-                        (int) (y * Settings.TILE_HEIGHT - handler.getGameCamera().getyOffset()));
-//                e nghi k can ,, không cần gì á, ơ được á, thử chạy xem ạ, sửa lại cái load world nào
-                //render layer 3
-                getTile(x, y + height*2).render(g, (int) (x * Settings.TILE_WIDTH - handler.getGameCamera().getxOffset()),
-                        (int) (y * Settings.TILE_HEIGHT - handler.getGameCamera().getyOffset()));
+                    getTile(x, y, z).render(g, (int) (x * Settings.TILE_WIDTH - handler.getGameCamera().getxOffset()),
+                            (int) (y * Settings.TILE_HEIGHT - handler.getGameCamera().getyOffset()));
+
+//                    //render layer 2
+//                    getTile(x, y + height).render(g, (int) (x * Settings.TILE_WIDTH - handler.getGameCamera().getxOffset()),
+//                            (int) (y * Settings.TILE_HEIGHT - handler.getGameCamera().getyOffset()));
+////                e nghi k can ,, không cần gì á, ơ được á, thử chạy xem ạ, sửa lại cái load world nào
+//                    //render layer 3
+//                    getTile(x, y + height * 2).render(g, (int) (x * Settings.TILE_WIDTH - handler.getGameCamera().getxOffset()),
+//                            (int) (y * Settings.TILE_HEIGHT - handler.getGameCamera().getyOffset()));
+                }
             }
         }
 
@@ -138,11 +140,11 @@ public class World {
     }
 
     //get Tile layer 1
-    public Tile getTile(int x, int y){
-        if(x < 0 || y < 0 || x >= width || y >= height * 3){
-            return Tile.clear;
-        }
-        Tile t = Tile.tiles[tiles[x][y]];
+    public Tile getTile(int x, int y, int z){
+//        if(x < 0 || y < 0 || x >= width || y >= height * 3){
+//            return Tile.clear;
+//        }
+        Tile t = Tile.tiles[tiles[x][y][z]];
         if(t == null)
             return Tile.clear;
         return t;
@@ -162,34 +164,35 @@ public class World {
         spawnXPre = Utils.parseInt(tokens[4]);
         spawnYPre = Utils.parseInt(tokens[5]);
         countWorld = Utils.parseInt(tokens[6]);
-//        layer = Utils.parseInt(tokens[7]);
+        layer = Utils.parseInt(tokens[7]);
         ///System.out.println(layer);
 
-        tiles = new int[width][height*3];
-        tiles = new int[25][60];
+        tiles = new int[width][height][layer];
 
-        //load layer 1
-        for (int j = 0; j < height; j++) {
-            for (int i = 0; i < width; i++) {
-                tiles[i][j] = Utils.parseInt(tokens[i + j * width + 7]);
+        for(int z = 0; z < layer; z++) {
+            for (int j = 0; j < height; j++) {
+                for (int i = 0; i < width; i++) {
+                    tiles[i][j][z] = Utils.parseInt(tokens[width*height*z + i + j * width + 8]);
+                    // tiles[i][j] = Utils.parseInt(tokens[235]);
+                }
             }
         }
 
         //load layer 2
-        for (int j = height; j < height*2; j++) {
-            for (int i = 0; i < width; i++) {
-                tiles[i][j] = Utils.parseInt(tokens[i + j * width + 7]);
-//                tiles[i][j] = 49;
-            }
-        }
-
-        //load layer 3
-        for (int j = height*2; j < height*3; j++) {
-            for (int i = 0; i < width; i++) {
-                tiles[i][j] = Utils.parseInt(tokens[i + j * width + 7]);
-//                tiles[i][j] = 499;
-            }
-        }
+//        for (int j = height; j < height*2; j++) {
+//            for (int i = 0; i < width; i++) {
+//                tiles[i][j] = Utils.parseInt(tokens[i + j * width + 7]);
+////                tiles[i][j] = 49;
+//            }
+//        }
+//
+//        //load layer 3
+//        for (int j = height*2; j < height*3; j++) {
+//            for (int i = 0; i < width; i++) {
+//                tiles[i][j] = Utils.parseInt(tokens[i + j * width + 7]);
+////                tiles[i][j] = 499;
+//            }
+//        }
 
     }
 
@@ -213,11 +216,11 @@ public class World {
         this.enemyOnBoard = enemyOnBoard;
     }
 
-//    public int getLayer() {
-//        return layer;
-//    }
-//
-//    public void setLayer(int layer) {
-//        this.layer = layer;
-//    }
+    public int getLayer() {
+        return layer;
+    }
+
+    public void setLayer(int layer) {
+        this.layer = layer;
+    }
 }

@@ -21,6 +21,7 @@ public class Assets {
         for(int i=0; i<=12; i++){
             tree[i] = ImageLoader.loadImage("res/textures/tree/tree (" + i + ").png");
         }
+        SpriteSheet teleport = new SpriteSheet(ImageLoader.loadImage("res/textures/Teleport.png"));
         SpriteSheet map_1 = new SpriteSheet(ImageLoader.loadImage("res/textures/Map_1.png"));
         for(int i = 0; i<29; i++){
             for(int j = 0; j<23; j++){
@@ -31,7 +32,7 @@ public class Assets {
         dirt = sheet.crop(width, 0, width, height);
         grass = sheet.crop(width * 2, 0, width, height);
         stone = sheet.crop(width * 3, 0, width, height);
-        checkpoint = sheet.crop(0, height * 2, width, height);
+        checkpoint = teleport.crop(40, 180, 430, 430);
 
         skeleton = ImageLoader.loadImage("res/textures/skeleton.png");
         player = ImageLoader.loadImage("res/textures/player.png");

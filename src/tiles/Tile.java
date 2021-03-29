@@ -11,8 +11,8 @@ public class Tile {
     public static Tile[] tiles = new Tile[1000];
 //    public static Tile grassTile = new GrassTile(0);
 //    public static Tile dirtTile = new DirtTile(1);
-//    public static Tile rockTile = new RockTile(2);
-//    public static Tile checkPoint = new CheckPoint(3);
+    public static Tile rockTile ;
+    public static Tile checkPoint ;
     public static Tile clear;
     public static Tile[] Architecture = new Tile[1000];
 
@@ -28,8 +28,10 @@ public class Tile {
 
     public static void init(){
         clear = new Clear(0);
+        checkPoint = new CheckPoint(999);
+        rockTile = new RockTile(998);
         for(int i=1; i<644; i++ )
-            Architecture[i] = new AchitectureMap1(i);
+            Architecture[i] = new ArchitectureMap1(i);
     }
 
     public void tick(){

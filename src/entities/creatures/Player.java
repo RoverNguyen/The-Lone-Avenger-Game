@@ -78,9 +78,12 @@ public class Player extends Creature{
     //CHECKPOINT
     //check if Player reach CheckPoint
     private boolean checkPointTile(int x, int y){
-
-            return  handler.getWorld().getTile(x,y).isCheckPoint();
-
+        for(int z = 0; z<handler.getWorld().getLayer(); z++) {
+            if(handler.getWorld().getTile(x,y, z).isCheckPoint()){
+                return true;
+            }
+        }
+        return false;
         //return handler.getWorld().getTile(x,y).isCheckPoint();
     }
 
