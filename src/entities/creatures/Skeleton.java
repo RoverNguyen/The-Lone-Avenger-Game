@@ -22,8 +22,8 @@ public class Skeleton extends Enemy{
     SpriteAnimation animation;
     Image enemy;
 
-    public Skeleton(Handler handler,  Image image, double x, double y, int damage){
-        super(handler, image, x, y, damage);
+    public Skeleton(Handler handler,  Image image, double x, double y){
+        super(handler, image, x, y);
 
         setWidth(64);
         setWidth(64);
@@ -49,21 +49,17 @@ public class Skeleton extends Enemy{
     }
 
     private void setAnimation(){
-        if(checkPlayerZone()){
-            if(direction == 1){ //up
-                animation.setOffsetY(0);
-            }
-            if(direction == 2){ //down
-                animation.setOffsetY(128);
-
-            }
-            if(direction == 3){ //right
-                animation.setOffsetY(192);
-
-            }
-            if(direction == 4){ //left
-                animation.setOffsetY(64);
-            }
+        if(direction == 1){ //up
+            animation.setOffsetY(0);
+        }
+        if(direction == 2){ //down
+            animation.setOffsetY(128);
+        }
+        if(direction == 3){ //right
+            animation.setOffsetY(192);
+        }
+        if(direction == 4){ //left
+            animation.setOffsetY(64);
         }
     }
 

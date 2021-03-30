@@ -71,23 +71,44 @@ public class World {
         player = new Player(handler, spawnX, spawnY, 25);
         entityManager.setPlayer(player);
 
-//        for(int i = 0; i < 6; i++){
-//            entityManager.addEntity(new Tree(handler, Assets.tree[1], 175 + 100*i, 50));
-//            entityManager.addEntity(new Tree(handler, Assets.tree[12], 175 + 100*i, 130));
-//        }
-//
-//        for(int i = 0; i < 4; i++) {
-//            entityManager.addEntity(new Tree(handler, Assets.tree[12], 290 + 100 * i, 800));
-//        }
+        //spawn enemies in world 1:
+        for(int i = 0; i < 3; ++i){
+            world1Manager.addEntity(new Skeleton(handler, Assets.skeleton, 550 + 55 * i, 1050));
+            world1Manager.addEntity(new Slime(handler, Assets.skeleton, 600 + 45 * i, 1150));
+            world1Manager.addEntity(new Skeleton(handler, Assets.skeleton, 550 + 55 * i, 1200));
 
+            world1Manager.addEntity(new Skeleton(handler, Assets.skeleton, 1300 + 55 * i, 1050));
+            world1Manager.addEntity(new Slime(handler, Assets.skeleton, 1350 + 45 * i, 1150));
+            world1Manager.addEntity(new Skeleton(handler, Assets.skeleton, 1300 + 55 * i, 1200));
+
+            world1Manager.addEntity(new Skeleton(handler, Assets.skeleton, 1100 + 55 * i, 70));
+            world1Manager.addEntity(new Slime(handler, Assets.skeleton, 1150 + 45 * i, 130));
+            world1Manager.addEntity(new Skeleton(handler, Assets.skeleton, 1100 + 55 * i, 150));
+        }
+
+        //enemies in world 2
+        for(int i = 0; i < 3; ++i){
+            world2Manager.addEntity(new Skeleton(handler, Assets.skeleton, 550 + 55 * i, 1050));
+            world2Manager.addEntity(new Slime(handler, Assets.skeleton, 150 + 45 * i, 650));
+            world2Manager.addEntity(new Skeleton(handler, Assets.skeleton, 150 + 55 * i, 700));
+
+            world2Manager.addEntity(new Skeleton(handler, Assets.skeleton, 1200 + 55 * i, 150));
+            world2Manager.addEntity(new Slime(handler, Assets.skeleton, 1350 + 45 * i, 250));
+            world2Manager.addEntity(new Skeleton(handler, Assets.skeleton, 1100 + 55 * i, 650));
+
+            world2Manager.addEntity(new Skeleton(handler, Assets.skeleton, 750 + 55 * i, 300));
+            world2Manager.addEntity(new Slime(handler, Assets.skeleton, 900 + 45 * i, 400));
+        }
     }
+
 
 
     public void tick() {
         entityManager.tick();
-        spawnEnemy();
+        updateEntityManager();
+    }
 
-        //set entity manager
+    public void updateEntityManager(){
         if(handler.getWorld().getCountWorld() == 1){
             entityManager = world1Manager;
         } else if(handler.getWorld().getCountWorld() == 2){
@@ -110,10 +131,10 @@ public class World {
             enemyOnBoard++;
             int enemyType = 1 + (int) (Math.random()*(2-1+1));
             switch (enemyType){
-                case 1: entityManager.addEntity(new Slime(handler, Assets.skeleton,
-                        Math.random()*(700 - 100 + 1) + 100, Math.random()*(500 - 300 + 1) + 300, 15)); break;
-                case 2: entityManager.addEntity(new Skeleton(handler, Assets.skeleton,
-                        Math.random()*(700 - 100 + 1) + 100, Math.random()*(500 - 300 + 1) + 300, 10)); break;
+                case 1: world1Manager.addEntity(new Slime(handler, Assets.skeleton,
+                        Math.random()*(1000 - 500 + 1) + 500, Math.random()*(1200 - 700 + 1) + 700)); break;
+                case 2: world1Manager.addEntity(new Skeleton(handler, Assets.skeleton,
+                        Math.random()*(1000 - 500 + 1) + 500, Math.random()*(1200 - 700 + 1) + 700)); break;
                 default: break;
             }
 
@@ -136,13 +157,6 @@ public class World {
                     getTile(x, y, z).render(g, (int) (x * Settings.TILE_WIDTH - handler.getGameCamera().getxOffset()),
                             (int) (y * Settings.TILE_HEIGHT - handler.getGameCamera().getyOffset()));
 
-//                    //render layer 2
-//                    getTile(x, y + height).render(g, (int) (x * Settings.TILE_WIDTH - handler.getGameCamera().getxOffset()),
-//                            (int) (y * Settings.TILE_HEIGHT - handler.getGameCamera().getyOffset()));
-////                e nghi k can ,, không cần gì á, ơ được á, thử chạy xem ạ, sửa lại cái load world nào
-//                    //render layer 3
-//                    getTile(x, y + height * 2).render(g, (int) (x * Settings.TILE_WIDTH - handler.getGameCamera().getxOffset()),
-//                            (int) (y * Settings.TILE_HEIGHT - handler.getGameCamera().getyOffset()));
                 }
             }
         }
@@ -151,7 +165,6 @@ public class World {
         entityManager.render(g);
     }
 
-    //get Tile layer 1
     public Tile getTile(int x, int y, int z){
         if(x < 0 || y < 0 || x >= width || y >= height){
             return Tile.rockTile;
@@ -162,9 +175,6 @@ public class World {
         return t;
     }
 
-    //get Tile layer 2
-
-    //get Tile layer 3
 
     public void loadWorld(String path){
         String file = Utils.loadFileAsString(path);
@@ -177,7 +187,6 @@ public class World {
         spawnYPre = Utils.parseInt(tokens[5]);
         countWorld = Utils.parseInt(tokens[6]);
         layer = Utils.parseInt(tokens[7]);
-        ///System.out.println(layer);
 
         tiles = new int[width][height][layer];
 
@@ -185,26 +194,10 @@ public class World {
             for (int j = 0; j < height; j++) {
                 for (int i = 0; i < width; i++) {
                     tiles[i][j][z] = Utils.parseInt(tokens[width*height*z + i + j * width + 8]);
-                    // tiles[i][j] = Utils.parseInt(tokens[235]);
                 }
             }
         }
 
-        //load layer 2
-//        for (int j = height; j < height*2; j++) {
-//            for (int i = 0; i < width; i++) {
-//                tiles[i][j] = Utils.parseInt(tokens[i + j * width + 7]);
-////                tiles[i][j] = 49;
-//            }
-//        }
-//
-//        //load layer 3
-//        for (int j = height*2; j < height*3; j++) {
-//            for (int i = 0; i < width; i++) {
-//                tiles[i][j] = Utils.parseInt(tokens[i + j * width + 7]);
-////                tiles[i][j] = 499;
-//            }
-//        }
 
     }
 

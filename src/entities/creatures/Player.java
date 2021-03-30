@@ -42,7 +42,7 @@ public class Player extends Creature{
     public Player(Handler handler, double x, double y, int damage){
         super(handler, Assets.player, x, y, Settings.DEFAULT_CREATURE_WIDTH, Settings.DEFAULT_CREATURE_HEIGHT, damage);
 
-        setSpeed(5);
+        setSpeed(Settings.PLAYER_SPEED);
 
         imageView = new ImageView(image);
         imageView.setFitWidth(width);

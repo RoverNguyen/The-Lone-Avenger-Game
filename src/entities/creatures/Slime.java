@@ -12,8 +12,10 @@ public class Slime extends Enemy{
     private ImageAnimation slimeUp, slimeDown, slimeLeft, slimeRight;
 
 
-    public Slime(Handler handler, Image image, double x, double y, int damage) {
-        super(handler, image, x, y, damage);
+    public Slime(Handler handler, Image image, double x, double y) {
+        super(handler, image, x, y);
+
+        setDamage(50);
 
         setWidth(32);
         setHeight(32);
