@@ -18,6 +18,12 @@ public class EntityManager{
     private Iterator i, j;
     private Comparator<Entity> renderSort = Comparator.comparingDouble(a -> a.getY() + a.getHeight());
 
+    public EntityManager(Handler handler){
+        this.handler = handler;
+        entities = new ArrayList<>();
+        bullets = new ArrayList<>();
+    }
+
     public EntityManager(Handler handler, Player player){
         this.handler = handler;
         this.player = player;
@@ -63,11 +69,19 @@ public class EntityManager{
     public void addBullet(Bullet b) {
         bullets.add(b);
     }
+    public void removePlayer(Player player){
+        entities.remove(player);
+    }
 
 
     //Getters & Setters
     public Player getPlayer() {
         return player;
+    }
+
+    public void setPlayer(Player player){
+        this.player = player;
+        addEntity(player);
     }
 
     public ArrayList<Entity> getEntities() {

@@ -16,6 +16,7 @@ import utils.Utils;
 public class World {
 
     private int width, height;
+    private Player player;
     private int spawnXNext;
     private int spawnYNext;
     private int spawnXPre;
@@ -45,22 +46,14 @@ public class World {
 
     //Entities
     private EntityManager entityManager;
-
+    private EntityManager world1Manager, world2Manager, world3Manager;
     private Handler handler;
     private long lastSpawnTimer, spawnCoolDown = 500, spawnTimer = spawnCoolDown;
     private int enemyOnBoard = 0;
 
     public World(Handler handler, String path){
         this.handler = handler;
-        //entityManager = new EntityManager(handler, new Player(handler,100, 100, 25));
-//        for(int i = 0; i < 6; i++){
-//            entityManager.addEntity(new Tree(handler, Assets.tree1, 175 + 100*i, 50));
-//            entityManager.addEntity(new Tree(handler, Assets.tree12, 175 + 100*i, 130));
-//        }
-//
-//        for(int i = 0; i < 4; i++) {
-//            entityManager.addEntity(new Tree(handler, Assets.tree12, 290 + 100 * i, 800));
-//        }
+
         loadWorld(path);
         if(handler.isTele()){
             spawnX = spawnXNext;
@@ -69,7 +62,15 @@ public class World {
             spawnX = spawnXPre;
             spawnY = spawnYPre;
         }
-        entityManager = new EntityManager(handler, new Player(handler,spawnX, spawnY, 25));
+
+        world1Manager = new EntityManager(handler);
+        world2Manager = new EntityManager(handler);
+        world3Manager = new EntityManager(handler);
+        entityManager = world1Manager;
+
+        player = new Player(handler, spawnX, spawnY, 25);
+        entityManager.setPlayer(player);
+
 //        for(int i = 0; i < 6; i++){
 //            entityManager.addEntity(new Tree(handler, Assets.tree[1], 175 + 100*i, 50));
 //            entityManager.addEntity(new Tree(handler, Assets.tree[12], 175 + 100*i, 130));
@@ -84,7 +85,18 @@ public class World {
 
     public void tick() {
         entityManager.tick();
-//        spawnEnemy();
+        spawnEnemy();
+
+        //set entity manager
+        if(handler.getWorld().getCountWorld() == 1){
+            entityManager = world1Manager;
+        } else if(handler.getWorld().getCountWorld() == 2){
+            entityManager = world2Manager;
+        } else if(handler.getWorld().getCountWorld() == 3){
+            entityManager = world3Manager;
+        }
+        entityManager.removePlayer(player);
+        entityManager.setPlayer(player);
     }
 
     public void spawnEnemy(){
@@ -141,9 +153,9 @@ public class World {
 
     //get Tile layer 1
     public Tile getTile(int x, int y, int z){
-//        if(x < 0 || y < 0 || x >= width || y >= height * 3){
-//            return Tile.clear;
-//        }
+        if(x < 0 || y < 0 || x >= width || y >= height){
+            return Tile.rockTile;
+        }
         Tile t = Tile.tiles[tiles[x][y][z]];
         if(t == null)
             return Tile.clear;
