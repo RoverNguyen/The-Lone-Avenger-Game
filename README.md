@@ -1,5 +1,4 @@
 # TileGame
-Tile Game (Demo, chưa có giao diện gì lun)
 
 Nếu chưa tải Java 15 hay JavaFX thì tải về nhé
 
@@ -27,15 +26,12 @@ Demo là như vậy, ý tưởng phát triển thêm:
 
 - [ ] Enemy thay vì đứng im, chờ Player đi vào zone rồi mới đuổi theo Player thì có thể đi Random hướng để đi lung tung.
 
-- [ ] Thêm các State tương ứng với mức Easy, Medium, Hard, thêm các World mới. Về World có thể sử dụng Tiled (https://www.mapeditor.org/) để thiết kế cho đẹp.
+- [ ] Thêm các State tương ứng với mức Easy, Medium, Hard, thêm các World mới. Về World có thể sử dụng Tiled để thiết kế cho đẹp.
 
 - [ ] Thêm Story Scene, NPC Dialogue, tạo cốt truyện cho Game, cái này chắc hơi thừa, rảnh thì làm quá.
 
 Starting Scene:
 ![image](https://user-images.githubusercontent.com/38860847/111766841-90e25e80-88d8-11eb-8212-2b308d6b484b.png)
-
-Game State:
-![image](https://user-images.githubusercontent.com/38860847/111906040-536d0500-8a81-11eb-996f-c0762de1a3cb.png)
 
 Victory State:
 ![image](https://user-images.githubusercontent.com/38860847/111906078-75668780-8a81-11eb-80b6-eac746b808d7.png)
