@@ -6,7 +6,6 @@ import settings.Settings;
 
 
 public class Tile {
-    public static int[] countmap1 = { 38, 39, 40, 41};
 
     public static Tile[] tiles = new Tile[10000];
 //    public static Tile grassTile = new GrassTile(0);
@@ -17,6 +16,7 @@ public class Tile {
     public static Tile[] Architecture1 = new Tile[501];
     public static Tile[] Architecture2 = new Tile[501];
     public static Tile[] Architecture3 = new Tile[501];
+    public static Tile[] Architecture4 = new Tile[501];
 
 
     protected Image image;
@@ -39,6 +39,8 @@ public class Tile {
             Architecture2[i-501] = new ArchitectureMap2(i);
         for(int i=1001; i<1501; i++ )
             Architecture3[i-1001] = new ArchitectureMap3(i);
+        for(int i=1501; i<2001; i++ )
+            Architecture4[i-1501] = new ArchitectureMap4(i);
 
     }
 

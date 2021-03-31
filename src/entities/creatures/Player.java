@@ -89,7 +89,7 @@ public class Player extends Creature{
 
     //set world
     private void setNewWorld(){
-        if(handler.getWorld().getWidth()*64/2 <= x+xMove){
+        if(handler.getWorld().getWidth()*64*2/3 <= x+xMove){
             GameState.world[0] = GameState.world[handler.getWorld().getCountWorld()+1];
             tele = true;
         } else {
