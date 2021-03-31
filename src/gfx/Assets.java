@@ -9,6 +9,7 @@ public class Assets {
     public static Image[] tree = new Image[13];
     public static Image[][] map1 = new Image[30][30];
     public static Image[][] map2 = new Image[30][30];
+    public static Image[][] map3 = new Image[30][30];
     public static Image background, gameover, pause, victory;
     public static Image start, exit, mute_unmute, restart, main_menu;
     public static Image[] slime_up, slime_down, slime_left, slime_right;
@@ -25,11 +26,13 @@ public class Assets {
         SpriteSheet teleport = new SpriteSheet(ImageLoader.loadImage("res/textures/Teleport.png"));
         SpriteSheet map_1 = new SpriteSheet(ImageLoader.loadImage("res/textures/Map1.png"));
         SpriteSheet map_2 = new SpriteSheet(ImageLoader.loadImage("res/textures/Map2.png"));
+        SpriteSheet map_3 = new SpriteSheet(ImageLoader.loadImage("res/textures/Map3.png"));
 
         for(int i = 0; i<20; i++){
             for(int j = 0; j<25; j++){
                 map1[j][i] = map_1.crop(width*j, height*i, width, height);
                 map2[j][i] = map_2.crop(width*j, height*i, width, height);
+                map3[j][i] = map_3.crop(width*j, height*i, width, height);
             }
         }
         clear = crystal_clear.crop(0, 0, width, height);

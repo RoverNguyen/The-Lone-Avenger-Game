@@ -12,10 +12,11 @@ public class Tile {
 //    public static Tile grassTile = new GrassTile(0);
 //    public static Tile dirtTile = new DirtTile(1);
     public static Tile rockTile ;
-    public static Tile checkPoint ;
+    public static Tile checkPoint , checkPointClear;
     public static Tile clear;
-    public static Tile[] Architecture1 = new Tile[1000];
-    public static Tile[] Architecture2 = new Tile[10000];
+    public static Tile[] Architecture1 = new Tile[501];
+    public static Tile[] Architecture2 = new Tile[501];
+    public static Tile[] Architecture3 = new Tile[501];
 
 
     protected Image image;
@@ -30,11 +31,14 @@ public class Tile {
     public static void init(){
         clear = new Clear(0);
         checkPoint = new CheckPoint(9999);
+        checkPoint = new CheckPointClear(9997);
         rockTile = new RockTile(9998);
         for(int i=1; i<501; i++ )
             Architecture1[i] = new ArchitectureMap1(i);
         for(int i=501; i<1001; i++ )
             Architecture2[i-501] = new ArchitectureMap2(i);
+        for(int i=1001; i<1501; i++ )
+            Architecture3[i-1001] = new ArchitectureMap3(i);
 
     }
 

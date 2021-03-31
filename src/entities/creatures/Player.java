@@ -35,7 +35,7 @@ public class Player extends Creature{
 
     //Attack Timer
     protected long lastAttackTimer, attackCoolDown = 500, attackTimer = attackCoolDown;
-    public static long lastSpellTimer, spellCoolDown = 50, spellTimer = spellCoolDown;
+    public static long lastSpellTimer, spellCoolDown = 500, spellTimer = spellCoolDown;
 
     protected MediaPlayer footstep;
 
