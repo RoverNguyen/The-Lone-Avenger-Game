@@ -9,4 +9,5 @@ public class SoundLoader {
     public static Media loadSound(String path){
         return new Media(new File(path).toURI().toString());
     }
+
 }
