@@ -1,5 +1,6 @@
 package input;
 
+import game.Handler;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -11,9 +12,10 @@ public class KeyManager {
     private HashMap<KeyCode, Boolean> keys = new HashMap<>();
 
     Scene scene;
-
-    public KeyManager(Scene scene){
+    Handler handler;
+    public KeyManager(Scene scene, Handler handler){
         this.scene = scene;
+        this.handler = handler;
     }
 
     public void addListener(){
@@ -23,7 +25,29 @@ public class KeyManager {
 
     private EventHandler<KeyEvent> keyPressedEventHandler = e -> keys.put(e.getCode(), true);
 
-    private EventHandler<KeyEvent> keyReleasedEventHandler = e -> keys.put(e.getCode(), false);
+    private EventHandler<KeyEvent> keyReleasedEventHandler = e -> {
+        keys.put(e.getCode(), false);
+        if(e.getCode() == KeyCode.E){
+            handler.getWorld().getEntityManager().getPlayer().getInventory().changeActive();
+        }
+
+        else if(e.getCode() == KeyCode.DOWN){
+            if(handler.getWorld().getEntityManager().getPlayer().getInventory().isActive()){
+                handler.getWorld().getEntityManager().getPlayer().getInventory().scrollDown();
+            }
+
+        }
+        else if(e.getCode() == KeyCode.UP){
+            if(handler.getWorld().getEntityManager().getPlayer().getInventory().isActive()){
+                handler.getWorld().getEntityManager().getPlayer().getInventory().scrollUp();
+            }
+        }
+        else if(e.getCode() == KeyCode.ENTER){
+            if(handler.getWorld().getEntityManager().getPlayer().getInventory().isActive()){
+                handler.getWorld().getEntityManager().getPlayer().getInventory().useItem();
+            }
+        }
+    };
 
     public boolean isMoveUp(){
         return keys.getOrDefault(KeyCode.UP, false);

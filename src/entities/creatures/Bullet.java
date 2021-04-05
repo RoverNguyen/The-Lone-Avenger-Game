@@ -114,7 +114,7 @@ public class Bullet extends Creature{
             if(e.equals(handler.getWorld().getEntityManager().getPlayer()))
                 continue;
             if(e.getCollisionBounds(0, 0).intersects(getCollisionBounds(0,0).getBoundsInLocal())){
-                e.takeDamage(damage);
+                e.takeDamage(handler.getWorld().getEntityManager().getPlayer().getDamage());
                 die();
                 if(!Settings.IS_MUTE){
                     if(Sound.punch.getStatus() == MediaPlayer.Status.PLAYING)

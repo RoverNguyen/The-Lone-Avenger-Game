@@ -5,6 +5,7 @@ import game.Handler;
 
 import gfx.Assets;
 import gfx.SpriteAnimation;
+import inventory.Inventory;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -39,6 +40,9 @@ public class Player extends Creature{
 
     protected MediaPlayer footstep;
 
+    //inventory
+    private Inventory inventory;
+
     public Player(Handler handler, double x, double y, int damage){
         super(handler, Assets.player, x, y, Settings.DEFAULT_CREATURE_WIDTH, Settings.DEFAULT_CREATURE_HEIGHT, damage);
 
@@ -58,6 +62,10 @@ public class Player extends Creature{
         footstep = Sound.footstep;
         handler.getSoundManager().addSound(footstep);
 
+        inventory = new Inventory(handler);
+
+        maxHealth = 1000;
+        health = 1000;
     }
 
     @Override
@@ -73,6 +81,8 @@ public class Player extends Creature{
         checkAttacks();
         checkSpells();
 
+        //inventory
+        inventory.tick();
     }
 
     //CHECKPOINT
@@ -134,6 +144,9 @@ public class Player extends Creature{
 
 
     private void checkSpells(){
+        if(inventory.isActive()){
+            return;
+        }
         spellTimer += System.currentTimeMillis() - lastSpellTimer;
         lastSpellTimer = System.currentTimeMillis();
         if(spellTimer < spellCoolDown){
@@ -165,6 +178,9 @@ public class Player extends Creature{
     }
 
     private void checkAttacks(){
+        if(inventory.isActive())
+            return;
+
         attackTimer += System.currentTimeMillis() - lastAttackTimer;
         lastAttackTimer = System.currentTimeMillis();
         if(attackTimer < attackCoolDown){
@@ -223,6 +239,9 @@ public class Player extends Creature{
     public void getInput(){
         xMove = 0;
         yMove = 0;
+
+        if(inventory.isActive())
+            return;
 
         if(handler.getKeyManager().isMoveUp()){
             direction = 1;
@@ -293,6 +312,19 @@ public class Player extends Creature{
         g.drawImage(player, (int)(x - handler.getGameCamera().getxOffset()),
                 (int) (y - handler.getGameCamera().getyOffset()));
 
+
     }
 
+    public void postRender(GraphicsContext g){
+        inventory.render(g);
+    }
+
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    @Override
+    public void setHealth(int health){
+        this.health = health;
+    }
 }

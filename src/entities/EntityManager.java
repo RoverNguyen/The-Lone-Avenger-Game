@@ -51,6 +51,8 @@ public class EntityManager{
             if(!bullet.isActive())
                 j.remove();
         }
+
+
     }
 
     public void render(GraphicsContext g){
@@ -61,6 +63,8 @@ public class EntityManager{
         for(Bullet b : bullets){
             b.render(g);
         }
+
+        player.postRender(g);
     }
 
     public void addEntity(Entity e){

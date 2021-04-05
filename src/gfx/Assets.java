@@ -1,8 +1,12 @@
 package gfx;
 
 import javafx.scene.image.Image;
+import javafx.scene.text.Font;
 
 public class Assets {
+
+    public static Font font28;
+    public static Font font20;
 
     private static final int width = 32, height = 32;
     public static Image icon, dirt, grass, stone, skeleton, player, checkpoint, clear;
@@ -15,9 +19,20 @@ public class Assets {
     public static Image start, exit, mute_unmute, restart, main_menu;
     public static Image[] slime_up, slime_down, slime_left, slime_right;
 
+    //item
+    public static Image lotionMana, lotionHP, lotionDamage;
+
+    //inventory
+    public static Image inventoryScreen;
+
     public static Image player_bullet;
 
     public static void init(){
+        inventoryScreen = ImageLoader.loadImage("res/textures/inventoryScreen.png");
+
+        font28 = FontLoader.loadFont("res/fonts/slkscr.ttf",28);
+        font20 = FontLoader.loadFont("res/fonts/slkscr.ttf",20);
+
         icon = ImageLoader.loadImage("res/textures/icon.png");
         SpriteSheet crystal_clear = new SpriteSheet(ImageLoader.loadImage("res/textures/BladeY.png"));
         SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("res/textures/sheet.png"));
@@ -76,6 +91,11 @@ public class Assets {
         for(int i = 0; i < 4; i++)
             slime_right[i] = ImageLoader.loadImage("res/textures/slime/SlimeRight_" + i + ".png");
 
+        //item
+        SpriteSheet sheet_item = new SpriteSheet(ImageLoader.loadImage("res/textures/items4x.png"));
+        lotionMana = sheet_item.crop(64 * 3, 0, 64, 64);
+        lotionHP = sheet_item.crop(64 * 4, 0, 64, 64);
+        lotionDamage = sheet_item.crop(64 * 5, 0, 64, 64);
 
     }
 }
