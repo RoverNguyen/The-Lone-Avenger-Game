@@ -4,10 +4,8 @@ import entities.EntityManager;
 import entities.creatures.Player;
 import entities.creatures.Skeleton;
 import entities.creatures.Slime;
-import entities.statics.Tree;
 import game.Handler;
 import gfx.Assets;
-import items.Item;
 import items.ItemManager;
 import javafx.scene.canvas.GraphicsContext;
 import settings.Settings;
@@ -48,7 +46,6 @@ public class World {
 
     //Entities
     private EntityManager entityManager;
-    private EntityManager world1Manager, world2Manager, world3Manager;
     private Handler handler;
     private long lastSpawnTimer, spawnCoolDown = 500, spawnTimer = spawnCoolDown;
     private int enemyOnBoard = 0;
@@ -68,43 +65,12 @@ public class World {
             spawnY = spawnYPre;
         }
 
-        world1Manager = new EntityManager(handler);
-        world2Manager = new EntityManager(handler);
-        world3Manager = new EntityManager(handler);
-        entityManager = world1Manager;
-
+        entityManager = new EntityManager(handler);
         player = new Player(handler, spawnX, spawnY, 25);
         entityManager.setPlayer(player);
+
         itemManager = new ItemManager(handler);
 
-        //spawn enemies in world 1:
-        for(int i = 0; i < 3; ++i){
-            world1Manager.addEntity(new Skeleton(handler, Assets.skeleton, 550 + 55 * i, 1050));
-            world1Manager.addEntity(new Slime(handler, Assets.skeleton, 600 + 45 * i, 1150));
-            world1Manager.addEntity(new Skeleton(handler, Assets.skeleton, 550 + 55 * i, 1200));
-
-            world1Manager.addEntity(new Skeleton(handler, Assets.skeleton, 1300 + 55 * i, 1050));
-            world1Manager.addEntity(new Slime(handler, Assets.skeleton, 1350 + 45 * i, 1150));
-            world1Manager.addEntity(new Skeleton(handler, Assets.skeleton, 1300 + 55 * i, 1200));
-
-            world1Manager.addEntity(new Skeleton(handler, Assets.skeleton, 1100 + 55 * i, 70));
-            world1Manager.addEntity(new Slime(handler, Assets.skeleton, 1150 + 45 * i, 130));
-            world1Manager.addEntity(new Skeleton(handler, Assets.skeleton, 1100 + 55 * i, 150));
-        }
-
-        //enemies in world 2
-        for(int i = 0; i < 3; ++i){
-            world2Manager.addEntity(new Skeleton(handler, Assets.skeleton, 550 + 55 * i, 1050));
-            world2Manager.addEntity(new Slime(handler, Assets.skeleton, 150 + 45 * i, 650));
-            world2Manager.addEntity(new Skeleton(handler, Assets.skeleton, 150 + 55 * i, 700));
-
-            world2Manager.addEntity(new Skeleton(handler, Assets.skeleton, 1200 + 55 * i, 150));
-            world2Manager.addEntity(new Slime(handler, Assets.skeleton, 1350 + 45 * i, 250));
-            world2Manager.addEntity(new Skeleton(handler, Assets.skeleton, 1100 + 55 * i, 650));
-
-            world2Manager.addEntity(new Skeleton(handler, Assets.skeleton, 750 + 55 * i, 300));
-            world2Manager.addEntity(new Slime(handler, Assets.skeleton, 900 + 45 * i, 400));
-        }
     }
 
 
@@ -112,20 +78,9 @@ public class World {
     public void tick() {
         itemManager.tick();
         entityManager.tick();
-        updateEntityManager();
     }
 
-    public void updateEntityManager(){
-        if(handler.getWorld().getCountWorld() == 1){
-            entityManager = world1Manager;
-        } else if(handler.getWorld().getCountWorld() == 2){
-            entityManager = world2Manager;
-        } else if(handler.getWorld().getCountWorld() == 3){
-            entityManager = world3Manager;
-        }
-        entityManager.removePlayer(player);
-        entityManager.setPlayer(player);
-    }
+
 
     public void spawnEnemy(){
         if(enemyOnBoard < 5){
@@ -138,9 +93,9 @@ public class World {
             enemyOnBoard++;
             int enemyType = 1 + (int) (Math.random()*(2-1+1));
             switch (enemyType){
-                case 1: world1Manager.addEntity(new Slime(handler, Assets.skeleton,
+                case 1: entityManager.addEntity(new Slime(handler, Assets.skeleton,
                         Math.random()*(1000 - 500 + 1) + 500, Math.random()*(1200 - 700 + 1) + 700)); break;
-                case 2: world1Manager.addEntity(new Skeleton(handler, Assets.skeleton,
+                case 2: entityManager.addEntity(new Skeleton(handler, Assets.skeleton,
                         Math.random()*(1000 - 500 + 1) + 500, Math.random()*(1200 - 700 + 1) + 700)); break;
                 default: break;
             }

@@ -103,9 +103,12 @@ public class Player extends Creature{
     private void setNewWorld(){
         if(handler.getWorld().getWidth()*64*2/3 <= x+xMove){
             GameState.world[0] = GameState.world[handler.getWorld().getCountWorld()+1];
+            GameState.entityManager = GameState.world[handler.getWorld().getCountWorld()+1].getEntityManager();
+
             tele = true;
         } else {
             GameState.world[0] = GameState.world[handler.getWorld().getCountWorld()-1];
+            GameState.entityManager = GameState.world[handler.getWorld().getCountWorld()-1].getEntityManager();
             tele = false;
         }
         handler.setWorld(GameState.world[0], tele);
