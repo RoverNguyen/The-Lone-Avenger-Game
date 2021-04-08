@@ -66,7 +66,7 @@ public class Game extends Application {
 
         handler = new Handler(this);
 
-        keyManager = new KeyManager(scene);
+        keyManager = new KeyManager(scene, handler);
         keyManager.addListener();
         mouseManager = new MouseManager(scene);
         mouseManager.addListener();

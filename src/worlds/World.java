@@ -7,6 +7,8 @@ import entities.creatures.Slime;
 import entities.statics.Tree;
 import game.Handler;
 import gfx.Assets;
+import items.Item;
+import items.ItemManager;
 import javafx.scene.canvas.GraphicsContext;
 import settings.Settings;
 import tiles.Tile;
@@ -51,6 +53,9 @@ public class World {
     private long lastSpawnTimer, spawnCoolDown = 500, spawnTimer = spawnCoolDown;
     private int enemyOnBoard = 0;
 
+    //Items
+    private ItemManager itemManager;
+
     public World(Handler handler, String path){
         this.handler = handler;
 
@@ -70,6 +75,7 @@ public class World {
 
         player = new Player(handler, spawnX, spawnY, 25);
         entityManager.setPlayer(player);
+        itemManager = new ItemManager(handler);
 
         //spawn enemies in world 1:
         for(int i = 0; i < 3; ++i){
@@ -104,6 +110,7 @@ public class World {
 
 
     public void tick() {
+        itemManager.tick();
         entityManager.tick();
         updateEntityManager();
     }
@@ -161,7 +168,7 @@ public class World {
             }
         }
 
-
+        itemManager.render(g);
         entityManager.render(g);
     }
 
@@ -227,5 +234,21 @@ public class World {
 
     public void setLayer(int layer) {
         this.layer = layer;
+    }
+
+    public Handler getHandler() {
+        return handler;
+    }
+
+    public void setHandler(Handler handler) {
+        this.handler = handler;
+    }
+
+    public ItemManager getItemManager() {
+        return itemManager;
+    }
+
+    public void setItemManager(ItemManager itemManager) {
+        this.itemManager = itemManager;
     }
 }

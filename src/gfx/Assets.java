@@ -1,8 +1,12 @@
 package gfx;
 
 import javafx.scene.image.Image;
+import javafx.scene.text.Font;
 
 public class Assets {
+
+    public static Font font28;
+    public static Font font20;
 
     private static final int width = 32, height = 32;
     public static Image icon, dirt, grass, stone, skeleton, player, checkpoint, clear;
@@ -15,9 +19,23 @@ public class Assets {
     public static Image start, exit, mute_unmute, restart, main_menu;
     public static Image[] slime_up, slime_down, slime_left, slime_right;
 
+    //item
+    public static Image lotionMana, lotionHP, lotionDamage;
+
+    //inventory
+    public static Image inventoryScreen;
+
     public static Image player_bullet;
+    //chuong
+    public static Image player_ball1,player_ball2,player_ball3,player_ball4;
+    public static Image player_sword1,player_sword2,player_sword3,player_sword4;
 
     public static void init(){
+        inventoryScreen = ImageLoader.loadImage("res/textures/inventoryScreen.png");
+
+        font28 = FontLoader.loadFont("res/fonts/slkscr.ttf",28);
+        font20 = FontLoader.loadFont("res/fonts/slkscr.ttf",20);
+
         icon = ImageLoader.loadImage("res/textures/icon.png");
         SpriteSheet crystal_clear = new SpriteSheet(ImageLoader.loadImage("res/textures/BladeY.png"));
         SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("res/textures/sheet.png"));
@@ -47,8 +65,20 @@ public class Assets {
         skeleton = ImageLoader.loadImage("res/textures/skeleton.png");
         player = ImageLoader.loadImage("res/textures/player.png");
 
+        //bullet
         player_bullet = ImageLoader.loadImage("res/textures/player_bullet.png");
+        //chuong
+        SpriteSheet energyBall = new SpriteSheet(ImageLoader.loadImage("res/textures/energy_ball.png"));
+        player_ball1 = energyBall.crop(0, height,width , height);
+        player_ball2 = energyBall.crop(0, 0,width, height);
+        player_ball3 = energyBall.crop(width , 0,width , height );
+        player_ball4 = energyBall.crop(width , height ,width  , height);
 
+        SpriteSheet sheet3 = new SpriteSheet(ImageLoader.loadImage("res/textures/player_sword.png"));
+        player_sword1 = sheet3.crop(width/3, 0,width/3 , height+13);
+        player_sword2 = sheet3.crop(0, 0,width/3 , height+13);
+        player_sword3 = sheet3.crop(0, height+24,width+13 , height/3);
+        player_sword4 = sheet3.crop(0, height+13,width+13 , height/3);
 
         start = ImageLoader.loadImage("res/textures/start_button.png");
         exit = ImageLoader.loadImage("res/textures/exit_button.png");
@@ -76,6 +106,11 @@ public class Assets {
         for(int i = 0; i < 4; i++)
             slime_right[i] = ImageLoader.loadImage("res/textures/slime/SlimeRight_" + i + ".png");
 
+        //item
+        SpriteSheet sheet_item = new SpriteSheet(ImageLoader.loadImage("res/textures/items4x.png"));
+        lotionMana = sheet_item.crop(64 * 3, 0, 64, 64);
+        lotionHP = sheet_item.crop(64 * 4, 0, 64, 64);
+        lotionDamage = sheet_item.crop(64 * 5, 0, 64, 64);
 
     }
 }

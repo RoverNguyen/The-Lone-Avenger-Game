@@ -17,12 +17,12 @@ public class Bullet extends Creature{
         super(handler, image, x, y, 20, 21, damage);
         this.direction = direction;
 
-        setSpeed(50);
+        setSpeed(30);
 
         bounds.setX(4);
         bounds.setY(4);
-        bounds.setWidth(12);
-        bounds.setHeight(12);
+        bounds.setWidth(20);
+        bounds.setHeight(20);
 
     }
 
@@ -114,12 +114,13 @@ public class Bullet extends Creature{
             if(e.equals(handler.getWorld().getEntityManager().getPlayer()))
                 continue;
             if(e.getCollisionBounds(0, 0).intersects(getCollisionBounds(0,0).getBoundsInLocal())){
-                e.takeDamage(damage);
+
+                e.takeDamage(handler.getWorld().getEntityManager().getPlayer().getDamage() + 20);
                 die();
                 if(!Settings.IS_MUTE){
-                    if(Sound.punch.getStatus() == MediaPlayer.Status.PLAYING)
-                        Sound.punch.stop();
-                    Sound.punch.play();
+                    if(Sound.boom.getStatus() == MediaPlayer.Status.PLAYING)
+                        Sound.boom.stop();
+                    Sound.boom.play();
                 }
             }
         }
@@ -127,7 +128,7 @@ public class Bullet extends Creature{
         //Tile hit
 
         //Bullet move
-        if(Math.abs(xLong) > 200 || Math.abs(yLong) > 200)
+        if(Math.abs(xLong) > 500 || Math.abs(yLong) > 500)
             die();
     }
 

@@ -1,12 +1,15 @@
 package entities.creatures;
 
 import game.Handler;
+import items.Item;
 import javafx.scene.image.Image;
 
 
 import javafx.scene.media.MediaPlayer;
 import settings.Settings;
 import sounds.Sound;
+
+import java.util.Random;
 
 
 public abstract class Enemy extends Creature{
@@ -150,5 +153,14 @@ public abstract class Enemy extends Creature{
         handler.getWorld().setEnemyOnBoard(handler.getWorld().getEnemyOnBoard() - 1);
         System.out.println(Settings.SCORES);
         System.out.println("xin lũiiii mà :(");
+
+        int rand = (int) (Math.random() * 5);
+        if(rand == 1){
+            handler.getWorld().getItemManager().addItem(Item.lotionHP.createNew((int) x, (int) y));
+        }else if(rand == 2){
+            handler.getWorld().getItemManager().addItem(Item.lotionMana.createNew((int) x, (int) y));
+        }else if(rand == 3) {
+            handler.getWorld().getItemManager().addItem(Item.lotionAttack.createNew((int) x, (int) y));
+        }
     }
 }

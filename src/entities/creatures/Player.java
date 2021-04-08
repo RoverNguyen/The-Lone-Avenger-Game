@@ -5,6 +5,7 @@ import game.Handler;
 
 import gfx.Assets;
 import gfx.SpriteAnimation;
+import inventory.Inventory;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -35,9 +36,13 @@ public class Player extends Creature{
 
     //Attack Timer
     protected long lastAttackTimer, attackCoolDown = 500, attackTimer = attackCoolDown;
-    public static long lastSpellTimer, spellCoolDown = 500, spellTimer = spellCoolDown;
+    public static long lastSpellTimer, spellCoolDown = 3000, spellTimer = spellCoolDown;
+    public static long lastCutTimer, cutCoolDown = 800, cutTimer = cutCoolDown;
 
     protected MediaPlayer footstep;
+
+    //inventory
+    private Inventory inventory;
 
     public Player(Handler handler, double x, double y, int damage){
         super(handler, Assets.player, x, y, Settings.DEFAULT_CREATURE_WIDTH, Settings.DEFAULT_CREATURE_HEIGHT, damage);
@@ -58,6 +63,10 @@ public class Player extends Creature{
         footstep = Sound.footstep;
         handler.getSoundManager().addSound(footstep);
 
+        inventory = new Inventory(handler);
+
+        maxHealth = 1000;
+        health = 1000;
     }
 
     @Override
@@ -72,7 +81,10 @@ public class Player extends Creature{
         //Attack
         checkAttacks();
         checkSpells();
+        checkCut();
 
+        //inventory
+        inventory.tick();
     }
 
     //CHECKPOINT
@@ -134,6 +146,9 @@ public class Player extends Creature{
 
 
     private void checkSpells(){
+        if(inventory.isActive()){
+            return;
+        }
         spellTimer += System.currentTimeMillis() - lastSpellTimer;
         lastSpellTimer = System.currentTimeMillis();
         if(spellTimer < spellCoolDown){
@@ -149,8 +164,19 @@ public class Player extends Creature{
         }
 
         if(handler.getKeyManager().isSpell()){
-            handler.getWorld().getEntityManager().addBullet(new Bullet(handler, Assets.player_bullet,
-                    x + 22, y + 35, Settings.PLAYER_BULLET_DAMAGE, direction));
+            if(direction ==1) {
+                handler.getWorld().getEntityManager().addBullet(new Bullet(handler, Assets.player_ball1,
+                        x+20 , y+30 ,Settings.PLAYER_BULLET_DAMAGE, direction));}
+            if(direction ==2) {
+                handler.getWorld().getEntityManager().addBullet(new Bullet(handler, Assets.player_ball2,
+                        x+20, y+35 , Settings.PLAYER_BULLET_DAMAGE, direction));}
+            if(direction ==3) {
+                handler.getWorld().getEntityManager().addBullet(new Bullet(handler, Assets.player_ball3,
+                        x+22, y+30 , Settings.PLAYER_BULLET_DAMAGE, direction));}
+            if(direction ==4) {
+                handler.getWorld().getEntityManager().addBullet(new Bullet(handler, Assets.player_ball4,
+                        x+35, y+30 , Settings.PLAYER_BULLET_DAMAGE, direction));}
+
             if(!Settings.IS_MUTE){
                 if(Sound.player_fired.getStatus() == MediaPlayer.Status.PLAYING)
                     Sound.player_fired.stop();
@@ -164,7 +190,44 @@ public class Player extends Creature{
 
     }
 
+    private void checkCut() {
+        cutTimer += System.currentTimeMillis() - lastCutTimer;
+        lastCutTimer = System.currentTimeMillis();
+        if(cutTimer < cutCoolDown){
+            return;
+
+        }
+        if(handler.getKeyManager().isSpace()){
+            if(direction ==1) {
+                handler.getWorld().getEntityManager().addSword(new Sword(handler, Assets.player_sword1,
+                        x+33 , y+25 ,Settings.PLAYER_SWORD_DAMAGE, direction));}
+            if(direction ==2) {
+                handler.getWorld().getEntityManager().addSword(new Sword(handler, Assets.player_sword2,
+                        x+34, y+25 , Settings.PLAYER_SWORD_DAMAGE, direction));}
+            if(direction ==3) {
+                handler.getWorld().getEntityManager().addSword(new Sword(handler, Assets.player_sword3,
+                        x+15, y+37 , Settings.PLAYER_SWORD_DAMAGE, direction));}
+            if(direction ==4) {
+                handler.getWorld().getEntityManager().addSword(new Sword(handler, Assets.player_sword4,
+                        x+15, y+37 , Settings.PLAYER_SWORD_DAMAGE, direction));}
+
+
+            if(!Settings.IS_MUTE){
+                if(Sound.player_sword.getStatus() == MediaPlayer.Status.PLAYING)
+                    Sound.player_sword.stop();
+                Sound.player_sword.play();
+            }
+        } else {
+            return;
+        }
+
+        cutTimer = 0;
+    }
+
     private void checkAttacks(){
+        if(inventory.isActive())
+            return;
+
         attackTimer += System.currentTimeMillis() - lastAttackTimer;
         lastAttackTimer = System.currentTimeMillis();
         if(attackTimer < attackCoolDown){
@@ -178,22 +241,22 @@ public class Player extends Creature{
         ar.setWidth(arSize);
         ar.setHeight(arSize);
 
-        if(handler.getKeyManager().isSpace() && direction == 1){
+        if(handler.getMouseManager().isLeftPressed() && direction == 1){
             ar.setX(cb.getX() + cb.getWidth()/2 - arSize/2);
             ar.setY(cb.getY() - arSize);
 
 
-        } else if(handler.getKeyManager().isSpace() && direction == 2){
+        } else if(handler.getMouseManager().isLeftPressed() && direction == 2){
             ar.setX(cb.getX() + cb.getWidth()/2 - arSize/2);
             ar.setY(cb.getY() + cb.getHeight());
 
 
-        } else if(handler.getKeyManager().isSpace() && direction == 3){
+        } else if(handler.getMouseManager().isLeftPressed() && direction == 3){
             ar.setX(cb.getX() - arSize);
             ar.setY(cb.getY() + cb.getHeight()/2 - arSize/2);
 
 
-        } else if(handler.getKeyManager().isSpace() && direction == 4){
+        } else if(handler.getMouseManager().isLeftPressed() && direction == 4){
             ar.setX(cb.getX() + cb.getWidth());
             ar.setY(cb.getY() + cb.getHeight()/2 - arSize/2);
 
@@ -223,6 +286,9 @@ public class Player extends Creature{
     public void getInput(){
         xMove = 0;
         yMove = 0;
+
+        if(inventory.isActive())
+            return;
 
         if(handler.getKeyManager().isMoveUp()){
             direction = 1;
@@ -293,6 +359,19 @@ public class Player extends Creature{
         g.drawImage(player, (int)(x - handler.getGameCamera().getxOffset()),
                 (int) (y - handler.getGameCamera().getyOffset()));
 
+
     }
 
+    public void postRender(GraphicsContext g){
+        inventory.render(g);
+    }
+
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    @Override
+    public void setHealth(int health){
+        this.health = health;
+    }
 }
