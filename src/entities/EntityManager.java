@@ -2,6 +2,7 @@ package entities;
 
 import entities.creatures.Bullet;
 import entities.creatures.Player;
+import entities.creatures.Sword;
 import game.Handler;
 import javafx.scene.canvas.GraphicsContext;
 
@@ -15,13 +16,15 @@ public class EntityManager{
     private Player player;
     private ArrayList<Entity> entities;
     private ArrayList<Bullet> bullets;
-    private Iterator i, j;
+    private ArrayList<Sword> swords;
+    private Iterator i, j, t;
     private Comparator<Entity> renderSort = Comparator.comparingDouble(a -> a.getY() + a.getHeight());
 
     public EntityManager(Handler handler){
         this.handler = handler;
         entities = new ArrayList<>();
         bullets = new ArrayList<>();
+        swords = new ArrayList<>();
     }
 
     public EntityManager(Handler handler, Player player){
@@ -29,6 +32,7 @@ public class EntityManager{
         this.player = player;
         entities = new ArrayList<>();
         bullets = new ArrayList<>();
+        swords = new ArrayList<>();
         addEntity(player);
     }
 
@@ -52,6 +56,14 @@ public class EntityManager{
                 j.remove();
         }
 
+        t = swords.iterator();
+        while(t.hasNext()){
+            Sword sword = (Sword) t.next();
+            sword.tick();
+            if(!sword.isActive()){
+                t.remove();
+            }
+        }
 
     }
 
@@ -63,7 +75,9 @@ public class EntityManager{
         for(Bullet b : bullets){
             b.render(g);
         }
-
+        for(Sword s : swords ){
+            s.render(g);
+        }
         player.postRender(g);
     }
 
@@ -72,6 +86,9 @@ public class EntityManager{
     }
     public void addBullet(Bullet b) {
         bullets.add(b);
+    }
+    public void addSword(Sword s){
+        swords.add(s);
     }
     public void removePlayer(Player player){
         entities.remove(player);
@@ -88,12 +105,18 @@ public class EntityManager{
         addEntity(player);
     }
 
+
+
     public ArrayList<Entity> getEntities() {
         return entities;
     }
 
     public ArrayList<Bullet> getBullets(){
         return bullets;
+    }
+
+    public ArrayList<Sword> getSwords(){
+        return swords;
     }
 
 }

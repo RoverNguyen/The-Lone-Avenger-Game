@@ -26,6 +26,9 @@ public class Assets {
     public static Image inventoryScreen;
 
     public static Image player_bullet;
+    //chuong
+    public static Image player_ball1,player_ball2,player_ball3,player_ball4;
+    public static Image player_sword1,player_sword2,player_sword3,player_sword4;
 
     public static void init(){
         inventoryScreen = ImageLoader.loadImage("res/textures/inventoryScreen.png");
@@ -62,8 +65,20 @@ public class Assets {
         skeleton = ImageLoader.loadImage("res/textures/skeleton.png");
         player = ImageLoader.loadImage("res/textures/player.png");
 
+        //bullet
         player_bullet = ImageLoader.loadImage("res/textures/player_bullet.png");
+        //chuong
+        SpriteSheet energyBall = new SpriteSheet(ImageLoader.loadImage("res/textures/energy_ball.png"));
+        player_ball1 = energyBall.crop(0, height,width , height);
+        player_ball2 = energyBall.crop(0, 0,width, height);
+        player_ball3 = energyBall.crop(width , 0,width , height );
+        player_ball4 = energyBall.crop(width , height ,width  , height);
 
+        SpriteSheet sheet3 = new SpriteSheet(ImageLoader.loadImage("res/textures/player_sword.png"));
+        player_sword1 = sheet3.crop(width/3, 0,width/3 , height+13);
+        player_sword2 = sheet3.crop(0, 0,width/3 , height+13);
+        player_sword3 = sheet3.crop(0, height+24,width+13 , height/3);
+        player_sword4 = sheet3.crop(0, height+13,width+13 , height/3);
 
         start = ImageLoader.loadImage("res/textures/start_button.png");
         exit = ImageLoader.loadImage("res/textures/exit_button.png");

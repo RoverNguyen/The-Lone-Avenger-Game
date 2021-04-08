@@ -50,16 +50,16 @@ public class KeyManager {
     };
 
     public boolean isMoveUp(){
-        return keys.getOrDefault(KeyCode.UP, false);
+        return keys.getOrDefault(KeyCode.W, false);
     }
     public boolean isMoveDown(){
-        return keys.getOrDefault(KeyCode.DOWN, false);
+        return keys.getOrDefault(KeyCode.S, false);
     }
     public boolean isMoveLeft(){
-        return keys.getOrDefault(KeyCode.LEFT, false);
+        return keys.getOrDefault(KeyCode.A, false);
     }
     public boolean isMoveRight(){
-        return keys.getOrDefault(KeyCode.RIGHT, false);
+        return keys.getOrDefault(KeyCode.D, false);
     }
     public boolean isSpace(){
         return keys.getOrDefault(KeyCode.SPACE, false);

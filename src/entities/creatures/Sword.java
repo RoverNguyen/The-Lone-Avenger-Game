@@ -8,21 +8,21 @@ import javafx.scene.media.MediaPlayer;
 import settings.Settings;
 import sounds.Sound;
 
-public class Bullet extends Creature{
+public class Sword extends Creature {
 
-    private boolean isFired = false;
+    private boolean isCut = false;
     private int xLong = 0, yLong = 0;
 
-    public Bullet(Handler handler, Image image, double x, double y, int damage, int direction) {
-        super(handler, image, x, y, 20, 21, damage);
+    public Sword(Handler handler, Image image, double x, double y, int damage, int direction) {
+        super(handler, image, x, y, 10, 11, damage);
         this.direction = direction;
 
-        setSpeed(30);
+        setSpeed(8);
 
-        bounds.setX(4);
-        bounds.setY(4);
-        bounds.setWidth(20);
-        bounds.setHeight(20);
+        bounds.setX(0);
+        bounds.setY(0);
+        bounds.setWidth(40);
+        bounds.setHeight(40);
 
     }
 
@@ -82,13 +82,13 @@ public class Bullet extends Creature{
 
     @Override
     public void tick() {
-        fire();
+        cut();
         move();
         checkHit();
     }
 
-    public void fire(){
-        if(!isFired){
+    public void cut(){
+        if(!isCut){
             if(direction == 1){ //up
                 yMove = -speed;
             }
@@ -104,7 +104,7 @@ public class Bullet extends Creature{
             if(direction == 4){ //right
                 xMove = speed;
             }
-            isFired = true;
+            isCut = true;
         }
     }
 
@@ -114,13 +114,12 @@ public class Bullet extends Creature{
             if(e.equals(handler.getWorld().getEntityManager().getPlayer()))
                 continue;
             if(e.getCollisionBounds(0, 0).intersects(getCollisionBounds(0,0).getBoundsInLocal())){
+                e.takeDamage(damage);
 
-                e.takeDamage(handler.getWorld().getEntityManager().getPlayer().getDamage() + 20);
-                die();
                 if(!Settings.IS_MUTE){
-                    if(Sound.boom.getStatus() == MediaPlayer.Status.PLAYING)
-                        Sound.boom.stop();
-                    Sound.boom.play();
+                    if(Sound.cut.getStatus() == MediaPlayer.Status.PLAYING)
+                        Sound.cut.stop();
+                    Sound.cut.play();
                 }
             }
         }
@@ -128,7 +127,7 @@ public class Bullet extends Creature{
         //Tile hit
 
         //Bullet move
-        if(Math.abs(xLong) > 500 || Math.abs(yLong) > 500)
+        if(Math.abs(xLong) > 23 || Math.abs(yLong) > 23)
             die();
     }
 
@@ -142,6 +141,7 @@ public class Bullet extends Creature{
     @Override
     public void die() {
         active = false;
-        System.out.println("Chết :D");
+        System.out.println("Chet :D");
     }
 }
+

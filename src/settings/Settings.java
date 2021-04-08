@@ -10,7 +10,9 @@ public class Settings {
     public static final int DISTANCE_PLAYER = 200*200;
     public static final int ATTACK_ZONE = 35*35;
     public static boolean IS_MUTE = true;
-    public static final int PLAYER_BULLET_DAMAGE = 40;
+    public static int PLAYER_BULLET_DAMAGE = 60;
     public static int SCORES = 0;
+    public static int PLAYER_SWORD_DAMAGE = 10;
+
 
 }

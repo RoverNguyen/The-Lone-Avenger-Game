@@ -13,4 +13,8 @@ public class Sound {
     public static MediaPlayer victory = new MediaPlayer(SoundLoader.loadSound("res/sounds/victory.wav"));
     public static MediaPlayer punch = new MediaPlayer(SoundLoader.loadSound("res/sounds/punch.wav"));
     public static MediaPlayer player_fired = new MediaPlayer(SoundLoader.loadSound("res/sounds/player_fired.wav"));
+    public static MediaPlayer player_sword = new MediaPlayer(SoundLoader.loadSound("res/sounds/sword-arm-2a.wav"));
+    public static MediaPlayer cut = new MediaPlayer(SoundLoader.loadSound("res/sounds/sword-1a.wav"));
+    public static MediaPlayer boom = new MediaPlayer(SoundLoader.loadSound("res/sounds/boom.wav"));
+
 }
