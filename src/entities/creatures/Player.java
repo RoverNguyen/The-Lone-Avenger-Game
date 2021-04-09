@@ -33,7 +33,6 @@ public class Player extends Creature{
     protected SpriteAnimation animation;
     protected Image player;
 
-
     //Attack Timer
     protected long lastAttackTimer, attackCoolDown = 500, attackTimer = attackCoolDown;
     public static long lastSpellTimer, spellCoolDown = 3000, spellTimer = spellCoolDown;
@@ -103,14 +102,15 @@ public class Player extends Creature{
         if(handler.getWorld().getWidth()*64*2/3 <= x+xMove){
             GameState.world[0] = GameState.world[handler.getWorld().getCountWorld()+1];
             GameState.entityManager = GameState.world[handler.getWorld().getCountWorld()+1].getEntityManager();
-
             tele = true;
         } else {
             GameState.world[0] = GameState.world[handler.getWorld().getCountWorld()-1];
             GameState.entityManager = GameState.world[handler.getWorld().getCountWorld()-1].getEntityManager();
             tele = false;
         }
+        GameState.playerCurrentHealth = handler.getWorld().getEntityManager().getPlayer().getHealth();
         handler.setWorld(GameState.world[0], tele);
+        GameState.entityManager.getPlayer().setHealth(GameState.playerCurrentHealth);
     }
 
     //get Move
