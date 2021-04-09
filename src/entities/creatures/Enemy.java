@@ -43,7 +43,7 @@ public abstract class Enemy extends Creature{
         checkAttacks();
     }
 
-    protected void checkAttacks(){
+    private void checkAttacks(){
         attackTimer += System.currentTimeMillis() - lastAttackTimer;
         lastAttackTimer = System.currentTimeMillis();
         if(attackTimer < attackCoolDown){

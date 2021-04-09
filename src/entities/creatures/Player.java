@@ -33,6 +33,7 @@ public class Player extends Creature{
     protected SpriteAnimation animation;
     protected Image player;
 
+
     //Attack Timer
     protected long lastAttackTimer, attackCoolDown = 500, attackTimer = attackCoolDown;
     public static long lastSpellTimer, spellCoolDown = 3000, spellTimer = spellCoolDown;
@@ -47,8 +48,6 @@ public class Player extends Creature{
         super(handler, Assets.player, x, y, Settings.DEFAULT_CREATURE_WIDTH, Settings.DEFAULT_CREATURE_HEIGHT, damage);
 
         setSpeed(Settings.PLAYER_SPEED);
-        setHealth(Settings.PLAYER_HEALTH);
-        maxHealth = health;
 
         imageView = new ImageView(image);
         imageView.setFitWidth(width);
@@ -65,6 +64,9 @@ public class Player extends Creature{
         handler.getSoundManager().addSound(footstep);
 
         inventory = new Inventory(handler);
+
+        maxHealth = 1000;
+        health = 1000;
     }
 
     @Override
@@ -73,7 +75,7 @@ public class Player extends Creature{
         getInput();
         move();
         checkPointMove();
-        stepSound();
+        //stepSound();
         handler.getGameCamera().centerOnEntity(this);
 
         //Attack
@@ -101,16 +103,12 @@ public class Player extends Creature{
     private void setNewWorld(){
         if(handler.getWorld().getWidth()*64*2/3 <= x+xMove){
             GameState.world[0] = GameState.world[handler.getWorld().getCountWorld()+1];
-            GameState.entityManager = GameState.world[handler.getWorld().getCountWorld()+1].getEntityManager();
             tele = true;
         } else {
             GameState.world[0] = GameState.world[handler.getWorld().getCountWorld()-1];
-            GameState.entityManager = GameState.world[handler.getWorld().getCountWorld()-1].getEntityManager();
             tele = false;
         }
-        GameState.playerCurrentHealth = handler.getWorld().getEntityManager().getPlayer().getHealth();
         handler.setWorld(GameState.world[0], tele);
-        GameState.entityManager.getPlayer().setHealth(GameState.playerCurrentHealth);
     }
 
     //get Move
@@ -179,7 +177,11 @@ public class Player extends Creature{
                 handler.getWorld().getEntityManager().addBullet(new Bullet(handler, Assets.player_ball4,
                         x+35, y+30 , Settings.PLAYER_BULLET_DAMAGE, direction));}
 
-            Sound.playSound(Sound.player_fired);
+            if(!Settings.IS_MUTE){
+                if(Sound.player_fired.getStatus() == MediaPlayer.Status.PLAYING)
+                    Sound.player_fired.stop();
+                Sound.player_fired.play();
+            }
         } else {
             return;
         }
@@ -272,7 +274,11 @@ public class Player extends Creature{
                 continue;
             if(e.getCollisionBounds(0, 0).intersects(ar.getBoundsInLocal())){
                 e.takeDamage(damage);
-                Sound.playSound(Sound.punch);
+                if(!Settings.IS_MUTE){
+                    if(Sound.punch.getStatus() == MediaPlayer.Status.PLAYING)
+                        Sound.punch.stop();
+                    //Sound.punch.play();
+                }
             }
         }
     }
@@ -313,11 +319,14 @@ public class Player extends Creature{
         }
     }
 
-    public void stepSound() {
-        if (active) {
-            if (handler.getKeyManager().isMoveUp() || handler.getKeyManager().isMoveDown()
-                    || handler.getKeyManager().isMoveLeft() || handler.getKeyManager().isMoveRight()) {
-                Sound.playSound(footstep);
+    public void stepSound(){
+        if(active){
+            if(handler.getKeyManager().isMoveUp() || handler.getKeyManager().isMoveDown()
+                    || handler.getKeyManager().isMoveLeft() || handler.getKeyManager().isMoveRight()){
+                footstep.setCycleCount(MediaPlayer.INDEFINITE);
+                //footstep.play();
+            } else {
+                //footstep.stop();
             }
         }
     }
