@@ -1,6 +1,7 @@
 package sounds;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import settings.Settings;
 
 
 public class Sound {
@@ -17,4 +18,12 @@ public class Sound {
     public static MediaPlayer cut = new MediaPlayer(SoundLoader.loadSound("res/sounds/sword-1a.wav"));
     public static MediaPlayer boom = new MediaPlayer(SoundLoader.loadSound("res/sounds/boom.wav"));
 
+    public static void playSound(MediaPlayer mediaPlayer){
+        if (!Settings.IS_MUTE) {
+            if (mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING)
+                mediaPlayer.stop();
+            mediaPlayer.play();
+        }
+    }
 }
+

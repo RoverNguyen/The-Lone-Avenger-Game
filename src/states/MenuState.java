@@ -21,8 +21,8 @@ public class MenuState extends State{
 
         stateSound = Sound.uchiha;
         handler.getSoundManager().addSound(stateSound);
-
-        stateSound.play();
+        if(!Settings.IS_MUTE)
+            stateSound.play();
 
         uiManager.addObject(new UIImageButton(300, 130,200, 100, Assets.start,
                 () -> {

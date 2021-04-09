@@ -37,6 +37,7 @@ public class GameState extends State{
         handler.getSoundManager().addSound(stateSound);
         stateSound.setCycleCount(MediaPlayer.INDEFINITE);
 
+
         //spawn enemies in world 1:
         for(int i = 0; i < 3; ++i){
             world[1].getEntityManager().addEntity(new Skeleton(handler, Assets.skeleton, 550 + 55 * i, 1050));
@@ -69,8 +70,9 @@ public class GameState extends State{
 
     @Override
     public void tick() {
-        //stateSound.play();
-        handler.getSoundManager().soundOff();
+        if(!Settings.IS_MUTE)
+            stateSound.play();
+
         world[0].tick();
         checkPause();
         checkWin();

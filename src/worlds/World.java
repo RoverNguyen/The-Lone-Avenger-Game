@@ -74,7 +74,6 @@ public class World {
     }
 
 
-
     public void tick() {
         itemManager.tick();
         entityManager.tick();
