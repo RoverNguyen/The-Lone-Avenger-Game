@@ -27,6 +27,7 @@ public class MenuState extends State{
         uiManager.addObject(new UIImageButton(300, 130,200, 100, Assets.start,
                 () -> {
                     handler.getMouseManager().setUiManager(null);
+                    handler.setTele(true);
                     handler.getGame().gameState = new GameState(handler);
                     State.setState(handler.getGame().gameState);
                     stateSound.dispose();
