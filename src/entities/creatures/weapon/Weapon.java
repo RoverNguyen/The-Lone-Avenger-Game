@@ -107,8 +107,6 @@ public abstract class Weapon extends Creature {
             }
         }
 
-        //Tile hit
-
         //Bullet move
         if(Math.abs(xLong) > xFar || Math.abs(yLong) > yFar)
             die();

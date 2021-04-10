@@ -23,6 +23,7 @@ public class GameState extends State{
     public static World[] world = new World[5];
     public static EntityManager entityManager;
     public static int playerCurrentHealth;
+    public static double playerCurrentSpeed;
 
     public GameState(Handler handler){
         super(handler);

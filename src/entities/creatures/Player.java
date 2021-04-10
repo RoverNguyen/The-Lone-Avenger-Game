@@ -1,6 +1,8 @@
 package entities.creatures;
 
 import entities.Entity;
+import entities.creatures.weapon.Bullet;
+import entities.creatures.weapon.Sword;
 import game.Handler;
 
 import gfx.Assets;
@@ -16,6 +18,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import settings.Settings;
 import sounds.Sound;
+import sounds.SoundPlayer;
 import states.GameOverState;
 import states.GameState;
 import states.State;
@@ -103,12 +106,21 @@ public class Player extends Creature{
     private void setNewWorld(){
         if(handler.getWorld().getWidth()*64*2/3 <= x+xMove){
             GameState.world[0] = GameState.world[handler.getWorld().getCountWorld()+1];
+            GameState.entityManager = GameState.world[handler.getWorld().getCountWorld()+1].getEntityManager();
             tele = true;
         } else {
             GameState.world[0] = GameState.world[handler.getWorld().getCountWorld()-1];
+            GameState.entityManager = GameState.world[handler.getWorld().getCountWorld()-1].getEntityManager();
             tele = false;
         }
+        GameState.playerCurrentHealth = handler.getWorld().getEntityManager().getPlayer().getHealth();
+        GameState.playerCurrentSpeed = handler.getWorld().getEntityManager().getPlayer().getSpeed();
+
         handler.setWorld(GameState.world[0], tele);
+
+        GameState.entityManager.getPlayer().setHealth(GameState.playerCurrentHealth);
+        GameState.entityManager.getPlayer().setSpeed(GameState.playerCurrentSpeed);
+
     }
 
     //get Move
@@ -177,11 +189,7 @@ public class Player extends Creature{
                 handler.getWorld().getEntityManager().addBullet(new Bullet(handler, Assets.player_ball4,
                         x+35, y+30 , Settings.PLAYER_BULLET_DAMAGE, direction));}
 
-            if(!Settings.IS_MUTE){
-                if(Sound.player_fired.getStatus() == MediaPlayer.Status.PLAYING)
-                    Sound.player_fired.stop();
-                Sound.player_fired.play();
-            }
+            SoundPlayer.PlaySound(Sound.player_fired);
         } else {
             return;
         }
@@ -211,12 +219,7 @@ public class Player extends Creature{
                 handler.getWorld().getEntityManager().addSword(new Sword(handler, Assets.player_sword4,
                         x+15, y+37 , Settings.PLAYER_SWORD_DAMAGE, direction));}
 
-
-            if(!Settings.IS_MUTE){
-                if(Sound.player_sword.getStatus() == MediaPlayer.Status.PLAYING)
-                    Sound.player_sword.stop();
-                Sound.player_sword.play();
-            }
+            SoundPlayer.PlaySound(Sound.player_sword);
         } else {
             return;
         }
