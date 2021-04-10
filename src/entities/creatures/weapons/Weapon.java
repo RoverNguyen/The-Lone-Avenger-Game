@@ -1,4 +1,4 @@
-package entities.creatures.weapon;
+package entities.creatures.weapons;
 
 import entities.Entity;
 import entities.creatures.Creature;

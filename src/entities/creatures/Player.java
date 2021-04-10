@@ -1,8 +1,8 @@
 package entities.creatures;
 
 import entities.Entity;
-import entities.creatures.weapon.Bullet;
-import entities.creatures.weapon.Sword;
+import entities.creatures.weapons.Bullet;
+import entities.creatures.weapons.Sword;
 import game.Handler;
 
 import gfx.Assets;

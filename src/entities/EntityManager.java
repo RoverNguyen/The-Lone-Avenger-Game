@@ -1,8 +1,8 @@
 package entities;
 
 import entities.creatures.Player;
-import entities.creatures.weapon.Bullet;
-import entities.creatures.weapon.Sword;
+import entities.creatures.weapons.Bullet;
+import entities.creatures.weapons.Sword;
 import game.Handler;
 import javafx.scene.canvas.GraphicsContext;
 

@@ -1,11 +1,8 @@
-package entities.creatures.weapon;
+package entities.creatures.weapons;
 
 import entities.Entity;
-import entities.creatures.weapon.Weapon;
 import game.Handler;
 import javafx.scene.image.Image;
-import javafx.scene.media.MediaPlayer;
-import settings.Settings;
 import sounds.Sound;
 import sounds.SoundPlayer;
 
