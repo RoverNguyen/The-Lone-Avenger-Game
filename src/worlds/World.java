@@ -24,21 +24,7 @@ public class World {
     private int spawnX;
     private int spawnY;
     private int layer = 3;
-    public void setWidth(int width) {
-        this.width = width;
-    }
 
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    public int getCountWorld() {
-        return countWorld;
-    }
-
-    public void setCountWorld(int countWorld) {
-        this.countWorld = countWorld;
-    }
 
     private int countWorld;
     private int[][][] tiles;
@@ -57,6 +43,7 @@ public class World {
         this.handler = handler;
 
         loadWorld(path);
+        Settings.countWorld = countWorld;
         if(handler.isTele()){
             spawnX = spawnXNext;
             spawnY = spawnYNext;
@@ -160,6 +147,21 @@ public class World {
         }
 
 
+    }
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public int getCountWorld() {
+        return countWorld;
+    }
+
+    public void setCountWorld(int countWorld) {
+        this.countWorld = countWorld;
     }
 
     public int getWidth() {

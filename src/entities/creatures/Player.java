@@ -68,7 +68,7 @@ public class Player extends Creature{
 
         inventory = new Inventory(handler);
 
-        maxHealth = 1000;
+        maxHealth = Settings.PLAYER_HEALTH;
         health = 1000;
     }
 

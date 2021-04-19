@@ -9,7 +9,7 @@ public class Assets {
     public static Font font20;
 
     private static final int width = 32, height = 32;
-    public static Image icon, dirt, grass, stone, skeleton, player, checkpoint, clear;
+    public static Image icon, dirt, grass, stone, skeleton, player, checkpoint, clear, easy, medium, hard, difficultState;
     public static Image[] tree = new Image[13];
     public static Image[][] map1 = new Image[30][30];
     public static Image[][] map2 = new Image[30][30];
@@ -42,6 +42,10 @@ public class Assets {
         for(int i=0; i<=12; i++){
             tree[i] = ImageLoader.loadImage("res/textures/tree/tree (" + i + ").png");
         }
+        easy = ImageLoader.loadImage("res/textures/Easy.png");
+        medium = ImageLoader.loadImage("res/textures/Medium.png");
+        hard = ImageLoader.loadImage("res/textures/Hard.png");
+        difficultState = ImageLoader.loadImage("res/textures/background_difficult.png");
         SpriteSheet teleport = new SpriteSheet(ImageLoader.loadImage("res/textures/Teleport.png"));
         SpriteSheet map_1 = new SpriteSheet(ImageLoader.loadImage("res/textures/Map1.png"));
         SpriteSheet map_2 = new SpriteSheet(ImageLoader.loadImage("res/textures/Map2.png"));

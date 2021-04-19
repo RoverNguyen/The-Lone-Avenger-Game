@@ -152,7 +152,7 @@ public abstract class Enemy extends Creature{
         Settings.SCORES++;
         handler.getWorld().setEnemyOnBoard(handler.getWorld().getEnemyOnBoard() - 1);
         System.out.println(Settings.SCORES);
-        System.out.println("xin lũiiii mà :(");
+       // System.out.println("xin lũiiii mà :(");
 
         int rand = (int) (Math.random() * 5);
         if(rand == 1){

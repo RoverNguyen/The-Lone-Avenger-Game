@@ -15,6 +15,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import settings.Settings;
 import sounds.SoundManager;
+import states.DifficultState;
 import states.MenuState;
 
 import states.State;
@@ -152,4 +153,5 @@ public class Game extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
 }
