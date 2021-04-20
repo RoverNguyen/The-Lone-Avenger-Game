@@ -34,9 +34,8 @@ public abstract class Entity {
         this.width = width;
         this.height = height;
 
-        health = Settings.DEFAULT_HEALTH;
+        health = Settings.DEFAULT_HEALTH + 100*handler.getDifficulty();// + 100*(handler.getWorld().getCountWorld()-1);
         maxHealth = health;
-
 
         params = new SnapshotParameters();
         params.setFill(Color.TRANSPARENT);

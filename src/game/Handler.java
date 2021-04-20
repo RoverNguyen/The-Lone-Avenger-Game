@@ -12,6 +12,7 @@ public class Handler {
 
     private Game game;
     private World world;
+    private int difficulty;
     private boolean tele = true;
 
     public Handler(Game game){
@@ -58,6 +59,14 @@ public class Handler {
         this.tele = tele;
         this.world = world;
 
+    }
+
+    public int getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(int difficulty) {
+        this.difficulty = difficulty;
     }
 
     public int getWidth(){

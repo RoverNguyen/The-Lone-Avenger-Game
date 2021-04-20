@@ -27,7 +27,7 @@ public class MenuState extends State{
         uiManager.addObject(new UIImageButton(300, 130,200, 100, Assets.start,
                 () -> {
                     handler.getMouseManager().setUiManager(null);
-                    handler.getGame().menuState = new DifficultState(handler);
+                    handler.getGame().menuState = new DifficultyState(handler);
                     State.setState(handler.getGame().menuState);
                 }));
 

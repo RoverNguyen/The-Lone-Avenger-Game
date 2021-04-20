@@ -43,7 +43,6 @@ public class World {
         this.handler = handler;
 
         loadWorld(path);
-        Settings.countWorld = countWorld;
         if(handler.isTele()){
             spawnX = spawnXNext;
             spawnY = spawnYNext;

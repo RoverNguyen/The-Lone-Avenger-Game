@@ -15,12 +15,12 @@ public class Slime extends Enemy{
     public Slime(Handler handler, Image image, double x, double y) {
         super(handler, image, x, y);
 
-        setDamage(50);
+        setDamage(50+10*handler.getDifficulty());
 
         setWidth(32);
         setHeight(32);
-        setSpeed(1);
-        setHealth(50);
+        //setSpeed(1);
+        //setHealth(50);
 
         bounds.setX(4);
         bounds.setY(12);

@@ -27,7 +27,7 @@ public class Skeleton extends Enemy{
 
         setWidth(64);
         setWidth(64);
-        setSpeed(2);
+        //setSpeed(2);
 
         imageView = new ImageView(image);
         imageView.setFitWidth(width);

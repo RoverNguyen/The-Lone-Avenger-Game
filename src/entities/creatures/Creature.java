@@ -16,7 +16,7 @@ public abstract class Creature extends Entity {
     public Creature(Handler handler, Image image, double x, double y, int width, int height, int damage){
         super(handler, image, x, y, width, height);
         this.damage = damage;
-        speed = Settings.DEFAULT_SPEED;
+        speed = Settings.DEFAULT_SPEED + handler.getDifficulty()+0.5;
         xMove = 0;
         yMove = 0;
     }

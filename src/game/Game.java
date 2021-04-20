@@ -15,7 +15,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import settings.Settings;
 import sounds.SoundManager;
-import states.DifficultState;
+import states.DifficultyState;
 import states.MenuState;
 
 import states.State;
