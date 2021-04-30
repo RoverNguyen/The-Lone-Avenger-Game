@@ -44,6 +44,7 @@ public class Player extends Creature{
 
     protected MediaPlayer footstep;
 
+    public Rectangle abound;
     //inventory
     private Inventory inventory;
 
@@ -63,6 +64,13 @@ public class Player extends Creature{
         bounds.setWidth(16);
         bounds.setHeight(24);
 
+        //attack bounds
+        abound =new Rectangle();
+        abound.setX(16);
+        abound.setY(16);
+        abound.setWidth(32);
+        abound.setHeight(48);
+
         footstep = Sound.footstep;
         handler.getSoundManager().addSound(footstep);
 
@@ -70,6 +78,8 @@ public class Player extends Creature{
 
         maxHealth = Settings.PLAYER_HEALTH;
         health = 1000;
+
+        speed = 10;
     }
 
     @Override
@@ -376,5 +386,10 @@ public class Player extends Creature{
     @Override
     public void setHealth(int health){
         this.health = health;
+    }
+
+    public Rectangle getAttackBounds(double xOffset, double yOffset){
+        return new Rectangle((int) (x + abound.getX() + xOffset),
+                (int) (y + abound.getY() + yOffset), abound.getWidth(), abound.getHeight());
     }
 }

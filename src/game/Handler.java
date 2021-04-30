@@ -14,6 +14,15 @@ public class Handler {
     private World world;
     private int difficulty;
     private boolean tele = true;
+    private boolean win = false;
+
+    public boolean isWin() {
+        return win;
+    }
+
+    public void setWin(boolean win) {
+        this.win = win;
+    }
 
     public Handler(Game game){
         this.game = game;

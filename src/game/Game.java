@@ -46,6 +46,12 @@ public class Game extends Application {
     //Sound
     private SoundManager soundManager;
 
+    //fps
+    private long start;
+    private long timePerUpDate;
+    private double delta = 1;
+    private int count = 0;
+
     public void init(){
         Assets.init();
         Tile.init();
@@ -80,12 +86,18 @@ public class Game extends Application {
 
         gameCamera = new GameCamera(handler,0,0);
 
+        start = System.nanoTime();
+        timePerUpDate = 1000000000/40;
 
         AnimationTimer gameLoop = new AnimationTimer() {
             @Override
             public void handle(long l) {
-                tick();
-                render(g);
+
+                if(l - start > timePerUpDate) {
+                    start = l;
+                    tick();
+                    render(g);
+                }
             }
         };
         gameLoop.start();
@@ -152,6 +164,14 @@ public class Game extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    public StackPane getRoot() {
+        return root;
+    }
+
+    public void setRoot(StackPane root) {
+        this.root = root;
     }
 
 }

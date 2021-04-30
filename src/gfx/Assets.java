@@ -17,7 +17,17 @@ public class Assets {
     public static Image[][] map4 = new Image[30][30];
     public static Image background, gameover, pause, victory;
     public static Image start, exit, mute_unmute, restart, main_menu;
+
     public static Image[] slime_up, slime_down, slime_left, slime_right;
+
+    //boss
+    public static Image bossblue;
+    public static Image firebreath;
+    public static Image energyBall;
+    public static Image energyBall1;
+    public static Image energyBall2;
+    public static Image energyBall3;
+    public static Image energyBall4;
 
     //item
     public static Image lotionMana, lotionHP, lotionDamage;
@@ -26,11 +36,22 @@ public class Assets {
     public static Image inventoryScreen;
 
     public static Image player_bullet;
+
     //chuong
     public static Image player_ball1,player_ball2,player_ball3,player_ball4;
     public static Image player_sword1,player_sword2,player_sword3,player_sword4;
 
     public static void init(){
+        //boss
+        bossblue = ImageLoader.loadImage("res/textures/bossblue.png");
+        firebreath = ImageLoader.loadImage("res/textures/boss/fireball3.png");
+        energyBall = ImageLoader.loadImage("res/textures/boss/energyBall.png");
+        SpriteSheet e = new SpriteSheet(energyBall);
+        energyBall1 = e.crop(0,0,182,206);
+        energyBall2 = e.crop(182 * 1,0,182,206);
+        energyBall3 = e.crop(182 * 2,0,182,206);
+        energyBall4 = e.crop(182 * 3,0,182,206);
+
         inventoryScreen = ImageLoader.loadImage("res/textures/inventoryScreen.png");
 
         font28 = FontLoader.loadFont("res/fonts/slkscr.ttf",28);

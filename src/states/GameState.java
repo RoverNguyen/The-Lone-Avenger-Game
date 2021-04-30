@@ -4,6 +4,7 @@ import entities.EntityManager;
 import entities.creatures.Player;
 import entities.creatures.Skeleton;
 import entities.creatures.Slime;
+import entities.creatures.Boss;
 import game.Handler;
 import gfx.Assets;
 import javafx.scene.canvas.GraphicsContext;
@@ -14,8 +15,6 @@ import javafx.scene.text.FontWeight;
 import settings.Settings;
 import sounds.Sound;
 import worlds.World;
-
-
 
 public class GameState extends State{
 
@@ -56,6 +55,8 @@ public class GameState extends State{
             world[1].getEntityManager().addEntity(new Skeleton(handler, Assets.skeleton, 1100 + 55 * i, 150));
         }
 
+//        world[1].getEntityManager().addEntity(new Boss(handler, Assets.bossblue, 600, 600));
+
         //enemies in world 2
         for(int i = 0; i < 3; ++i){
             world[2].getEntityManager().addEntity(new Skeleton(handler, Assets.skeleton, 550 + 55 * i, 1050));
@@ -69,6 +70,9 @@ public class GameState extends State{
             world[2].getEntityManager().addEntity(new Skeleton(handler, Assets.skeleton, 750 + 55 * i, 300));
             world[2].getEntityManager().addEntity(new Slime(handler, Assets.skeleton, 900 + 45 * i, 400));
         }
+
+        //enemies in world 4
+        world[4].getEntityManager().addEntity(new Boss(handler, Assets.bossblue, 600, 600));
     }
 
     @Override
@@ -95,7 +99,8 @@ public class GameState extends State{
     }
 
     public void checkWin(){
-        if(Settings.SCORES < 100){
+
+        if(!handler.isWin()){
             return;
         }
 

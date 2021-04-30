@@ -1,5 +1,6 @@
 package entities;
 
+import entities.creatures.BossSkill.energyBall;
 import entities.creatures.Player;
 import entities.creatures.weapons.Bullet;
 import entities.creatures.weapons.Sword;
@@ -17,7 +18,10 @@ public class EntityManager{
     private ArrayList<Entity> entities;
     private ArrayList<Bullet> bullets;
     private ArrayList<Sword> swords;
-    private Iterator i, j, t;
+
+    private ArrayList<energyBall> fire;
+
+    private Iterator i, j, t, eb;
     private Comparator<Entity> renderSort = Comparator.comparingDouble(a -> a.getY() + a.getHeight());
 
     public EntityManager(Handler handler){
@@ -25,6 +29,7 @@ public class EntityManager{
         entities = new ArrayList<>();
         bullets = new ArrayList<>();
         swords = new ArrayList<>();
+        fire = new ArrayList<>();
     }
 
     public EntityManager(Handler handler, Player player){
@@ -33,6 +38,7 @@ public class EntityManager{
         entities = new ArrayList<>();
         bullets = new ArrayList<>();
         swords = new ArrayList<>();
+        fire = new ArrayList<>();
         addEntity(player);
     }
 
@@ -65,6 +71,15 @@ public class EntityManager{
             }
         }
 
+        eb = fire.iterator();
+        while(eb.hasNext()){
+            energyBall energyB = (energyBall) eb.next();
+            energyB.tick();
+            if(!energyB.isActive()){
+                eb.remove();
+            }
+        }
+
     }
 
     public void render(GraphicsContext g){
@@ -77,6 +92,9 @@ public class EntityManager{
         }
         for(Sword s : swords ){
             s.render(g);
+        }
+        for(energyBall eb : fire){
+            eb.render(g);
         }
         player.postRender(g);
     }
@@ -93,7 +111,9 @@ public class EntityManager{
     public void removePlayer(Player player){
         entities.remove(player);
     }
-
+    public void addEnergyBall(energyBall eb){
+        fire.add(eb);
+    }
 
     //Getters & Setters
     public Player getPlayer() {
@@ -118,5 +138,7 @@ public class EntityManager{
     public ArrayList<Sword> getSwords(){
         return swords;
     }
+
+
 
 }
