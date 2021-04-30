@@ -1,6 +1,7 @@
 package entities.creatures;
 
 import game.Handler;
+import gfx.Assets;
 import gfx.SpriteAnimation;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
@@ -8,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
+import settings.Settings;
 
 
 public class Skeleton extends Enemy{
@@ -22,8 +24,8 @@ public class Skeleton extends Enemy{
     SpriteAnimation animation;
     Image enemy;
 
-    public Skeleton(Handler handler,  Image image, double x, double y){
-        super(handler, image, x, y);
+    public Skeleton(Handler handler, double x, double y){
+        super(handler, Assets.skeleton, x, y);
 
         setWidth(64);
         setWidth(64);
@@ -82,5 +84,20 @@ public class Skeleton extends Enemy{
         g.fillRoundRect((int) (x - handler.getGameCamera().getxOffset()) + 11,
                 (int) (y - handler.getGameCamera().getyOffset()), 40 * ((double) (health) / (double) maxHealth), 4, 10, 10);
 
+    }
+
+    @Override
+    public void die(){
+        super.die();
+        Thread enemySpawner = new Thread(() -> {
+            try {
+                Thread.sleep(Settings.ENEMY_RESPAWN_TIME);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            handler.getWorld().getEntityManager().addEntity(new Skeleton(handler, homeX, homeY));
+        });
+        enemySpawner.start();
     }
 }

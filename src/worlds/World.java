@@ -67,28 +67,28 @@ public class World {
 
 
 
-    public void spawnEnemy(){
-        if(enemyOnBoard < 5){
-            spawnTimer += System.currentTimeMillis() - lastSpawnTimer;
-            lastSpawnTimer = System.currentTimeMillis();
-            if(spawnTimer < spawnCoolDown){
-                return;
-            }
-
-            enemyOnBoard++;
-            int enemyType = 1 + (int) (Math.random()*(2-1+1));
-            switch (enemyType){
-                case 1: entityManager.addEntity(new Slime(handler, Assets.skeleton,
-                        Math.random()*(1000 - 500 + 1) + 500, Math.random()*(1200 - 700 + 1) + 700)); break;
-                case 2: entityManager.addEntity(new Skeleton(handler, Assets.skeleton,
-                        Math.random()*(1000 - 500 + 1) + 500, Math.random()*(1200 - 700 + 1) + 700)); break;
-                default: break;
-            }
-
-            spawnTimer = 0;
-        }
-
-    }
+//    public void spawnEnemy(){
+//        if(enemyOnBoard < 5){
+//            spawnTimer += System.currentTimeMillis() - lastSpawnTimer;
+//            lastSpawnTimer = System.currentTimeMillis();
+//            if(spawnTimer < spawnCoolDown){
+//                return;
+//            }
+//
+//            enemyOnBoard++;
+//            int enemyType = 1 + (int) (Math.random()*(2-1+1));
+//            switch (enemyType){
+//                case 1: entityManager.addEntity(new Slime(handler, Assets.skeleton,
+//                        Math.random()*(1000 - 500 + 1) + 500, Math.random()*(1200 - 700 + 1) + 700)); break;
+//                case 2: entityManager.addEntity(new Skeleton(handler, Assets.skeleton,
+//                        Math.random()*(1000 - 500 + 1) + 500, Math.random()*(1200 - 700 + 1) + 700)); break;
+//                default: break;
+//            }
+//
+//            spawnTimer = 0;
+//        }
+//
+//    }
 
     public void render(GraphicsContext g){
 

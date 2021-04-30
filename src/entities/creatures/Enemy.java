@@ -9,7 +9,6 @@ import javafx.scene.media.MediaPlayer;
 import settings.Settings;
 import sounds.Sound;
 
-import java.util.Random;
 
 
 public abstract class Enemy extends Creature{
@@ -162,5 +161,6 @@ public abstract class Enemy extends Creature{
         }else if(rand == 3) {
             handler.getWorld().getItemManager().addItem(Item.lotionAttack.createNew((int) x, (int) y));
         }
+
     }
 }

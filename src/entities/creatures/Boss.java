@@ -44,8 +44,8 @@ public class Boss extends Enemy{
         this.distanceA = distanceA;
     }
 
-    public Boss(Handler handler, Image image, double x, double y) {
-        super(handler, image, x, y);
+    public Boss(Handler handler, double x, double y) {
+        super(handler, Assets.bossblue, x, y);
         setWidth(144);
         setHeight(128);
 

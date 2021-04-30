@@ -42,37 +42,37 @@ public class GameState extends State{
 
         //spawn enemies in world 1:
         for(int i = 0; i < 3; ++i){
-            world[1].getEntityManager().addEntity(new Skeleton(handler, Assets.skeleton, 550 + 55 * i, 1050));
-            world[1].getEntityManager().addEntity(new Slime(handler, Assets.skeleton, 600 + 45 * i, 1150));
-            world[1].getEntityManager().addEntity(new Skeleton(handler, Assets.skeleton, 550 + 55 * i, 1200));
+            world[1].getEntityManager().addEntity(new Skeleton(handler, 550 + 55 * i, 1050));
+            world[1].getEntityManager().addEntity(new Slime(handler, 600 + 45 * i, 1150));
+            world[1].getEntityManager().addEntity(new Skeleton(handler,  550 + 55 * i, 1200));
 
-            world[1].getEntityManager().addEntity(new Skeleton(handler, Assets.skeleton, 1300 + 55 * i, 1050));
-            world[1].getEntityManager().addEntity(new Slime(handler, Assets.skeleton, 1350 + 45 * i, 1150));
-            world[1].getEntityManager().addEntity(new Skeleton(handler, Assets.skeleton, 1300 + 55 * i, 1200));
+            world[1].getEntityManager().addEntity(new Skeleton(handler,  1300 + 55 * i, 1050));
+            world[1].getEntityManager().addEntity(new Slime(handler,  1350 + 45 * i, 1150));
+            world[1].getEntityManager().addEntity(new Skeleton(handler, 1300 + 55 * i, 1200));
 
-            world[1].getEntityManager().addEntity(new Skeleton(handler, Assets.skeleton, 1100 + 55 * i, 70));
-            world[1].getEntityManager().addEntity(new Slime(handler, Assets.skeleton, 1150 + 45 * i, 130));
-            world[1].getEntityManager().addEntity(new Skeleton(handler, Assets.skeleton, 1100 + 55 * i, 150));
+            world[1].getEntityManager().addEntity(new Skeleton(handler,  1100 + 55 * i, 70));
+            world[1].getEntityManager().addEntity(new Slime(handler,  1150 + 45 * i, 130));
+            world[1].getEntityManager().addEntity(new Skeleton(handler, 1100 + 55 * i, 150));
         }
 
 //        world[1].getEntityManager().addEntity(new Boss(handler, Assets.bossblue, 600, 600));
 
         //enemies in world 2
         for(int i = 0; i < 3; ++i){
-            world[2].getEntityManager().addEntity(new Skeleton(handler, Assets.skeleton, 550 + 55 * i, 1050));
-            world[2].getEntityManager().addEntity(new Slime(handler, Assets.skeleton, 150 + 45 * i, 650));
-            world[2].getEntityManager().addEntity(new Skeleton(handler, Assets.skeleton, 150 + 55 * i, 700));
+            world[2].getEntityManager().addEntity(new Skeleton(handler, 550 + 55 * i, 1050));
+            world[2].getEntityManager().addEntity(new Slime(handler, 150 + 45 * i, 650));
+            world[2].getEntityManager().addEntity(new Skeleton(handler, 150 + 55 * i, 700));
 
-            world[2].getEntityManager().addEntity(new Skeleton(handler, Assets.skeleton, 1200 + 55 * i, 150));
-            world[2].getEntityManager().addEntity(new Slime(handler, Assets.skeleton, 1350 + 45 * i, 250));
-            world[2].getEntityManager().addEntity(new Skeleton(handler, Assets.skeleton, 1100 + 55 * i, 650));
+            world[2].getEntityManager().addEntity(new Skeleton(handler, 1200 + 55 * i, 150));
+            world[2].getEntityManager().addEntity(new Slime(handler, 1350 + 45 * i, 250));
+            world[2].getEntityManager().addEntity(new Skeleton(handler, 1100 + 55 * i, 650));
 
-            world[2].getEntityManager().addEntity(new Skeleton(handler, Assets.skeleton, 750 + 55 * i, 300));
-            world[2].getEntityManager().addEntity(new Slime(handler, Assets.skeleton, 900 + 45 * i, 400));
+            world[2].getEntityManager().addEntity(new Skeleton(handler, 750 + 55 * i, 300));
+            world[2].getEntityManager().addEntity(new Slime(handler, 900 + 45 * i, 400));
         }
 
         //enemies in world 4
-        world[4].getEntityManager().addEntity(new Boss(handler, Assets.bossblue, 600, 600));
+        world[4].getEntityManager().addEntity(new Boss(handler, 600, 600));
     }
 
     @Override

@@ -6,14 +6,15 @@ import gfx.ImageAnimation;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import settings.Settings;
 
 public class Slime extends Enemy{
 
     private ImageAnimation slimeUp, slimeDown, slimeLeft, slimeRight;
 
 
-    public Slime(Handler handler, Image image, double x, double y) {
-        super(handler, image, x, y);
+    public Slime(Handler handler, double x, double y) {
+        super(handler, Assets.skeleton, x, y);
 
         setDamage(50+10*handler.getDifficulty());
 
@@ -70,6 +71,20 @@ public class Slime extends Enemy{
         }
     }
 
+    @Override
+    public void die(){
+        super.die();
+        Thread enemySpawner = new Thread(() -> {
+            try {
+                Thread.sleep(Settings.ENEMY_RESPAWN_TIME);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            handler.getWorld().getEntityManager().addEntity(new Slime(handler, homeX, homeY));
+        });
+        enemySpawner.start();
+    }
 }
 
 
