@@ -160,6 +160,8 @@ public abstract class Enemy extends Creature{
         }else if(rand == 3) {
             handler.getWorld().getItemManager().addItem(Item.lotionAttack.createNew((int) x, (int) y));
         }
+
+        active = false;
     }
 
 }
