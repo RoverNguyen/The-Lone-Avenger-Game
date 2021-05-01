@@ -14,6 +14,6 @@ public class Settings {
     public static final int PLAYER_BULLET_DAMAGE = 60;
     public static int SCORES = 0;
     public static final int PLAYER_SWORD_DAMAGE = 25;
-    public static final int ENEMY_RESPAWN_TIME = 60000;
+    public static final int ENEMY_RESPAWN_TIME = 50000;
 
 }

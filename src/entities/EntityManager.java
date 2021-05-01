@@ -24,14 +24,6 @@ public class EntityManager{
     private Iterator i, j, t, eb;
     private Comparator<Entity> renderSort = Comparator.comparingDouble(a -> a.getY() + a.getHeight());
 
-    public EntityManager(Handler handler){
-        this.handler = handler;
-        entities = new ArrayList<>();
-        bullets = new ArrayList<>();
-        swords = new ArrayList<>();
-        fire = new ArrayList<>();
-    }
-
     public EntityManager(Handler handler, Player player){
         this.handler = handler;
         this.player = player;

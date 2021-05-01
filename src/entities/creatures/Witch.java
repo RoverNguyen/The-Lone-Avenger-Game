@@ -13,6 +13,7 @@ import javafx.util.Duration;
 import settings.Settings;
 import sounds.Sound;
 import sounds.SoundPlayer;
+import states.GameState;
 
 public class Witch extends Enemy{
 
@@ -131,7 +132,7 @@ public class Witch extends Enemy{
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            handler.getWorld().getEntityManager().addEntity(new Witch(handler, homeX, homeY));
+            GameState.world[handler.getWorld().getCountWorld()].getEntityManager().addEntity(new Witch(handler, homeX, homeY));
         });
         enemySpawner.start();
     }

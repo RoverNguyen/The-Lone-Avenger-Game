@@ -10,6 +10,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import settings.Settings;
+import states.GameState;
+
+import java.util.Iterator;
 
 
 public class Skeleton extends Enemy{
@@ -29,7 +32,7 @@ public class Skeleton extends Enemy{
 
         setWidth(64);
         setWidth(64);
-        //setSpeed(2);
+
 
         imageView = new ImageView(image);
         imageView.setFitWidth(width);
@@ -95,7 +98,7 @@ public class Skeleton extends Enemy{
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            handler.getWorld().getEntityManager().addEntity(new Skeleton(handler, homeX, homeY));
+            GameState.world[handler.getWorld().getCountWorld()].getEntityManager().addEntity(new Skeleton(handler, homeX, homeY));
         });
         enemySpawner.start();
     }

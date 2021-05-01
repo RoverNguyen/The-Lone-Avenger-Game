@@ -28,7 +28,7 @@ public class GameState extends State{
         world[2] = new World(handler, "res/worlds/world2.txt");
         world[3] = new World(handler, "res/worlds/world3.txt");
         world[4] = new World(handler, "res/worlds/world4.txt");
-        world[0] = world[1];
+        world[0] = world[2];
         handler.setWorld(world[0], true);
 
         entityManager = world[0].getEntityManager();
@@ -40,8 +40,8 @@ public class GameState extends State{
         //create NPCs
         world[1].getEntityManager().addEntity(new Guard(handler, "Tao có súng\nđây nè...",300, 660));
         world[1].getEntityManager().addEntity(new Guard(handler, 170, 660));
-        world[1].getEntityManager().addEntity(new Jack(handler, 500, 660));
-        world[1].getEntityManager().addEntity(new Jill(handler, 600, 660));
+        world[1].getEntityManager().addEntity(new Jack(handler, 500, 760));
+        world[1].getEntityManager().addEntity(new Jill(handler, 700, 660));
         world[1].getEntityManager().addEntity(new Monk(handler, 300, 800));
         world[1].getEntityManager().addEntity(new Grandma(handler, 900, 1100));
         world[1].getEntityManager().addEntity(new Farmer(handler, 1200, 950));
@@ -136,13 +136,13 @@ public class GameState extends State{
         double percent = (double) handler.getWorld().getEntityManager().getPlayer().getHealth() /
                 (double) handler.getWorld().getEntityManager().getPlayer().getMaxHealth();
         g.setFill(Color.BURLYWOOD);
-        g.fillRoundRect(200, 553, 400,7, 15, 15);
+        g.fillRoundRect(200, 553, 400,10, 20, 20);
         g.setFill(Color.RED);
-        g.fillRoundRect(200, 553, percent * 400,7, 15, 15);
-        g.setFont(Font.font("Verdana", FontWeight.BOLD, 7));
+        g.fillRoundRect(200, 553, percent * 400,10, 20, 20);
+        g.setFont(Font.font("Verdana", FontWeight.BOLD, 9));
         g.setFill(Color.WHITE);
         g.fillText(handler.getWorld().getEntityManager().getPlayer().getHealth() + " / "
-                + handler.getWorld().getEntityManager().getPlayer().getMaxHealth(), 380, 559);
+                + handler.getWorld().getEntityManager().getPlayer().getMaxHealth(), 380, 561);
 
         //DRAW SPELL COOL DOWN
         g.setFill(Color.BLACK);

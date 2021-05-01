@@ -7,6 +7,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import settings.Settings;
+import states.GameState;
 
 public class Slime extends Enemy{
 
@@ -106,7 +107,7 @@ public class Slime extends Enemy{
                 e.printStackTrace();
             }
 
-            handler.getWorld().getEntityManager().addEntity(new Slime(handler, homeX, homeY));
+            GameState.world[handler.getWorld().getCountWorld()].getEntityManager().addEntity(new Slime(handler, homeX, homeY));
         });
         enemySpawner.start();
     }
