@@ -57,11 +57,11 @@ public class Skeleton extends Enemy{
         if(direction == 2){ //down
             animation.setOffsetY(128);
         }
-        if(direction == 3){ //right
-            animation.setOffsetY(192);
-        }
-        if(direction == 4){ //left
+        if(direction == 3){ //left
             animation.setOffsetY(64);
+        }
+        if(direction == 4){ //right
+            animation.setOffsetY(192);
         }
     }
 
@@ -95,7 +95,6 @@ public class Skeleton extends Enemy{
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
             handler.getWorld().getEntityManager().addEntity(new Skeleton(handler, homeX, homeY));
         });
         enemySpawner.start();

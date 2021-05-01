@@ -9,7 +9,8 @@ public class Assets {
     public static Font font20;
 
     private static final int width = 32, height = 32;
-    public static Image icon, dirt, grass, stone, skeleton, player, checkpoint, clear, easy, medium, hard, difficultState;
+    public static Image icon, dirt, grass, stone, skeleton, player, witch;
+    public static Image checkpoint, clear, easy, medium, hard, difficultState;
     public static Image[] tree = new Image[13];
     public static Image[][] map1 = new Image[30][30];
     public static Image[][] map2 = new Image[30][30];
@@ -40,6 +41,9 @@ public class Assets {
     //chuong
     public static Image player_ball1,player_ball2,player_ball3,player_ball4;
     public static Image player_sword1,player_sword2,player_sword3,player_sword4;
+
+    //npc
+    public static Image male_npcs, female_npcs, children_npcs;
 
     public static void init(){
         //boss
@@ -89,6 +93,7 @@ public class Assets {
 
         skeleton = ImageLoader.loadImage("res/textures/skeleton.png");
         player = ImageLoader.loadImage("res/textures/player.png");
+        witch = ImageLoader.loadImage("res/textures/witch.png");
 
         //bullet
         player_bullet = ImageLoader.loadImage("res/textures/player_bullet.png");
@@ -136,6 +141,11 @@ public class Assets {
         lotionMana = sheet_item.crop(64 * 3, 0, 64, 64);
         lotionHP = sheet_item.crop(64 * 4, 0, 64, 64);
         lotionDamage = sheet_item.crop(64 * 5, 0, 64, 64);
+
+        //NPCs
+        male_npcs = ImageLoader.loadImage("res/textures/male_npcs.png", 528, 528);
+        female_npcs = ImageLoader.loadImage("res/textures/female_npcs.png", 528, 528);
+        children_npcs = ImageLoader.loadImage("res/textures/children_npcs.png", 528, 528);
 
     }
 }

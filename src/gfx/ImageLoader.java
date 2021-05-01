@@ -15,4 +15,15 @@ public class ImageLoader {
         }
         return null;
     }
+
+    public static Image loadImage(String path, int width, int height){
+        try {
+            return new Image(new FileInputStream(path), width, height, true, true);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
 }

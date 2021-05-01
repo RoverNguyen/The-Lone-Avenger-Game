@@ -1,10 +1,8 @@
 package states;
 
 import entities.EntityManager;
-import entities.creatures.Player;
-import entities.creatures.Skeleton;
-import entities.creatures.Slime;
-import entities.creatures.Boss;
+import entities.creatures.*;
+import entities.creatures.npc.*;
 import game.Handler;
 import gfx.Assets;
 import javafx.scene.canvas.GraphicsContext;
@@ -33,29 +31,25 @@ public class GameState extends State{
         world[0] = world[1];
         handler.setWorld(world[0], true);
 
-        entityManager = world[1].getEntityManager();
+        entityManager = world[0].getEntityManager();
 
         stateSound = Sound.main;
         handler.getSoundManager().addSound(stateSound);
         stateSound.setCycleCount(MediaPlayer.INDEFINITE);
 
+        //create NPCs
+        world[1].getEntityManager().addEntity(new Guard(handler, "Tao có súng\nđây nè...",300, 660));
+        world[1].getEntityManager().addEntity(new Guard(handler, 170, 660));
+        world[1].getEntityManager().addEntity(new Jack(handler, 500, 660));
+        world[1].getEntityManager().addEntity(new Jill(handler, 600, 660));
+        world[1].getEntityManager().addEntity(new Monk(handler, 300, 800));
+        world[1].getEntityManager().addEntity(new Grandma(handler, 900, 1100));
+        world[1].getEntityManager().addEntity(new Farmer(handler, 1200, 950));
+        world[1].getEntityManager().addEntity(new BlueHat(handler, 1300, 350));
+        world[1].getEntityManager().addEntity(new GreenHair(handler, 1200, 350));
+        world[1].getEntityManager().addEntity(new FemaleGuard(handler, 1460, 350));
+        world[1].getEntityManager().addEntity(new FemaleGuard(handler, 1460, 500));
 
-        //spawn enemies in world 1:
-        for(int i = 0; i < 3; ++i){
-            world[1].getEntityManager().addEntity(new Skeleton(handler, 550 + 55 * i, 1050));
-            world[1].getEntityManager().addEntity(new Slime(handler, 600 + 45 * i, 1150));
-            world[1].getEntityManager().addEntity(new Skeleton(handler,  550 + 55 * i, 1200));
-
-            world[1].getEntityManager().addEntity(new Skeleton(handler,  1300 + 55 * i, 1050));
-            world[1].getEntityManager().addEntity(new Slime(handler,  1350 + 45 * i, 1150));
-            world[1].getEntityManager().addEntity(new Skeleton(handler, 1300 + 55 * i, 1200));
-
-            world[1].getEntityManager().addEntity(new Skeleton(handler,  1100 + 55 * i, 70));
-            world[1].getEntityManager().addEntity(new Slime(handler,  1150 + 45 * i, 130));
-            world[1].getEntityManager().addEntity(new Skeleton(handler, 1100 + 55 * i, 150));
-        }
-
-//        world[1].getEntityManager().addEntity(new Boss(handler, Assets.bossblue, 600, 600));
 
         //enemies in world 2
         for(int i = 0; i < 3; ++i){
@@ -70,6 +64,19 @@ public class GameState extends State{
             world[2].getEntityManager().addEntity(new Skeleton(handler, 750 + 55 * i, 300));
             world[2].getEntityManager().addEntity(new Slime(handler, 900 + 45 * i, 400));
         }
+
+        for(int i = 0; i < 3; ++i){
+            world[3].getEntityManager().addEntity(new Skeleton(handler, 550 + 55 * i, 650));
+            world[3].getEntityManager().addEntity(new Witch(handler, 150 + 45 * i, 650));
+            world[3].getEntityManager().addEntity(new Skeleton(handler, 150 + 55 * i, 700));
+
+            world[3].getEntityManager().addEntity(new Skeleton(handler, 1000 + 55 * i, 450));
+            world[3].getEntityManager().addEntity(new Witch(handler, 950 + 45 * i, 400));
+            world[3].getEntityManager().addEntity(new Slime(handler, 1100 + 55 * i, 550));
+
+        }
+
+
 
         //enemies in world 4
         world[4].getEntityManager().addEntity(new Boss(handler, 600, 600));

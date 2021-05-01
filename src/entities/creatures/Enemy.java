@@ -10,7 +10,6 @@ import settings.Settings;
 import sounds.Sound;
 
 
-
 public abstract class Enemy extends Creature{
 
     //Music
@@ -120,11 +119,11 @@ public abstract class Enemy extends Creature{
                 yMove = speed;
             }
             if(x < handler.getWorld().getEntityManager().getPlayer().getX() - 1){ //right
-                direction = 3;
+                direction = 4;
                 xMove = speed;
             }
             if(x > handler.getWorld().getEntityManager().getPlayer().getX() + 1){ //left
-                direction = 4;
+                direction = 3;
                 xMove = -speed;
             }
         }
@@ -161,6 +160,6 @@ public abstract class Enemy extends Creature{
         }else if(rand == 3) {
             handler.getWorld().getItemManager().addItem(Item.lotionAttack.createNew((int) x, (int) y));
         }
-
     }
+
 }

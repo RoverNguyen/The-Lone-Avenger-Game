@@ -74,4 +74,8 @@ public class KeyManager {
         return keys.getOrDefault(KeyCode.CONTROL, false) && keys.getOrDefault(KeyCode.TAB, false);
     }
 
+    public boolean isEnter(){
+        return keys.getOrDefault(KeyCode.ENTER, false);
+    }
+
 }

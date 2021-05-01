@@ -5,20 +5,23 @@ import entities.creatures.Creature;
 import game.Handler;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.media.MediaPlayer;
 import settings.Settings;
+import sounds.SoundPlayer;
 
 
 public abstract class Weapon extends Creature {
 	protected boolean attack = false;
 	protected int xLong =0, yLong = 0;
 	protected int xFar, yFar;
+	protected MediaPlayer mediaPlayer;
 	
 	
-	public Weapon(Handler handler, Image image, double x, double y, int width, int height, int damage,int xFar,int yFar) {
+	public Weapon(Handler handler, Image image, double x, double y, int width, int height, int damage,int xFar,int yFar, MediaPlayer mediaPlayer) {
 		super(handler, image, x, y, width, height, damage);
 			this.xFar = xFar;
 			this.yFar = yFar;
-			
+			this.mediaPlayer= mediaPlayer;
 	}
 	@Override
 	public void move() {
@@ -72,8 +75,6 @@ public abstract class Weapon extends Creature {
             }
         }
     }
-    
-   
 
     public void cut(){
         if(!attack){
@@ -103,7 +104,8 @@ public abstract class Weapon extends Creature {
                 continue;
             if(e.getCollisionBounds(0, 0).intersects(getCollisionBounds(0,0).getBoundsInLocal())){
                 e.takeDamage(damage);
-              
+                SoundPlayer.PlaySound(mediaPlayer);
+                die();
             }
         }
 
@@ -123,7 +125,6 @@ public abstract class Weapon extends Creature {
 	public void render(GraphicsContext g) {
 		g.drawImage(image, (int)(x - handler.getGameCamera().getxOffset()),
                 (int) (y - handler.getGameCamera().getyOffset()));
-		
 	}
 
 	@Override

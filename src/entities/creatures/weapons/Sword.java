@@ -9,7 +9,7 @@ import sounds.SoundPlayer;
 public class Sword extends Weapon {
 
     public Sword(Handler handler, Image image, double x, double y, int damage,int direction) {
-        super(handler, image, x, y, 10,11, damage, 23, 23);
+        super(handler, image, x, y, 10,11, damage, 23, 23, Sound.cut);
         this.direction = direction;
 
         setSpeed(8);
@@ -18,24 +18,5 @@ public class Sword extends Weapon {
         bounds.setHeight(40);
         bounds.setWidth(40);
 
-    }
-    @Override
-    public void checkHit(){
-        //Enemy hit
-        for(Entity e : handler.getWorld().getEntityManager().getEntities()){
-            if(e.equals(handler.getWorld().getEntityManager().getPlayer()))
-                continue;
-            if(e.getCollisionBounds(0, 0).intersects(getCollisionBounds(0,0).getBoundsInLocal())){
-                e.takeDamage(damage);
-
-                SoundPlayer.PlaySound(Sound.cut);
-            }
-        }
-
-        //Tile hit
-
-        //Bullet move
-        if(Math.abs(xLong) > xFar || Math.abs(yLong) > yFar)
-            die();
     }
 }

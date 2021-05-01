@@ -6,6 +6,8 @@ import input.KeyManager;
 import input.MouseManager;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 
 import javafx.scene.canvas.Canvas;
@@ -13,6 +15,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
 
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import settings.Settings;
 import sounds.SoundManager;
 import states.DifficultyState;
@@ -101,7 +104,17 @@ public class Game extends Application {
             }
         };
         gameLoop.start();
+
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent t) {
+                Platform.exit();
+                System.exit(0);
+            }
+        });
     }
+
+
 
     public void tick(){
         if(State.getState() != null)
@@ -109,10 +122,8 @@ public class Game extends Application {
     }
 
     public void render(GraphicsContext g){
-        //refresh screen
         g.clearRect(0, 0, width, height);
 
-        //start drawing
         if(State.getState() != null)
             State.getState().render(g);
     }

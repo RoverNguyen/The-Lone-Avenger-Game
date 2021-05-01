@@ -43,6 +43,31 @@ public class Slime extends Enemy{
         slimeRight.tick();
     }
 
+    @Override
+    public void chasePlayerMove(){
+        xMove = 0;
+        yMove = 0;
+
+        if(checkPlayerZone()){
+            if(y > handler.getWorld().getEntityManager().getPlayer().getY() + 25){ //up
+                direction = 1;
+                yMove = -speed;
+            }
+            if(y < handler.getWorld().getEntityManager().getPlayer().getY() + 25){ //down
+                direction = 2;
+                yMove = speed;
+            }
+            if(x < handler.getWorld().getEntityManager().getPlayer().getX() + 25){ //right
+                direction = 4;
+                xMove = speed;
+            }
+            if(x > handler.getWorld().getEntityManager().getPlayer().getX() + 25){ //left
+                direction = 3;
+                xMove = -speed;
+            }
+        }
+    }
+
 
     @Override
     public void render(GraphicsContext g) {

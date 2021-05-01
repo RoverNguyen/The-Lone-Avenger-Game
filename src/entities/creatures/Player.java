@@ -52,7 +52,6 @@ public class Player extends Creature{
         super(handler, Assets.player, x, y, Settings.DEFAULT_CREATURE_WIDTH, Settings.DEFAULT_CREATURE_HEIGHT, damage);
 
         setSpeed(Settings.PLAYER_SPEED);
-
         imageView = new ImageView(image);
         imageView.setFitWidth(width);
         imageView.setFitHeight(height);
@@ -307,28 +306,24 @@ public class Player extends Creature{
             direction = 1;
             yMove = -speed;
             animation.setOffsetY(512);
-//            animation.setOffsetY(768);
         }
 
         if(handler.getKeyManager().isMoveDown()){
             direction = 2;
             yMove = speed;
             animation.setOffsetY(640);
-//            animation.setOffsetY(896);
         }
 
         if(handler.getKeyManager().isMoveLeft()){
             direction = 3;
             xMove = -speed;
             animation.setOffsetY(576);
-//            animation.setOffsetY(832);
         }
 
         if(handler.getKeyManager().isMoveRight()){
             direction = 4;
             xMove = speed;
             animation.setOffsetY(704);
-//            animation.setOffsetY(960);
         }
     }
 
