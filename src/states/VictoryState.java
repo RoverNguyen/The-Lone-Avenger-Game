@@ -28,16 +28,17 @@ public class VictoryState extends State{
             stateSound.play();
 
 
-        uiManager.addObject(new UIImageButton(150, 430,200, 100, Assets.restart,
+        uiManager.addObject(new UIImageButton(260, 650,240, 120, Assets.restart,
                 () -> {
                     handler.getMouseManager().setUiManager(null);
+                    handler.setTele(true);
                     handler.getGame().gameState = new GameState(handler);
                     State.setState(handler.getGame().gameState);
                     stateSound.stop();
 
                 }));
 
-        uiManager.addObject(new UIImageButton(450, 430,200, 100, Assets.exit, Platform::exit));
+        uiManager.addObject(new UIImageButton(700, 650,240, 120, Assets.exit, Platform::exit));
     }
 
     @Override

@@ -1,13 +1,11 @@
 package entities.creatures.BossSkill;
 
-import entities.Entity;
 import entities.creatures.Creature;
 import game.Handler;
 import gfx.Assets;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import sounds.Sound;
-import sounds.SoundPlayer;
+
 
 public class energyBall extends Creature {
     private int direction;

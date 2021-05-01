@@ -1,10 +1,8 @@
 package entities.creatures.weapons;
 
-import entities.Entity;
 import game.Handler;
 import javafx.scene.image.Image;
 import sounds.Sound;
-import sounds.SoundPlayer;
 
 public class Bullet extends Weapon {
 

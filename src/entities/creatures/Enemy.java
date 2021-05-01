@@ -94,12 +94,12 @@ public abstract class Enemy extends Creature{
             }
 
             if(x < homeX - 1){ //right
-                direction = 3;
+                direction = 4;
                 xMove = speed;
             }
 
             if(x > homeX + 1){ //left
-                direction = 4;
+                direction = 3;
                 xMove = -speed;
             }
 

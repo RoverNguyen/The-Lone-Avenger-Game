@@ -1,15 +1,13 @@
 package entities.creatures.weapons;
 
-import entities.Entity;
 import game.Handler;
 import javafx.scene.image.Image;
 import sounds.Sound;
-import sounds.SoundPlayer;
 
 public class Sword extends Weapon {
 
     public Sword(Handler handler, Image image, double x, double y, int damage,int direction) {
-        super(handler, image, x, y, 10,11, damage, 23, 23, Sound.cut);
+        super(handler, image, x, y, 10,11, damage, 30, 30, Sound.cut);
         this.direction = direction;
 
         setSpeed(8);

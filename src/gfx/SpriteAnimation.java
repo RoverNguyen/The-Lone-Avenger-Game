@@ -7,13 +7,6 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
-/*
-Nếu Character Assets chỉ gồm 1 file ảnh chia theo hàng, cột thì dùng class này.
-Class này extends Transition, sẽ chạy ImageView từ trái qua phải trên một hàng,
-từ đó sẽ tạo ra chuyển động của nhân vật. Để nhân vật chạy trái, phải, lên, xuống
-thì chỉ cần set offsetY, đưa vị trí chạy của ImageView tới hàng trái, phải, lên xuống
-tương ứng.
- */
 
 public class SpriteAnimation extends Transition{
     private final ImageView imageView;

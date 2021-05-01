@@ -10,16 +10,17 @@ public class Assets {
 
     private static final int width = 32, height = 32;
     public static Image icon, dirt, grass, stone, skeleton, player, witch;
-    public static Image checkpoint, clear, easy, medium, hard, difficultState;
+    public static Image checkpoint, clear, easy, medium, hard, difficultState, creditsState;
     public static Image[] tree = new Image[13];
     public static Image[][] map1 = new Image[30][30];
     public static Image[][] map2 = new Image[30][30];
     public static Image[][] map3 = new Image[30][30];
     public static Image[][] map4 = new Image[30][30];
     public static Image background, gameover, pause, victory;
-    public static Image start, exit, mute_unmute, restart, main_menu;
+    public static Image start, exit, mute_unmute, restart, main_menu, back, credits, resume;
 
     public static Image[] slime_up, slime_down, slime_left, slime_right;
+    public static Image talk;
 
     //boss
     public static Image bossblue;
@@ -62,6 +63,9 @@ public class Assets {
         font20 = FontLoader.loadFont("res/fonts/slkscr.ttf",20);
 
         icon = ImageLoader.loadImage("res/textures/icon.png");
+
+        talk = ImageLoader.loadImage("res/textures/talk.png", 42, 42);
+
         SpriteSheet crystal_clear = new SpriteSheet(ImageLoader.loadImage("res/textures/BladeY.png"));
         SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("res/textures/sheet.png"));
         for(int i=0; i<=12; i++){
@@ -70,7 +74,9 @@ public class Assets {
         easy = ImageLoader.loadImage("res/textures/Easy.png");
         medium = ImageLoader.loadImage("res/textures/Medium.png");
         hard = ImageLoader.loadImage("res/textures/Hard.png");
-        difficultState = ImageLoader.loadImage("res/textures/background_difficult.png");
+        difficultState = ImageLoader.loadImage("res/textures/difficulty_background.png");
+        creditsState = ImageLoader.loadImage("res/textures/credit.png");
+
         SpriteSheet teleport = new SpriteSheet(ImageLoader.loadImage("res/textures/Teleport.png"));
         SpriteSheet map_1 = new SpriteSheet(ImageLoader.loadImage("res/textures/Map1.png"));
         SpriteSheet map_2 = new SpriteSheet(ImageLoader.loadImage("res/textures/Map2.png"));
@@ -113,10 +119,13 @@ public class Assets {
         start = ImageLoader.loadImage("res/textures/start_button.png");
         exit = ImageLoader.loadImage("res/textures/exit_button.png");
         mute_unmute = ImageLoader.loadImage("res/textures/mute_unmute.png");
-        restart = ImageLoader.loadImage("res/textures/restart.png");
-        main_menu = ImageLoader.loadImage("res/textures/main_menu.png");
+        restart = ImageLoader.loadImage("res/textures/restart_button.png");
+        main_menu = ImageLoader.loadImage("res/textures/menu_button.png");
+        back = ImageLoader.loadImage("res/textures/back_button.png");
+        credits = ImageLoader.loadImage("res/textures/credits_button.png");
+        resume = ImageLoader.loadImage("res/textures/resume_button.png");
 
-        background = ImageLoader.loadImage("res/textures/background.jpg");
+        background = ImageLoader.loadImage("res/textures/background.png");
         gameover = ImageLoader.loadImage("res/textures/gameover.jpg");
         pause = ImageLoader.loadImage("res/textures/pause.jpg");
         victory = ImageLoader.loadImage("res/textures/victory.jpg");

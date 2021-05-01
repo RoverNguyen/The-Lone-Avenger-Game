@@ -28,7 +28,7 @@ public class GameState extends State{
         world[2] = new World(handler, "res/worlds/world2.txt");
         world[3] = new World(handler, "res/worlds/world3.txt");
         world[4] = new World(handler, "res/worlds/world4.txt");
-        world[0] = world[2];
+        world[0] = world[1];
         handler.setWorld(world[0], true);
 
         entityManager = world[0].getEntityManager();
@@ -66,13 +66,13 @@ public class GameState extends State{
         }
 
         for(int i = 0; i < 3; ++i){
-            world[3].getEntityManager().addEntity(new Skeleton(handler, 550 + 55 * i, 650, 2));
-            world[3].getEntityManager().addEntity(new Witch(handler, 150 + 45 * i, 650, 2));
-            world[3].getEntityManager().addEntity(new Skeleton(handler, 150 + 55 * i, 700, 2));
+            world[3].getEntityManager().addEntity(new Skeleton(handler, 550 + 55 * i, 650, 3));
+            world[3].getEntityManager().addEntity(new Witch(handler, 150 + 45 * i, 650, 3));
+            world[3].getEntityManager().addEntity(new Skeleton(handler, 150 + 55 * i, 700, 3));
 
-            world[3].getEntityManager().addEntity(new Skeleton(handler, 1000 + 55 * i, 450, 2));
-            world[3].getEntityManager().addEntity(new Witch(handler, 950 + 45 * i, 400, 2));
-            world[3].getEntityManager().addEntity(new Slime(handler, 1100 + 55 * i, 550, 2));
+            world[3].getEntityManager().addEntity(new Skeleton(handler, 1000 + 55 * i, 450, 3));
+            world[3].getEntityManager().addEntity(new Witch(handler, 950 + 45 * i, 400, 3));
+            world[3].getEntityManager().addEntity(new Slime(handler, 1100 + 55 * i, 550, 3));
 
         }
 
@@ -119,6 +119,8 @@ public class GameState extends State{
         //Set victory state
         handler.getMouseManager().setUiManager(null);
         State.setState(new VictoryState(handler));
+
+        handler.setWin(false);
     }
     @Override
     public void render(GraphicsContext g) {
@@ -136,30 +138,52 @@ public class GameState extends State{
         double percent = (double) handler.getWorld().getEntityManager().getPlayer().getHealth() /
                 (double) handler.getWorld().getEntityManager().getPlayer().getMaxHealth();
         g.setFill(Color.BURLYWOOD);
-        g.fillRoundRect(200, 553, 400,10, 20, 20);
+        g.fillRoundRect(370, 860, 500,10, 30, 30);
         g.setFill(Color.RED);
-        g.fillRoundRect(200, 553, percent * 400,10, 20, 20);
-        g.setFont(Font.font("Verdana", FontWeight.BOLD, 9));
+        g.fillRoundRect(370, 860, percent * 500,10, 30, 30);
+        g.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
         g.setFill(Color.WHITE);
         g.fillText(handler.getWorld().getEntityManager().getPlayer().getHealth() + " / "
-                + handler.getWorld().getEntityManager().getPlayer().getMaxHealth(), 380, 561);
+                + handler.getWorld().getEntityManager().getPlayer().getMaxHealth(), 585, 869);
 
         //DRAW SPELL COOL DOWN
         g.setFill(Color.BLACK);
-        g.strokeOval(700, 520,40,40);
-        g.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
-        int coolDown;
+        g.strokeOval(930, 810,60,60);
+        g.setFont(Font.font("Verdana", FontWeight.BOLD, 28));
+        double spellCoolDown;
         if(Player.spellCoolDown - Player.spellTimer < 0){
             g.setFill(Color.GREEN);
-            g.fillOval(700, 520, 40, 40);
+            g.fillOval(930, 810, 60, 60);
+            g.drawImage(Assets.player_ball4, 943, 820);
         } else {
-            coolDown = (int) Math.ceil((double) (Player.spellCoolDown - Player.spellTimer)/1000);
-            g.fillText(coolDown + "s", 707,546);
+            spellCoolDown = ((double) (Player.spellCoolDown - Player.spellTimer)/1000);
+            if (spellCoolDown >= 1) {
+                spellCoolDown = Math.floor((double) (Player.spellCoolDown - Player.spellTimer)/1000);
+                int scd = (int) spellCoolDown;
+                g.fillText(scd + "s", 943,847);
+            } else {
+                spellCoolDown = Math.round(spellCoolDown * 10.0) / 10.0;
+                g.fillText(String.valueOf(spellCoolDown), 935,847);
+            }
         }
-        g.setFont(Font.font("Verdana", FontWeight.BOLD, 7));
+        g.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
         g.setFill(Color.web("#e2fbff"));
-        g.fillRoundRect(711, 555, 20,10, 10,10);
+        g.fillRoundRect(938, 858, 45,12, 10,10);
         g.setFill(Color.BLACK);
-        g.fillText("Q", 718,562);
+        g.fillText("Q", 956,868);
+
+        //DRAW SWORD COOL DOWN
+        g.setFill(Color.BLACK);
+        g.strokeOval(1030, 810,60,60);
+        g.setFont(Font.font("Verdana", FontWeight.BOLD, 28));
+        g.setFill(Color.GREEN);
+        g.fillOval(1030, 810, 60, 60);
+        g.drawImage(Assets.player_sword4, 1038, 830);
+
+        g.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        g.setFill(Color.web("#e2fbff"));
+        g.fillRoundRect(1038, 858, 45,12, 10,10);
+        g.setFill(Color.BLACK);
+        g.fillText("Space", 1040,868);
     }
 }

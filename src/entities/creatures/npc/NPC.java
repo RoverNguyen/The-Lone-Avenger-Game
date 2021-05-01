@@ -3,6 +3,7 @@ package entities.creatures.npc;
 import entities.Entity;
 import entities.creatures.Creature;
 import game.Handler;
+import gfx.Assets;
 import gfx.SpriteAnimation;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
@@ -10,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.util.Duration;
 import settings.Settings;
 import sounds.SoundPlayer;
@@ -53,7 +55,7 @@ public abstract class NPC extends Creature {
         animation = new SpriteAnimation(imageView, Duration.millis(1000),count,columns,offsetX,offsetY,width,height);
 
         bounds.setX(16);
-        bounds.setY(32);
+        bounds.setY(36);
         bounds.setWidth(16);
         bounds.setHeight(28);
     }
@@ -152,17 +154,6 @@ public abstract class NPC extends Creature {
         }
     }
 
-//    protected boolean checkNPCsZone() {
-//        for(Entity e : handler.getWorld().getEntityManager().getEntities()){
-//            if(e.equals(handler.getWorld().getEntityManager().getPlayer()))
-//                continue;
-//            if(e.getCollisionBounds(0, 0).intersects(getCollisionBounds(0,0).getBoundsInLocal())){
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-
     protected boolean checkPlayerZone() {
         npcX = getCollisionBounds(0,0).getX();
         npcY = getCollisionBounds(0,0).getY();
@@ -189,6 +180,21 @@ public abstract class NPC extends Creature {
         npc = imageView.snapshot(params, null);
         g.drawImage(npc, (int) (x - handler.getGameCamera().getxOffset()),
                 (int) (y - handler.getGameCamera().getyOffset()));
+
+        if (checkPlayerZone()) {
+            g.setFill(Color.BLACK);
+            g.strokeOval(1130, 810,60,60);
+            g.setFont(Font.font("Verdana", FontWeight.BOLD, 28));
+            g.setFill(Color.GREEN);
+            g.fillOval(1130, 810, 60, 60);
+            g.drawImage(Assets.talk, 1138, 815);
+
+            g.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+            g.setFill(Color.web("#e2fbff"));
+            g.fillRoundRect(1138, 858, 45,12, 10,10);
+            g.setFill(Color.BLACK);
+            g.fillText("Enter", 1141,868);
+        }
     }
 
     @Override

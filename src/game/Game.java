@@ -18,7 +18,6 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import settings.Settings;
 import sounds.SoundManager;
-import states.DifficultyState;
 import states.MenuState;
 
 import states.State;
@@ -69,7 +68,7 @@ public class Game extends Application {
 
         scene = new Scene(root, width, height);
         stage.setScene(scene);
-        stage.setTitle("Tile Game");
+        stage.setTitle("The Lone Avenger");
         stage.getIcons().add(Assets.icon);
         stage.setResizable(false);
         stage.show();

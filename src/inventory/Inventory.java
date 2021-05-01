@@ -6,12 +6,12 @@ import gfx.TextItem;
 import items.Item;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 
 import java.util.ArrayList;
 
 public class Inventory {
-    private int invX = 144, invY = 108, invWidth = 512, invHeight = 384;
+    private int invX = 330, invY = 150, invWidth = 512, invHeight = 384;
+
     private int invListCenterX = invX + 20;
     private int invListCenterY = invY + 205;
     private int invListSpacing = 30;

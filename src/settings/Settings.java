@@ -1,7 +1,7 @@
 package settings;
 
 public class Settings {
-    public static final int STAGE_WIDTH = 800, STAGE_HEIGHT = 600;
+    public static final int STAGE_WIDTH = 1200, STAGE_HEIGHT = 900;
     public static final int DEFAULT_HEALTH = 100;
     public static final double DEFAULT_SPEED = 1.0;
     public static final double PLAYER_SPEED = 7.0;

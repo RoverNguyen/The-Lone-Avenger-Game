@@ -20,7 +20,7 @@ public class DifficultyState extends State{
         if(!Settings.IS_MUTE)
             stateSound.play();
 
-        uiManager.addObject(new UIImageButton(60, 200,160, 160, Assets.easy,
+        uiManager.addObject(new UIImageButton(80, 400,240, 240, Assets.easy,
                 () -> {
                     handler.getMouseManager().setUiManager(null);
                     handler.setTele(true);
@@ -29,7 +29,7 @@ public class DifficultyState extends State{
                     State.setState(handler.getGame().gameState);
                     stateSound.dispose();
                 }));
-        uiManager.addObject(new UIImageButton(320, 200,160, 160, Assets.medium,
+        uiManager.addObject(new UIImageButton(480, 400,240, 240, Assets.medium,
                 () -> {
                     handler.getMouseManager().setUiManager(null);
                     handler.setTele(true);
@@ -38,7 +38,7 @@ public class DifficultyState extends State{
                     State.setState(handler.getGame().gameState);
                     stateSound.dispose();
                 }));
-        uiManager.addObject(new UIImageButton(580, 200,160, 160, Assets.hard,
+        uiManager.addObject(new UIImageButton(880, 400,240, 240, Assets.hard,
                 () -> {
                     handler.getMouseManager().setUiManager(null);
                     handler.setTele(true);

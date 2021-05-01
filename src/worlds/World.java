@@ -2,10 +2,7 @@ package worlds;
 
 import entities.EntityManager;
 import entities.creatures.Player;
-import entities.creatures.Skeleton;
-import entities.creatures.Slime;
 import game.Handler;
-import gfx.Assets;
 import items.ItemManager;
 import javafx.scene.canvas.GraphicsContext;
 import settings.Settings;
@@ -16,7 +13,6 @@ import utils.Utils;
 public class World {
 
     private int width, height;
-    private Player player;
     private int spawnXNext;
     private int spawnYNext;
     private int spawnXPre;
