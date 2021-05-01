@@ -1,4 +1,3 @@
-# TileGame
+# The Lone Avenger
 
-Tà lăng tà lăng tăng tà lăng
-
+A simple project for our OOP class.
