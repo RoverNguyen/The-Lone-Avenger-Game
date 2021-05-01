@@ -28,7 +28,7 @@ public class GameState extends State{
         world[2] = new World(handler, "res/worlds/world2.txt");
         world[3] = new World(handler, "res/worlds/world3.txt");
         world[4] = new World(handler, "res/worlds/world4.txt");
-        world[0] = world[2];
+        world[0] = world[1];
         handler.setWorld(world[0], true);
 
         entityManager = world[0].getEntityManager();
