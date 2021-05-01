@@ -53,26 +53,26 @@ public class GameState extends State{
 
         //enemies in world 2
         for(int i = 0; i < 3; ++i){
-            world[2].getEntityManager().addEntity(new Skeleton(handler, 550 + 55 * i, 1050));
-            world[2].getEntityManager().addEntity(new Slime(handler, 150 + 45 * i, 650));
-            world[2].getEntityManager().addEntity(new Skeleton(handler, 150 + 55 * i, 700));
+            world[2].getEntityManager().addEntity(new Skeleton(handler, 550 + 55 * i, 1050, 2));
+            world[2].getEntityManager().addEntity(new Slime(handler, 150 + 45 * i, 650, 2));
+            world[2].getEntityManager().addEntity(new Skeleton(handler, 150 + 55 * i, 700, 2));
 
-            world[2].getEntityManager().addEntity(new Skeleton(handler, 1200 + 55 * i, 150));
-            world[2].getEntityManager().addEntity(new Slime(handler, 1350 + 45 * i, 250));
-            world[2].getEntityManager().addEntity(new Skeleton(handler, 1100 + 55 * i, 650));
+            world[2].getEntityManager().addEntity(new Skeleton(handler, 1200 + 55 * i, 150, 2));
+            world[2].getEntityManager().addEntity(new Slime(handler, 1350 + 45 * i, 250, 2));
+            world[2].getEntityManager().addEntity(new Skeleton(handler, 1100 + 55 * i, 650, 2));
 
-            world[2].getEntityManager().addEntity(new Skeleton(handler, 750 + 55 * i, 300));
-            world[2].getEntityManager().addEntity(new Slime(handler, 900 + 45 * i, 400));
+            world[2].getEntityManager().addEntity(new Skeleton(handler, 750 + 55 * i, 300, 2));
+            world[2].getEntityManager().addEntity(new Slime(handler, 900 + 45 * i, 400, 2));
         }
 
         for(int i = 0; i < 3; ++i){
-            world[3].getEntityManager().addEntity(new Skeleton(handler, 550 + 55 * i, 650));
-            world[3].getEntityManager().addEntity(new Witch(handler, 150 + 45 * i, 650));
-            world[3].getEntityManager().addEntity(new Skeleton(handler, 150 + 55 * i, 700));
+            world[3].getEntityManager().addEntity(new Skeleton(handler, 550 + 55 * i, 650, 2));
+            world[3].getEntityManager().addEntity(new Witch(handler, 150 + 45 * i, 650, 2));
+            world[3].getEntityManager().addEntity(new Skeleton(handler, 150 + 55 * i, 700, 2));
 
-            world[3].getEntityManager().addEntity(new Skeleton(handler, 1000 + 55 * i, 450));
-            world[3].getEntityManager().addEntity(new Witch(handler, 950 + 45 * i, 400));
-            world[3].getEntityManager().addEntity(new Slime(handler, 1100 + 55 * i, 550));
+            world[3].getEntityManager().addEntity(new Skeleton(handler, 1000 + 55 * i, 450, 2));
+            world[3].getEntityManager().addEntity(new Witch(handler, 950 + 45 * i, 400, 2));
+            world[3].getEntityManager().addEntity(new Slime(handler, 1100 + 55 * i, 550, 2));
 
         }
 

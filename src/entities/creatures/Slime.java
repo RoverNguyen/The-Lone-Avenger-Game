@@ -14,8 +14,10 @@ public class Slime extends Enemy{
     private ImageAnimation slimeUp, slimeDown, slimeLeft, slimeRight;
 
 
-    public Slime(Handler handler, double x, double y) {
+    public Slime(Handler handler, double x, double y, int worldCount) {
         super(handler, Assets.skeleton, x, y);
+
+        this.worldCount = worldCount;
 
         setDamage(50+10*handler.getDifficulty());
 
@@ -107,7 +109,7 @@ public class Slime extends Enemy{
                 e.printStackTrace();
             }
 
-            GameState.world[handler.getWorld().getCountWorld()].getEntityManager().addEntity(new Slime(handler, homeX, homeY));
+            GameState.world[worldCount].getEntityManager().addEntity(new Slime(handler, homeX, homeY, worldCount));
         });
         enemySpawner.start();
     }

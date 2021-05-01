@@ -27,12 +27,13 @@ public class Skeleton extends Enemy{
     SpriteAnimation animation;
     Image enemy;
 
-    public Skeleton(Handler handler, double x, double y){
+    public Skeleton(Handler handler, double x, double y, int worldCount){
         super(handler, Assets.skeleton, x, y);
 
         setWidth(64);
         setWidth(64);
 
+        this.worldCount = worldCount;
 
         imageView = new ImageView(image);
         imageView.setFitWidth(width);
@@ -98,7 +99,7 @@ public class Skeleton extends Enemy{
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            GameState.world[handler.getWorld().getCountWorld()].getEntityManager().addEntity(new Skeleton(handler, homeX, homeY));
+            GameState.world[worldCount].getEntityManager().addEntity(new Skeleton(handler, homeX, homeY, worldCount));
         });
         enemySpawner.start();
     }

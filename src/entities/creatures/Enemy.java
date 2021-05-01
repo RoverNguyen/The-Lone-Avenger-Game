@@ -14,6 +14,7 @@ public abstract class Enemy extends Creature{
 
     //Music
 
+    protected int worldCount;
     //Attack Timer
     private long lastAttackTimer, attackCoolDown = 1000, attackTimer = attackCoolDown;
     private long lastHealthRecover, recoverCoolDown = 100, recoverTimer = recoverCoolDown;
