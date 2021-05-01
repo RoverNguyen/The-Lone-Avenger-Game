@@ -33,7 +33,6 @@ public class World {
     //Entities
     private EntityManager entityManager;
     private Handler handler;
-    private long lastSpawnTimer, spawnCoolDown = 500, spawnTimer = spawnCoolDown;
     private int enemyOnBoard = 0;
 
     //Items
@@ -51,10 +50,7 @@ public class World {
             spawnY = spawnYPre;
         }
 
-        entityManager = new EntityManager(handler);
-        player = new Player(handler, spawnX, spawnY, 25);
-        entityManager.setPlayer(player);
-
+        entityManager = new EntityManager(handler, new Player(handler, spawnX, spawnY, Settings.PLAYER_SWORD_DAMAGE));
         itemManager = new ItemManager(handler);
 
     }
@@ -66,31 +62,7 @@ public class World {
     }
 
 
-
-//    public void spawnEnemy(){
-//        if(enemyOnBoard < 5){
-//            spawnTimer += System.currentTimeMillis() - lastSpawnTimer;
-//            lastSpawnTimer = System.currentTimeMillis();
-//            if(spawnTimer < spawnCoolDown){
-//                return;
-//            }
-//
-//            enemyOnBoard++;
-//            int enemyType = 1 + (int) (Math.random()*(2-1+1));
-//            switch (enemyType){
-//                case 1: entityManager.addEntity(new Slime(handler, Assets.skeleton,
-//                        Math.random()*(1000 - 500 + 1) + 500, Math.random()*(1200 - 700 + 1) + 700)); break;
-//                case 2: entityManager.addEntity(new Skeleton(handler, Assets.skeleton,
-//                        Math.random()*(1000 - 500 + 1) + 500, Math.random()*(1200 - 700 + 1) + 700)); break;
-//                default: break;
-//            }
-//
-//            spawnTimer = 0;
-//        }
-//
-//    }
-
-    public void render(GraphicsContext g){
+        public void render(GraphicsContext g){
 
         int xStart = (int) (Math.max(0, handler.getGameCamera().getxOffset() / Settings.TILE_WIDTH));
         int xEnd = (int) (Math.min(width, (handler.getGameCamera().getxOffset() + handler.getWidth()) / Settings.TILE_WIDTH + 1));

@@ -130,7 +130,6 @@ public abstract class Weapon extends Creature {
 	@Override
 	public void die() {
 		active = false;
-        //System.out.println("Chết :D");
 	}
 	
 

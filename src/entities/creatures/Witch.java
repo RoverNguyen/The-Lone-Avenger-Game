@@ -13,6 +13,7 @@ import javafx.util.Duration;
 import settings.Settings;
 import sounds.Sound;
 import sounds.SoundPlayer;
+import states.GameState;
 
 public class Witch extends Enemy{
 
@@ -28,9 +29,10 @@ public class Witch extends Enemy{
 
     public  long lastSpellTimer, spellCoolDown = 3000, spellTimer = spellCoolDown;
 
-    public Witch(Handler handler, double x, double y){
+    public Witch(Handler handler, double x, double y, int worldCount){
         super(handler, Assets.witch, x, y);
 
+        this.worldCount = worldCount;
         setWidth(64);
         setHeight(64);
 
@@ -131,7 +133,7 @@ public class Witch extends Enemy{
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            handler.getWorld().getEntityManager().addEntity(new Witch(handler, homeX, homeY));
+            GameState.world[worldCount].getEntityManager().addEntity(new Witch(handler, homeX, homeY, worldCount));
         });
         enemySpawner.start();
     }

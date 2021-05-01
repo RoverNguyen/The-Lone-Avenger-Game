@@ -10,6 +10,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import settings.Settings;
+import states.GameState;
+
+import java.util.Iterator;
 
 
 public class Skeleton extends Enemy{
@@ -24,12 +27,13 @@ public class Skeleton extends Enemy{
     SpriteAnimation animation;
     Image enemy;
 
-    public Skeleton(Handler handler, double x, double y){
+    public Skeleton(Handler handler, double x, double y, int worldCount){
         super(handler, Assets.skeleton, x, y);
 
         setWidth(64);
         setWidth(64);
-        //setSpeed(2);
+
+        this.worldCount = worldCount;
 
         imageView = new ImageView(image);
         imageView.setFitWidth(width);
@@ -95,7 +99,7 @@ public class Skeleton extends Enemy{
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            handler.getWorld().getEntityManager().addEntity(new Skeleton(handler, homeX, homeY));
+            GameState.world[worldCount].getEntityManager().addEntity(new Skeleton(handler, homeX, homeY, worldCount));
         });
         enemySpawner.start();
     }
