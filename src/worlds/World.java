@@ -5,8 +5,8 @@ import entities.creatures.Player;
 import game.Handler;
 import items.ItemManager;
 import javafx.scene.canvas.GraphicsContext;
-import settings.Settings;
-import tiles.Tile;
+import configs.Configs;
+import maps.Tile;
 import utils.Utils;
 
 
@@ -46,7 +46,7 @@ public class World {
             spawnY = spawnYPre;
         }
 
-        entityManager = new EntityManager(handler, new Player(handler, spawnX, spawnY, Settings.PLAYER_SWORD_DAMAGE));
+        entityManager = new EntityManager(handler, new Player(handler, spawnX, spawnY, Configs.PLAYER_SWORD_DAMAGE));
         itemManager = new ItemManager(handler);
 
     }
@@ -60,17 +60,17 @@ public class World {
 
         public void render(GraphicsContext g){
 
-        int xStart = (int) (Math.max(0, handler.getGameCamera().getxOffset() / Settings.TILE_WIDTH));
-        int xEnd = (int) (Math.min(width, (handler.getGameCamera().getxOffset() + handler.getWidth()) / Settings.TILE_WIDTH + 1));
-        int yStart = (int) (Math.max(0, handler.getGameCamera().getyOffset() / Settings.TILE_HEIGHT));
-        int yEnd = (int) (Math.min(height, (handler.getGameCamera().getyOffset() + handler.getHeight()) / Settings.TILE_HEIGHT + 1));
+        int xStart = (int) (Math.max(0, handler.getGameCamera().getxOffset() / Configs.TILE_WIDTH));
+        int xEnd = (int) (Math.min(width, (handler.getGameCamera().getxOffset() + handler.getWidth()) / Configs.TILE_WIDTH + 1));
+        int yStart = (int) (Math.max(0, handler.getGameCamera().getyOffset() / Configs.TILE_HEIGHT));
+        int yEnd = (int) (Math.min(height, (handler.getGameCamera().getyOffset() + handler.getHeight()) / Configs.TILE_HEIGHT + 1));
 
         for(int z = 0; z< layer; z++) {
             for (int y = yStart; y < yEnd; y++) {
                 for (int x = xStart; x < xEnd; x++) {
 
-                    getTile(x, y, z).render(g, (int) (x * Settings.TILE_WIDTH - handler.getGameCamera().getxOffset()),
-                            (int) (y * Settings.TILE_HEIGHT - handler.getGameCamera().getyOffset()));
+                    getTile(x, y, z).render(g, (int) (x * Configs.TILE_WIDTH - handler.getGameCamera().getxOffset()),
+                            (int) (y * Configs.TILE_HEIGHT - handler.getGameCamera().getyOffset()));
 
                 }
             }

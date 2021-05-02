@@ -16,7 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
-import settings.Settings;
+import configs.Configs;
 import sounds.Sound;
 import sounds.SoundPlayer;
 import states.GameOverState;
@@ -38,9 +38,9 @@ public class Player extends Creature{
 
 
     //Attack Timer
-    protected long lastAttackTimer, attackCoolDown = 500, attackTimer = attackCoolDown;
-    public static long lastSpellTimer, spellCoolDown = 3000, spellTimer = spellCoolDown;
-    public static long lastCutTimer, cutCoolDown = 800, cutTimer = cutCoolDown;
+    protected long lastAttackTimer, attackCoolDown = Configs.PLAYER_SWORD_COOL_DOWN, attackTimer = attackCoolDown;
+    public static long lastSpellTimer, spellCoolDown = Configs.PLAYER_SPELL_COOL_DOWN, spellTimer = spellCoolDown;
+    public static long lastCutTimer, cutCoolDown = Configs.PLAYER_SWORD_COOL_DOWN, cutTimer = cutCoolDown;
 
     protected MediaPlayer footstep;
 
@@ -49,9 +49,9 @@ public class Player extends Creature{
     private Inventory inventory;
 
     public Player(Handler handler, double x, double y, int damage){
-        super(handler, Assets.player, x, y, Settings.DEFAULT_CREATURE_WIDTH, Settings.DEFAULT_CREATURE_HEIGHT, damage);
+        super(handler, Assets.player, x, y, Configs.DEFAULT_CREATURE_WIDTH, Configs.DEFAULT_CREATURE_HEIGHT, damage);
 
-        setSpeed(Settings.PLAYER_SPEED);
+        setSpeed(Configs.PLAYER_SPEED);
         imageView = new ImageView(image);
         imageView.setFitWidth(width);
         imageView.setFitHeight(height);
@@ -75,7 +75,7 @@ public class Player extends Creature{
 
         inventory = new Inventory(handler);
 
-        maxHealth = Settings.PLAYER_HEALTH;
+        maxHealth = Configs.PLAYER_HEALTH;
         health = 1000;
 
         speed = 10;
@@ -111,55 +111,77 @@ public class Player extends Creature{
         //return handler.getWorld().getTile(x,y).isCheckPoint();
     }
 
+//    private boolean isStrongEnough() {
+//        if (handler.getWorld().getCountWorld() == 1) {
+//            return true;
+//        }
+//
+//        if (handler.getWorld().getCountWorld() == 2) {
+//            return GameState.scores > 15;
+//        }
+//
+//        if (handler.getWorld().getCountWorld() == 3) {
+//            return GameState.scores > 30;
+//        }
+//
+//        if (handler.getWorld().getCountWorld() == 4) {
+//            return true;
+//        }
+//
+//        return false;
+//    }
+
     //set world
     private void setNewWorld(){
-        if(handler.getWorld().getWidth()*64*2/3 <= x+xMove){
-            GameState.world[0] = GameState.world[handler.getWorld().getCountWorld()+1];
-            GameState.entityManager = GameState.world[handler.getWorld().getCountWorld()+1].getEntityManager();
-            tele = true;
-        } else {
-            GameState.world[0] = GameState.world[handler.getWorld().getCountWorld()-1];
-            GameState.entityManager = GameState.world[handler.getWorld().getCountWorld()-1].getEntityManager();
-            tele = false;
+         {
+            if (handler.getWorld().getWidth() * 64 * 2 / 3 <= x + xMove) {
+                GameState.world[0] = GameState.world[handler.getWorld().getCountWorld() + 1];
+                GameState.entityManager = GameState.world[handler.getWorld().getCountWorld() + 1].getEntityManager();
+                tele = true;
+            } else {
+                GameState.world[0] = GameState.world[handler.getWorld().getCountWorld() - 1];
+                GameState.entityManager = GameState.world[handler.getWorld().getCountWorld() - 1].getEntityManager();
+                tele = false;
+            }
+            GameState.playerCurrentHealth = handler.getWorld().getEntityManager().getPlayer().getHealth();
+            GameState.playerCurrentSpeed = handler.getWorld().getEntityManager().getPlayer().getSpeed();
+
+            handler.setWorld(GameState.world[0], tele);
+
+            GameState.entityManager.getPlayer().setHealth(GameState.playerCurrentHealth);
+            GameState.entityManager.getPlayer().setSpeed(GameState.playerCurrentSpeed);
         }
-        GameState.playerCurrentHealth = handler.getWorld().getEntityManager().getPlayer().getHealth();
-        GameState.playerCurrentSpeed = handler.getWorld().getEntityManager().getPlayer().getSpeed();
-
-        handler.setWorld(GameState.world[0], tele);
-
-        GameState.entityManager.getPlayer().setHealth(GameState.playerCurrentHealth);
-        GameState.entityManager.getPlayer().setSpeed(GameState.playerCurrentSpeed);
 
     }
 
     //get Move
     private void checkPointMove(){
         if(xMove > 0){
-            int tx = (int) (x + xMove + bounds.getX() + bounds.getWidth()) / Settings.TILE_WIDTH;
+            int tx = (int) (x + xMove + bounds.getX() + bounds.getWidth()) / Configs.TILE_WIDTH;
 
-            if(checkPointTile(tx, ((int) (y + bounds.getY()) / Settings.TILE_HEIGHT)) &&
-                    checkPointTile(tx, (int) (y + bounds.getY() + bounds.getHeight()) / Settings.TILE_HEIGHT)){
+            if(checkPointTile(tx, ((int) (y + bounds.getY()) / Configs.TILE_HEIGHT)) &&
+                    checkPointTile(tx, (int) (y + bounds.getY() + bounds.getHeight()) / Configs.TILE_HEIGHT)){
                 setNewWorld();
             }
         } else if(xMove < 0){
-            int tx = (int) (x + xMove + bounds.getX()) / Settings.TILE_WIDTH;
+            int tx = (int) (x + xMove + bounds.getX()) / Configs.TILE_WIDTH;
 
-            if(checkPointTile(tx, ((int) (y + bounds.getY()) / Settings.TILE_HEIGHT)) &&
-                    checkPointTile(tx, (int) (y + bounds.getY() + bounds.getHeight()) / Settings.TILE_HEIGHT)){
+            if(checkPointTile(tx, ((int) (y + bounds.getY()) / Configs.TILE_HEIGHT)) &&
+                    checkPointTile(tx, (int) (y + bounds.getY() + bounds.getHeight()) / Configs.TILE_HEIGHT)){
                 setNewWorld();
             }
         } else if(yMove < 0){
-            int ty = (int) (y + yMove + bounds.getY()) / Settings.TILE_HEIGHT;
+            int ty = (int) (y + yMove + bounds.getY()) / Configs.TILE_HEIGHT;
 
-            if(checkPointTile((int) (x + bounds.getX()) / Settings.TILE_WIDTH, ty) &&
-                    checkPointTile((int) (x + bounds.getX() + bounds.getWidth()) / Settings.TILE_WIDTH, ty)){
+            if(checkPointTile((int) (x + bounds.getX()) / Configs.TILE_WIDTH, ty) &&
+                    checkPointTile((int) (x + bounds.getX() + bounds.getWidth()) / Configs.TILE_WIDTH, ty)){
                 setNewWorld();
             }
         } else {
-            int ty = (int) (y + yMove + bounds.getY() + bounds.getHeight()) / Settings.TILE_HEIGHT;
+            int ty = (int) (y + yMove + bounds.getY() + bounds.getHeight()) / Configs.TILE_HEIGHT;
 
-            if(checkPointTile((int) (x + bounds.getX()) / Settings.TILE_WIDTH, ty) &&
-                    checkPointTile((int) (x + bounds.getX() + bounds.getWidth()) / Settings.TILE_WIDTH, ty)){
+            if(checkPointTile((int) (x + bounds.getX()) / Configs.TILE_WIDTH, ty) &&
+                    checkPointTile((int) (x + bounds.getX() + bounds.getWidth()) / Configs.TILE_WIDTH, ty)){
                 setNewWorld();
             }
         }
@@ -187,16 +209,16 @@ public class Player extends Creature{
         if(handler.getKeyManager().isSpell()){
             if(direction ==1) {
                 handler.getWorld().getEntityManager().addBullet(new Bullet(handler, Assets.player_ball1,
-                        x+20 , y+30 ,Settings.PLAYER_BULLET_DAMAGE, direction));}
+                        x+20 , y+30 , Configs.PLAYER_BULLET_DAMAGE, direction));}
             if(direction ==2) {
                 handler.getWorld().getEntityManager().addBullet(new Bullet(handler, Assets.player_ball2,
-                        x+20, y+35 , Settings.PLAYER_BULLET_DAMAGE, direction));}
+                        x+20, y+35 , Configs.PLAYER_BULLET_DAMAGE, direction));}
             if(direction ==3) {
                 handler.getWorld().getEntityManager().addBullet(new Bullet(handler, Assets.player_ball3,
-                        x+22, y+30 , Settings.PLAYER_BULLET_DAMAGE, direction));}
+                        x+22, y+30 , Configs.PLAYER_BULLET_DAMAGE, direction));}
             if(direction ==4) {
                 handler.getWorld().getEntityManager().addBullet(new Bullet(handler, Assets.player_ball4,
-                        x+35, y+30 , Settings.PLAYER_BULLET_DAMAGE, direction));}
+                        x+35, y+30 , Configs.PLAYER_BULLET_DAMAGE, direction));}
 
             SoundPlayer.PlaySound(Sound.player_fired);
         } else {
@@ -217,16 +239,16 @@ public class Player extends Creature{
         if(handler.getKeyManager().isSpace()){
             if(direction ==1) {
                 handler.getWorld().getEntityManager().addSword(new Sword(handler, Assets.player_sword1,
-                        x+33 , y+25 ,Settings.PLAYER_SWORD_DAMAGE, direction));}
+                        x+33 , y+25 , Configs.PLAYER_SWORD_DAMAGE, direction));}
             if(direction ==2) {
                 handler.getWorld().getEntityManager().addSword(new Sword(handler, Assets.player_sword2,
-                        x+34, y+25 , Settings.PLAYER_SWORD_DAMAGE, direction));}
+                        x+34, y+25 , Configs.PLAYER_SWORD_DAMAGE, direction));}
             if(direction ==3) {
                 handler.getWorld().getEntityManager().addSword(new Sword(handler, Assets.player_sword3,
-                        x+15, y+37 , Settings.PLAYER_SWORD_DAMAGE, direction));}
+                        x+15, y+37 , Configs.PLAYER_SWORD_DAMAGE, direction));}
             if(direction ==4) {
                 handler.getWorld().getEntityManager().addSword(new Sword(handler, Assets.player_sword4,
-                        x+15, y+37 , Settings.PLAYER_SWORD_DAMAGE, direction));}
+                        x+15, y+37 , Configs.PLAYER_SWORD_DAMAGE, direction));}
 
             SoundPlayer.PlaySound(Sound.player_sword);
         } else {
@@ -286,7 +308,7 @@ public class Player extends Creature{
                 continue;
             if(e.getCollisionBounds(0, 0).intersects(ar.getBoundsInLocal())){
                 e.takeDamage(damage);
-                if(!Settings.IS_MUTE){
+                if(!Configs.IS_MUTE){
                     if(Sound.punch.getStatus() == MediaPlayer.Status.PLAYING)
                         Sound.punch.stop();
                     //Sound.punch.play();
@@ -347,7 +369,7 @@ public class Player extends Creature{
         active = false;
 
         //Reset Scores
-        Settings.SCORES = 0;
+        Configs.SCORES = 0;
 
         //Sound off
         handler.getSoundManager().soundOff();

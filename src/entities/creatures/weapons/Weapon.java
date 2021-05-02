@@ -6,7 +6,7 @@ import game.Handler;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.media.MediaPlayer;
-import settings.Settings;
+import configs.Configs;
 import sounds.SoundPlayer;
 
 
@@ -30,20 +30,20 @@ public abstract class Weapon extends Creature {
 	}
 	public void moveX(){
         if(xMove > 0){ //Moving right
-            int tx = (int) (x + bounds.getX() + bounds.getWidth()) / Settings.TILE_WIDTH;
+            int tx = (int) (x + bounds.getX() + bounds.getWidth()) / Configs.TILE_WIDTH;
 
-            if(!collisionWithTile(tx, (int) (y + bounds.getY()) / Settings.TILE_HEIGHT) &&
-                    !collisionWithTile(tx, (int) (y + bounds.getY() + bounds.getHeight()) / Settings.TILE_HEIGHT)){
+            if(!collisionWithTile(tx, (int) (y + bounds.getY()) / Configs.TILE_HEIGHT) &&
+                    !collisionWithTile(tx, (int) (y + bounds.getY() + bounds.getHeight()) / Configs.TILE_HEIGHT)){
                 x += xMove/2;
                 xLong += xMove/2;
             } else {
                 die();
             }
         } else if (xMove < 0){ //Moving left
-            int tx = (int) (x + bounds.getX()) / Settings.TILE_WIDTH;
+            int tx = (int) (x + bounds.getX()) / Configs.TILE_WIDTH;
 
-            if (!collisionWithTile(tx, (int) (y + bounds.getY()) / Settings.TILE_HEIGHT) &&
-                    !collisionWithTile(tx, (int) (y + bounds.getY() + bounds.getHeight()) / Settings.TILE_HEIGHT)) {
+            if (!collisionWithTile(tx, (int) (y + bounds.getY()) / Configs.TILE_HEIGHT) &&
+                    !collisionWithTile(tx, (int) (y + bounds.getY() + bounds.getHeight()) / Configs.TILE_HEIGHT)) {
                 x += xMove/2;
                 xLong += xMove/2;
             } else {
@@ -54,20 +54,20 @@ public abstract class Weapon extends Creature {
 
     public void moveY(){
         if(yMove < 0){ //Moving up
-            int ty = (int) (y + bounds.getY()) / Settings.TILE_HEIGHT;
+            int ty = (int) (y + bounds.getY()) / Configs.TILE_HEIGHT;
 
-            if(!collisionWithTile((int) (x + bounds.getX()) / Settings.TILE_WIDTH, ty) &&
-                    !collisionWithTile((int) (x + bounds.getX() + bounds.getWidth()) / Settings.TILE_WIDTH, ty)){
+            if(!collisionWithTile((int) (x + bounds.getX()) / Configs.TILE_WIDTH, ty) &&
+                    !collisionWithTile((int) (x + bounds.getX() + bounds.getWidth()) / Configs.TILE_WIDTH, ty)){
                 y += yMove/2;
                 yLong += yMove/2;
             } else {
                 die();
             }
         } else if (yMove > 0){ //Moving down
-            int ty = (int) (y + bounds.getY() + bounds.getHeight()) / Settings.TILE_HEIGHT;
+            int ty = (int) (y + bounds.getY() + bounds.getHeight()) / Configs.TILE_HEIGHT;
 
-            if(!collisionWithTile((int) (x + bounds.getX()) / Settings.TILE_WIDTH, ty) &&
-                    !collisionWithTile((int) (x + bounds.getX() + bounds.getWidth()) / Settings.TILE_WIDTH, ty)){
+            if(!collisionWithTile((int) (x + bounds.getX()) / Configs.TILE_WIDTH, ty) &&
+                    !collisionWithTile((int) (x + bounds.getX() + bounds.getWidth()) / Configs.TILE_WIDTH, ty)){
                 y += yMove/2;
                 yLong += yMove/2;
             } else {

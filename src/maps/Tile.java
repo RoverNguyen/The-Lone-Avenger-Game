@@ -1,8 +1,8 @@
-package tiles;
+package maps;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import settings.Settings;
+import configs.Configs;
 
 
 public class Tile {
@@ -49,7 +49,7 @@ public class Tile {
     }
 
     public void render(GraphicsContext g, int x, int y){
-        g.drawImage(image, x, y, Settings.TILE_WIDTH, Settings.TILE_HEIGHT);
+        g.drawImage(image, x, y, Configs.TILE_WIDTH, Configs.TILE_HEIGHT);
     }
 
     public boolean isSolid(){

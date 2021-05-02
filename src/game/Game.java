@@ -16,12 +16,12 @@ import javafx.scene.layout.StackPane;
 
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import settings.Settings;
+import configs.Configs;
 import sounds.SoundManager;
 import states.MenuState;
 
 import states.State;
-import tiles.Tile;
+import maps.Tile;
 
 
 public class Game extends Application {
@@ -31,7 +31,7 @@ public class Game extends Application {
     private StackPane root;
     private Scene scene;
 
-    private int width = Settings.STAGE_WIDTH, height = Settings.STAGE_HEIGHT;
+    private int width = Configs.STAGE_WIDTH, height = Configs.STAGE_HEIGHT;
 
     //States
     public State gameState;

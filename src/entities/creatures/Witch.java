@@ -10,7 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
-import settings.Settings;
+import configs.Configs;
 import sounds.Sound;
 import sounds.SoundPlayer;
 import states.GameState;
@@ -129,7 +129,7 @@ public class Witch extends Enemy{
         super.die();
         Thread enemySpawner = new Thread(() -> {
             try {
-                Thread.sleep(Settings.ENEMY_RESPAWN_TIME);
+                Thread.sleep(Configs.ENEMY_RESPAWN_TIME);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

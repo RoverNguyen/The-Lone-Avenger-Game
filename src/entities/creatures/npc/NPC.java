@@ -1,6 +1,5 @@
 package entities.creatures.npc;
 
-import entities.Entity;
 import entities.creatures.Creature;
 import game.Handler;
 import gfx.Assets;
@@ -13,8 +12,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.util.Duration;
-import settings.Settings;
-import sounds.SoundPlayer;
+import configs.Configs;
 
 import java.util.Random;
 
@@ -47,7 +45,7 @@ public abstract class NPC extends Creature {
         this.offsetX = offsetX;
         this.offsetY = offsetY;
 
-        setSpeed(Settings.PLAYER_SPEED);
+        setSpeed(Configs.PLAYER_SPEED);
         imageView = new ImageView(image);
         imageView.setFitWidth(width);
         imageView.setFitHeight(height);

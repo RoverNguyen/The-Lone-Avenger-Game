@@ -4,15 +4,13 @@ import entities.creatures.BossSkill.energyBall;
 import game.Handler;
 import gfx.Assets;
 import gfx.SpriteAnimation;
-import items.Item;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
-import settings.Settings;
+import configs.Configs;
 import sounds.Sound;
 
 public class Boss extends Enemy{
@@ -179,7 +177,6 @@ public class Boss extends Enemy{
                     handler.getWorld().getEntityManager().getPlayer().getY()));
 //            isAttack = true;
             Sound.playSound(Sound.dragon_fired);
-            Sound.playSound(Sound.dragon_fired);
 
         }else{
             return;
@@ -217,9 +214,9 @@ public class Boss extends Enemy{
 
     @Override
     public void die() {
-        Settings.SCORES++;
+        Configs.SCORES++;
         handler.getWorld().setEnemyOnBoard(handler.getWorld().getEnemyOnBoard() - 1);
-        System.out.println(Settings.SCORES);
+        System.out.println(Configs.SCORES);
         // System.out.println("xin lũiiii mà :(");
 
         handler.setWin(true);

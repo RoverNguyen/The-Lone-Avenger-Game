@@ -1,7 +1,6 @@
-package tiles;
+package maps;
 
 import gfx.Assets;
-import javafx.scene.image.Image;
 
 public class ArchitectureMap3 extends Tile{
     public ArchitectureMap3(int id) {

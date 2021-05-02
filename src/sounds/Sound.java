@@ -1,7 +1,6 @@
 package sounds;
-import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import settings.Settings;
+import configs.Configs;
 
 
 public class Sound {
@@ -20,7 +19,7 @@ public class Sound {
     public static MediaPlayer dragon_fired = new MediaPlayer(SoundLoader.loadSound("res/sounds/dragon_fired.wav"));
 
     public static void playSound(MediaPlayer mediaPlayer){
-        if (!Settings.IS_MUTE) {
+        if (!Configs.IS_MUTE) {
             if (mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING)
                 mediaPlayer.stop();
             mediaPlayer.play();

@@ -5,7 +5,7 @@ import gfx.Assets;
 import javafx.application.Platform;
 import javafx.scene.canvas.GraphicsContext;
 
-import settings.Settings;
+import configs.Configs;
 
 
 import sounds.Sound;
@@ -24,7 +24,7 @@ public class VictoryState extends State{
 
         stateSound = Sound.victory;
         handler.getSoundManager().addSound(stateSound);
-        if(!Settings.IS_MUTE)
+        if(!Configs.IS_MUTE)
             stateSound.play();
 
 
@@ -48,7 +48,7 @@ public class VictoryState extends State{
 
     @Override
     public void render(GraphicsContext g) {
-        g.drawImage(Assets.victory, 0, 0, Settings.STAGE_WIDTH, Settings.STAGE_HEIGHT);
+        g.drawImage(Assets.victory, 0, 0, Configs.STAGE_WIDTH, Configs.STAGE_HEIGHT);
         uiManager.render(g);
     }
 }

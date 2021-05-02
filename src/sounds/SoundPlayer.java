@@ -1,14 +1,15 @@
 package sounds;
 
 import javafx.scene.media.MediaPlayer;
-import settings.Settings;
+import configs.Configs;
 
 public class SoundPlayer {
     public static void PlaySound(MediaPlayer mp){
-        if(!Settings.IS_MUTE){
+        if(!Configs.IS_MUTE){
             if(mp.getStatus() == MediaPlayer.Status.PLAYING)
                 mp.stop();
             mp.play();
         }
     }
+
 }

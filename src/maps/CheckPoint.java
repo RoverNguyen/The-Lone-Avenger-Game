@@ -1,4 +1,4 @@
-package tiles;
+package maps;
 
 import gfx.Assets;
 

@@ -10,7 +10,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import settings.Settings;
+import configs.Configs;
 import sounds.Sound;
 import worlds.World;
 
@@ -21,6 +21,7 @@ public class GameState extends State{
     public static EntityManager entityManager;
     public static int playerCurrentHealth;
     public static double playerCurrentSpeed;
+    public static int scores = 0;
 
     public GameState(Handler handler){
         super(handler);
@@ -28,7 +29,7 @@ public class GameState extends State{
         world[2] = new World(handler, "res/worlds/world2.txt");
         world[3] = new World(handler, "res/worlds/world3.txt");
         world[4] = new World(handler, "res/worlds/world4.txt");
-        world[0] = world[4];
+        world[0] = world[1];
         handler.setWorld(world[0], true);
 
         entityManager = world[0].getEntityManager();
@@ -84,7 +85,7 @@ public class GameState extends State{
 
     @Override
     public void tick() {
-        if(!Settings.IS_MUTE)
+        if(!Configs.IS_MUTE)
             stateSound.play();
 
         world[0].tick();
@@ -94,12 +95,6 @@ public class GameState extends State{
 
     public void checkPause(){
         if(handler.getKeyManager().isPause()){
-
-            //Sounds off
-            for(MediaPlayer mediaP : handler.getSoundManager().getSoundList()){
-                mediaP.pause();
-            }
-
             //Set pause state
             State.setState(new PauseState(handler));
         }
@@ -111,7 +106,7 @@ public class GameState extends State{
             return;
         }
 
-        Settings.SCORES = 0;
+        Configs.SCORES = 0;
 
         //Sounds off
         handler.getSoundManager().soundOff();
@@ -130,9 +125,11 @@ public class GameState extends State{
         //DRAW SCORES
         g.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
         g.setFill(Color.LAVENDER);
-        g.fillRect(Settings.STAGE_WIDTH - 200, 0, 200, 30);
+        g.fillRect(Configs.STAGE_WIDTH - 200, 0, 200, 30);
         g.setFill(Color.BLACK);
-        g.fillText("Điểm số: " + Settings.SCORES, Settings.STAGE_WIDTH - 190, 22);
+//        g.fillText("Điểm số: " + Settings.SCORES, Settings.STAGE_WIDTH - 190, 22);
+        g.fillText("Điểm số: " + scores, Configs.STAGE_WIDTH - 190, 22);
+
 
         //DRAW HEALTH BAR
         double percent = (double) handler.getWorld().getEntityManager().getPlayer().getHealth() /
@@ -170,7 +167,7 @@ public class GameState extends State{
         g.setFill(Color.web("#e2fbff"));
         g.fillRoundRect(625, 555, 30,10, 10,10);
         g.setFill(Color.BLACK);
-        g.fillText("Q", 638,562);
+        g.fillText("Q", 636,562);
 
         //DRAW SWORD COOL DOWN
         g.setFill(Color.BLACK);

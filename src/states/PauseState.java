@@ -5,7 +5,7 @@ import gfx.Assets;
 import javafx.application.Platform;
 import javafx.scene.canvas.GraphicsContext;
 
-import settings.Settings;
+import configs.Configs;
 
 import ui.UIImageButton;
 import ui.UIManager;
@@ -37,12 +37,12 @@ public class PauseState extends State{
 
         uiManager.addObject(new UIImageButton(320, 400,180, 120, Assets.mute_unmute,
                 () -> {
-                    if(!Settings.IS_MUTE) {
+                    if(!Configs.IS_MUTE) {
                         handler.getSoundManager().muteAll();
-                        Settings.IS_MUTE = true;
+                        Configs.IS_MUTE = true;
                     } else {
                         handler.getSoundManager().unMuteAll();
-                        Settings.IS_MUTE = false;
+                        Configs.IS_MUTE = false;
                     }
                 }));
     }
@@ -54,7 +54,7 @@ public class PauseState extends State{
 
     @Override
     public void render(GraphicsContext g) {
-        g.drawImage(Assets.pause, 0, 0, Settings.STAGE_WIDTH, Settings.STAGE_HEIGHT);
+        g.drawImage(Assets.pause, 0, 0, Configs.STAGE_WIDTH, Configs.STAGE_HEIGHT);
         uiManager.render(g);
     }
 }

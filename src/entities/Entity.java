@@ -9,7 +9,7 @@ import javafx.scene.image.ImageView;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import settings.Settings;
+import configs.Configs;
 
 public abstract class Entity {
 
@@ -34,7 +34,7 @@ public abstract class Entity {
         this.width = width;
         this.height = height;
 
-        health = Settings.DEFAULT_HEALTH + 100*handler.getDifficulty();// + 100*(handler.getWorld().getCountWorld()-1);
+        health = Configs.DEFAULT_HEALTH + 100*handler.getDifficulty();// + 100*(handler.getWorld().getCountWorld()-1);
         maxHealth = health;
 
         params = new SnapshotParameters();

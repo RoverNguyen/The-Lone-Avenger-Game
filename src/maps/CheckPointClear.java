@@ -1,7 +1,6 @@
-package tiles;
+package maps;
 
 import gfx.Assets;
-import javafx.scene.image.Image;
 
 public class CheckPointClear extends Tile{
     public CheckPointClear(int id) {

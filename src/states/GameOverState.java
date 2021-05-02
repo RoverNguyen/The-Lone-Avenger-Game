@@ -4,7 +4,7 @@ import game.Handler;
 import gfx.Assets;
 import javafx.application.Platform;
 import javafx.scene.canvas.GraphicsContext;
-import settings.Settings;
+import configs.Configs;
 import sounds.Sound;
 import ui.UIImageButton;
 import ui.UIManager;
@@ -20,7 +20,7 @@ public class GameOverState extends State{
 
         stateSound = Sound.gameover;
         handler.getSoundManager().addSound(stateSound);
-        if(!Settings.IS_MUTE)
+        if(!Configs.IS_MUTE)
             stateSound.play();
 
         uiManager.addObject(new UIImageButton(250, 370,200, 100, Assets.restart,
@@ -42,7 +42,7 @@ public class GameOverState extends State{
 
     @Override
     public void render(GraphicsContext g) {
-        g.drawImage(Assets.gameover, 0, 0, Settings.STAGE_WIDTH, Settings.STAGE_HEIGHT);
+        g.drawImage(Assets.gameover, 0, 0, Configs.STAGE_WIDTH, Configs.STAGE_HEIGHT);
         uiManager.render(g);
     }
 }

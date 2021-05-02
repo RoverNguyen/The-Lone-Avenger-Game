@@ -6,8 +6,9 @@ import javafx.scene.image.Image;
 
 
 import javafx.scene.media.MediaPlayer;
-import settings.Settings;
+import configs.Configs;
 import sounds.Sound;
+import states.GameState;
 
 
 public abstract class Enemy extends Creature{
@@ -16,14 +17,14 @@ public abstract class Enemy extends Creature{
 
     protected int worldCount;
     //Attack Timer
-    private long lastAttackTimer, attackCoolDown = 1000, attackTimer = attackCoolDown;
-    private long lastHealthRecover, recoverCoolDown = 100, recoverTimer = recoverCoolDown;
+    private long lastAttackTimer, attackCoolDown = Configs.ENEMY_ATTACK_COOL_DOWN, attackTimer = attackCoolDown;
+    private long lastHealthRecover, recoverCoolDown = Configs.ENEMY_RECOVER_COOL_DOWN, recoverTimer = recoverCoolDown;
 
     //Zone
     double enemyX, enemyY, playerX, playerY, distance;
     double homeX, homeY;
     public Enemy(Handler handler,  Image image, double x, double y){
-        super(handler, image, x, y, Settings.DEFAULT_CREATURE_WIDTH, Settings.DEFAULT_CREATURE_HEIGHT, 25);
+        super(handler, image, x, y, Configs.DEFAULT_CREATURE_WIDTH, Configs.DEFAULT_CREATURE_HEIGHT, 25);
         homeX = x;
         homeY = y;
     }
@@ -53,7 +54,7 @@ public abstract class Enemy extends Creature{
 
         if(checkAttackZone()){
             handler.getWorld().getEntityManager().getPlayer().takeDamage(damage);
-            if(!Settings.IS_MUTE){
+            if(!Configs.IS_MUTE){
                 if(Sound.hurt.getStatus() == MediaPlayer.Status.PLAYING)
                     Sound.hurt.stop();
                 Sound.hurt.play();
@@ -68,7 +69,7 @@ public abstract class Enemy extends Creature{
         playerY = handler.getWorld().getEntityManager().getPlayer().getCollisionBounds(0,0).getY();
         distance = (enemyX - playerX)*(enemyX - playerX) + (enemyY - playerY)*(enemyY - playerY);
 
-        return distance < Settings.DISTANCE_PLAYER;
+        return distance < Configs.DISTANCE_PLAYER;
     }
 
     protected boolean checkAttackZone() {
@@ -78,7 +79,7 @@ public abstract class Enemy extends Creature{
         playerY = handler.getWorld().getEntityManager().getPlayer().getCollisionBounds(0,0).getY();
         distance = (enemyX - playerX)*(enemyX - playerX) + (enemyY - playerY)*(enemyY - playerY);
 
-        return distance < Settings.ATTACK_ZONE;
+        return distance < Configs.ATTACK_ZONE;
     }
 
     public void backHomeMove(){
@@ -148,9 +149,9 @@ public abstract class Enemy extends Creature{
 
     @Override
     public void die() {
-        Settings.SCORES++;
+        GameState.scores++;
         handler.getWorld().setEnemyOnBoard(handler.getWorld().getEnemyOnBoard() - 1);
-        System.out.println(Settings.SCORES);
+        System.out.println(GameState.scores);
        // System.out.println("xin lũiiii mà :(");
 
         int rand = (int) (Math.random() * 5);

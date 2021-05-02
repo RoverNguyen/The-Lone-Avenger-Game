@@ -6,7 +6,7 @@ import gfx.ImageAnimation;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
-import settings.Settings;
+import configs.Configs;
 import states.GameState;
 
 public class Slime extends Enemy{
@@ -104,7 +104,7 @@ public class Slime extends Enemy{
         super.die();
         Thread enemySpawner = new Thread(() -> {
             try {
-                Thread.sleep(Settings.ENEMY_RESPAWN_TIME);
+                Thread.sleep(Configs.ENEMY_RESPAWN_TIME);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
