@@ -178,6 +178,9 @@ public class Boss extends Enemy{
                     handler.getWorld().getEntityManager().getPlayer().getX(),
                     handler.getWorld().getEntityManager().getPlayer().getY()));
 //            isAttack = true;
+            Sound.playSound(Sound.dragon_fired);
+            Sound.playSound(Sound.dragon_fired);
+
         }else{
             return;
         }
@@ -208,11 +211,7 @@ public class Boss extends Enemy{
 
         if(checkAttackZone()){
             handler.getWorld().getEntityManager().getPlayer().takeDamage(damage);
-            if(!Settings.IS_MUTE){
-                if(Sound.hurt.getStatus() == MediaPlayer.Status.PLAYING)
-                    Sound.hurt.stop();
-                Sound.hurt.play();
-            }
+            Sound.playSound(Sound.hurt);
         }
     }
 

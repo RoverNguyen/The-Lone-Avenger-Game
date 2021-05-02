@@ -5,6 +5,7 @@ import game.Handler;
 import gfx.Assets;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import sounds.Sound;
 
 
 public class energyBall extends Creature {
@@ -84,8 +85,8 @@ public class energyBall extends Creature {
         timer = 0;
         lastTime= System.currentTimeMillis();
 
-        bounds.setX(0);
-        bounds.setY(40);
+        bounds.setX(-50);
+        bounds.setY(-50);
         bounds.setWidth(96);
         bounds.setHeight(106);
 
@@ -118,6 +119,8 @@ public class energyBall extends Creature {
         if(checkHit()){
             die();
         }
+
+
     }
 
     @Override
@@ -132,7 +135,7 @@ public class energyBall extends Creature {
                 .getPlayer()
                 .getAttackBounds(0,0).intersects(getCollisionBounds(0,0).getBoundsInLocal())){
             handler.getWorld().getEntityManager().getPlayer().takeDamage(damage);
-
+            Sound.playSound(Sound.hurt);
             return true;
         }
 

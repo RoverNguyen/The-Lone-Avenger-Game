@@ -17,6 +17,7 @@ public class Sound {
     public static MediaPlayer player_sword = new MediaPlayer(SoundLoader.loadSound("res/sounds/sword-arm-2a.wav"));
     public static MediaPlayer cut = new MediaPlayer(SoundLoader.loadSound("res/sounds/sword-1a.wav"));
     public static MediaPlayer boom = new MediaPlayer(SoundLoader.loadSound("res/sounds/boom.wav"));
+    public static MediaPlayer dragon_fired = new MediaPlayer(SoundLoader.loadSound("res/sounds/dragon_fired.wav"));
 
     public static void playSound(MediaPlayer mediaPlayer){
         if (!Settings.IS_MUTE) {

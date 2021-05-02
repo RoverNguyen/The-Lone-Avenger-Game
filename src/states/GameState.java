@@ -28,7 +28,7 @@ public class GameState extends State{
         world[2] = new World(handler, "res/worlds/world2.txt");
         world[3] = new World(handler, "res/worlds/world3.txt");
         world[4] = new World(handler, "res/worlds/world4.txt");
-        world[0] = world[1];
+        world[0] = world[4];
         handler.setWorld(world[0], true);
 
         entityManager = world[0].getEntityManager();
@@ -163,7 +163,7 @@ public class GameState extends State{
                 g.fillText(scd + "s", 627,546);
             } else {
                 spellCoolDown = Math.round(spellCoolDown * 10.0) / 10.0;
-                g.fillText(String.valueOf(spellCoolDown), 627,546);
+                g.fillText(String.valueOf(spellCoolDown), 622,546);
             }
         }
         g.setFont(Font.font("Verdana", FontWeight.BOLD, 7));
