@@ -89,7 +89,7 @@ public class Item {
                 player.setSpeed(player.getSpeed() + 1);
                 break;
             case 1:
-                int h = player.getHealth() + 100;
+                int h = player.getHealth() + 200;
                 if (h <= player.getMaxHealth()) {
                     player.setHealth(h);
                 } else {

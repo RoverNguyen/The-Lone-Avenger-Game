@@ -20,14 +20,13 @@ public class CreditsState extends State{
         if(!Settings.IS_MUTE)
             stateSound.play();
 
-        uiManager.addObject(new UIImageButton(40, 760,160, 120, Assets.back,
+        uiManager.addObject(new UIImageButton(30, 500,100, 75, Assets.back,
                 () -> {
                     handler.getMouseManager().setUiManager(null);
                     handler.setTele(true);
                     handler.setDifficulty(0);
                     handler.getGame().menuState = new MenuState(handler);
                     State.setState(handler.getGame().menuState);
-                    stateSound.dispose();
                 }));
 
     }

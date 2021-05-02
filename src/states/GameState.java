@@ -138,52 +138,52 @@ public class GameState extends State{
         double percent = (double) handler.getWorld().getEntityManager().getPlayer().getHealth() /
                 (double) handler.getWorld().getEntityManager().getPlayer().getMaxHealth();
         g.setFill(Color.BURLYWOOD);
-        g.fillRoundRect(370, 860, 500,10, 30, 30);
+        g.fillRoundRect(200, 553, 400,10, 20, 20);
         g.setFill(Color.RED);
-        g.fillRoundRect(370, 860, percent * 500,10, 30, 30);
-        g.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        g.fillRoundRect(200, 553, percent * 400,10, 20, 20);
+        g.setFont(Font.font("Verdana", FontWeight.BOLD, 9));
         g.setFill(Color.WHITE);
         g.fillText(handler.getWorld().getEntityManager().getPlayer().getHealth() + " / "
-                + handler.getWorld().getEntityManager().getPlayer().getMaxHealth(), 585, 869);
+                + handler.getWorld().getEntityManager().getPlayer().getMaxHealth(), 380, 561);
 
         //DRAW SPELL COOL DOWN
         g.setFill(Color.BLACK);
-        g.strokeOval(930, 810,60,60);
-        g.setFont(Font.font("Verdana", FontWeight.BOLD, 28));
+        g.strokeOval(620, 520,40,40);
+        g.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
         double spellCoolDown;
         if(Player.spellCoolDown - Player.spellTimer < 0){
             g.setFill(Color.GREEN);
-            g.fillOval(930, 810, 60, 60);
-            g.drawImage(Assets.player_ball4, 943, 820);
+            g.fillOval(620, 520, 40, 40);
+            g.drawImage(Assets.player_ball4, 622, 520);
         } else {
             spellCoolDown = ((double) (Player.spellCoolDown - Player.spellTimer)/1000);
             if (spellCoolDown >= 1) {
                 spellCoolDown = Math.floor((double) (Player.spellCoolDown - Player.spellTimer)/1000);
                 int scd = (int) spellCoolDown;
-                g.fillText(scd + "s", 943,847);
+                g.fillText(scd + "s", 627,546);
             } else {
                 spellCoolDown = Math.round(spellCoolDown * 10.0) / 10.0;
-                g.fillText(String.valueOf(spellCoolDown), 935,847);
+                g.fillText(String.valueOf(spellCoolDown), 627,546);
             }
         }
-        g.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        g.setFont(Font.font("Verdana", FontWeight.BOLD, 7));
         g.setFill(Color.web("#e2fbff"));
-        g.fillRoundRect(938, 858, 45,12, 10,10);
+        g.fillRoundRect(625, 555, 30,10, 10,10);
         g.setFill(Color.BLACK);
-        g.fillText("Q", 956,868);
+        g.fillText("Q", 638,562);
 
         //DRAW SWORD COOL DOWN
         g.setFill(Color.BLACK);
-        g.strokeOval(1030, 810,60,60);
-        g.setFont(Font.font("Verdana", FontWeight.BOLD, 28));
+        g.strokeOval(680, 520,40,40);
+        g.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
         g.setFill(Color.GREEN);
-        g.fillOval(1030, 810, 60, 60);
-        g.drawImage(Assets.player_sword4, 1038, 830);
+        g.fillOval(680, 520, 40, 40);
+        g.drawImage(Assets.player_sword4, 675, 532);
 
-        g.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+        g.setFont(Font.font("Verdana", FontWeight.BOLD, 7));
         g.setFill(Color.web("#e2fbff"));
-        g.fillRoundRect(1038, 858, 45,12, 10,10);
+        g.fillRoundRect(686, 555, 30,10, 10,10);
         g.setFill(Color.BLACK);
-        g.fillText("Space", 1040,868);
+        g.fillText("Space", 690,562);
     }
 }

@@ -23,7 +23,7 @@ public class GameOverState extends State{
         if(!Settings.IS_MUTE)
             stateSound.play();
 
-        uiManager.addObject(new UIImageButton(400, 600,240, 120, Assets.restart,
+        uiManager.addObject(new UIImageButton(250, 370,200, 100, Assets.restart,
                 () -> {
                     handler.getMouseManager().setUiManager(null);
                     handler.setTele(true);
@@ -32,7 +32,7 @@ public class GameOverState extends State{
                     stateSound.stop();
                 }));
 
-        uiManager.addObject(new UIImageButton(800, 600,240, 120, Assets.exit, Platform::exit));
+        uiManager.addObject(new UIImageButton(530, 370,200, 100, Assets.exit, Platform::exit));
     }
 
     @Override

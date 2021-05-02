@@ -23,19 +23,19 @@ public class MenuState extends State{
         handler.getSoundManager().addSound(stateSound);
         if(!Settings.IS_MUTE)
             stateSound.play();
-        uiManager.addObject(new UIImageButton(110, 600,260, 130, Assets.credits,
+        uiManager.addObject(new UIImageButton(50, 400,200, 100, Assets.credits,
                 () -> {
                     handler.getMouseManager().setUiManager(null);
                     State.setState(new CreditsState(handler));
                 }));
 
-        uiManager.addObject(new UIImageButton(460, 600,260, 130, Assets.start,
+        uiManager.addObject(new UIImageButton(300, 400,200, 100, Assets.start,
                 () -> {
                     handler.getMouseManager().setUiManager(null);
                     State.setState(new DifficultyState(handler));
                 }));
 
-        uiManager.addObject(new UIImageButton(810, 600,260, 130, Assets.exit, Platform::exit));
+        uiManager.addObject(new UIImageButton(550, 400,200, 100, Assets.exit, Platform::exit));
 
     }
 

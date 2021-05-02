@@ -10,7 +10,7 @@ import javafx.scene.paint.Color;
 import java.util.ArrayList;
 
 public class Inventory {
-    private int invX = 330, invY = 150, invWidth = 512, invHeight = 384;
+    private int invX = 144, invY = 108, invWidth = 512, invHeight = 384;
 
     private int invListCenterX = invX + 20;
     private int invListCenterY = invY + 205;

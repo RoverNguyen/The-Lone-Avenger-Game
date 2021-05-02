@@ -175,7 +175,7 @@ public abstract class NPC extends Creature {
             g.setFill(Color.BLACK);
             g.setFont(Font.font(13));
             g.fillText(dialogue, (int) (x - handler.getGameCamera().getxOffset()) - 5,
-                    (int) (y - handler.getGameCamera().getyOffset()) - 25);
+                    (int) (y - handler.getGameCamera().getyOffset()) - 26);
         }
         npc = imageView.snapshot(params, null);
         g.drawImage(npc, (int) (x - handler.getGameCamera().getxOffset()),
@@ -183,17 +183,17 @@ public abstract class NPC extends Creature {
 
         if (checkPlayerZone()) {
             g.setFill(Color.BLACK);
-            g.strokeOval(1130, 810,60,60);
-            g.setFont(Font.font("Verdana", FontWeight.BOLD, 28));
+            g.strokeOval(740, 520,40,40);
+            g.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
             g.setFill(Color.GREEN);
-            g.fillOval(1130, 810, 60, 60);
-            g.drawImage(Assets.talk, 1138, 815);
+            g.fillOval(740, 520, 40, 40);
+            g.drawImage(Assets.talk, 739, 518);
 
-            g.setFont(Font.font("Verdana", FontWeight.BOLD, 12));
+            g.setFont(Font.font("Verdana", FontWeight.BOLD, 7));
             g.setFill(Color.web("#e2fbff"));
-            g.fillRoundRect(1138, 858, 45,12, 10,10);
+            g.fillRoundRect(748, 555, 30,10, 10,10);
             g.setFill(Color.BLACK);
-            g.fillText("Enter", 1141,868);
+            g.fillText("Enter", 751,562);
         }
     }
 

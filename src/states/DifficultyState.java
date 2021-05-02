@@ -20,32 +20,32 @@ public class DifficultyState extends State{
         if(!Settings.IS_MUTE)
             stateSound.play();
 
-        uiManager.addObject(new UIImageButton(80, 400,240, 240, Assets.easy,
+        uiManager.addObject(new UIImageButton(60, 250,160, 160, Assets.easy,
                 () -> {
                     handler.getMouseManager().setUiManager(null);
                     handler.setTele(true);
                     handler.setDifficulty(0);
                     handler.getGame().gameState = new GameState(handler);
                     State.setState(handler.getGame().gameState);
-                    stateSound.dispose();
+                    stateSound.stop();
                 }));
-        uiManager.addObject(new UIImageButton(480, 400,240, 240, Assets.medium,
+        uiManager.addObject(new UIImageButton(320, 250,160, 160, Assets.medium,
                 () -> {
                     handler.getMouseManager().setUiManager(null);
                     handler.setTele(true);
                     handler.setDifficulty(1);
                     handler.getGame().gameState = new GameState(handler);
                     State.setState(handler.getGame().gameState);
-                    stateSound.dispose();
+                    stateSound.stop();
                 }));
-        uiManager.addObject(new UIImageButton(880, 400,240, 240, Assets.hard,
+        uiManager.addObject(new UIImageButton(580, 250,160, 160, Assets.hard,
                 () -> {
                     handler.getMouseManager().setUiManager(null);
                     handler.setTele(true);
                     handler.setDifficulty(2);
                     handler.getGame().gameState = new GameState(handler);
                     State.setState(handler.getGame().gameState);
-                    stateSound.dispose();
+                    stateSound.stop();
                 }));
 
     }
