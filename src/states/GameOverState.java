@@ -30,6 +30,8 @@ public class GameOverState extends State{
                     handler.getGame().gameState = new GameState(handler);
                     State.setState(handler.getGame().gameState);
                     stateSound.stop();
+                    GameState.scores = 0;
+
                 }));
 
         uiManager.addObject(new UIImageButton(530, 370,200, 100, Assets.exit, Platform::exit));

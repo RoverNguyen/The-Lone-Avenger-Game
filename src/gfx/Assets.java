@@ -19,6 +19,7 @@ public class Assets {
     public static Image background, gameover, pause, victory;
     public static Image start, exit, mute_unmute, restart, main_menu, back, credits, resume;
 
+
     public static Image[] slime_up, slime_down, slime_left, slime_right;
     public static Image talk;
 

@@ -36,6 +36,7 @@ public abstract class NPC extends Creature {
                int offsetUp, int offsetDown, int offsetLeft, int offsetRight) {
         super(handler, image, x, y, 64, 96, 0);
 
+        setHealth(9999999);
         this.offsetUp = offsetUp;
         this.offsetDown = offsetDown;
         this.offsetLeft = offsetLeft;

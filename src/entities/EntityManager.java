@@ -10,6 +10,7 @@ import javafx.scene.canvas.GraphicsContext;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.ListIterator;
 
 public class EntityManager{
 
@@ -18,10 +19,12 @@ public class EntityManager{
     private ArrayList<Entity> entities;
     private ArrayList<Bullet> bullets;
     private ArrayList<Sword> swords;
+    private ArrayList<Entity> temp;
 
     private ArrayList<energyBall> fire;
 
     private Iterator i, j, t, eb;
+
     private Comparator<Entity> renderSort = Comparator.comparingDouble(a -> a.getY() + a.getHeight());
 
     public EntityManager(Handler handler, Player player){
@@ -31,6 +34,7 @@ public class EntityManager{
         bullets = new ArrayList<>();
         swords = new ArrayList<>();
         fire = new ArrayList<>();
+        temp = new ArrayList<>();
         addEntity(player);
     }
 
@@ -42,8 +46,11 @@ public class EntityManager{
 
             if(!e.isActive())
                 i.remove();
+
         }
+        entities.addAll(temp);
         entities.sort(renderSort);
+        temp.removeAll(temp);
 
         j = bullets.iterator();
         while(j.hasNext()){
@@ -92,7 +99,7 @@ public class EntityManager{
     }
 
     public void addEntity(Entity e){
-        entities.add(e);
+        temp.add(e);
     }
     public void addBullet(Bullet b) {
         bullets.add(b);

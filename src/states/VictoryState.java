@@ -35,7 +35,7 @@ public class VictoryState extends State{
                     handler.getGame().gameState = new GameState(handler);
                     State.setState(handler.getGame().gameState);
                     stateSound.stop();
-
+                    GameState.scores = 0;
                 }));
 
         uiManager.addObject(new UIImageButton(450, 430,200, 100, Assets.exit, Platform::exit));

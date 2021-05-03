@@ -3,9 +3,11 @@ package worlds;
 import entities.EntityManager;
 import entities.creatures.Player;
 import game.Handler;
+import gfx.Assets;
 import items.ItemManager;
 import javafx.scene.canvas.GraphicsContext;
 import configs.Configs;
+import javafx.scene.image.Image;
 import maps.Tile;
 import utils.Utils;
 
@@ -34,6 +36,8 @@ public class World {
     //Items
     private ItemManager itemManager;
 
+    //Player
+    private Image player;
     public World(Handler handler, String path){
         this.handler = handler;
 
