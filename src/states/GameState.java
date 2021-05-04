@@ -25,6 +25,8 @@ public class GameState extends State{
 
     public GameState(Handler handler){
         super(handler);
+        handler.setInGame(true);
+
         world[1] = new World(handler, "res/worlds/world1.txt");
         world[2] = new World(handler, "res/worlds/world2.txt");
         world[3] = new World(handler, "res/worlds/world3.txt");

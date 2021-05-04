@@ -28,6 +28,7 @@ public class Game extends Application {
 
     private Canvas canvas;
     private GraphicsContext g;
+
     private StackPane root;
     private Scene scene;
 
@@ -112,8 +113,6 @@ public class Game extends Application {
             }
         });
     }
-
-
 
     public void tick(){
         if(State.getState() != null)

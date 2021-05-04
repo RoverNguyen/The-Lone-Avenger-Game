@@ -26,25 +26,23 @@ public class KeyManager {
     private EventHandler<KeyEvent> keyPressedEventHandler = e -> keys.put(e.getCode(), true);
 
     private EventHandler<KeyEvent> keyReleasedEventHandler = e -> {
-        keys.put(e.getCode(), false);
-        if(e.getCode() == KeyCode.E){
-            handler.getWorld().getEntityManager().getPlayer().getInventory().changeActive();
-        }
+        if(handler.isInGame()) {
+            keys.put(e.getCode(), false);
+            if (e.getCode() == KeyCode.E) {
+                handler.getWorld().getEntityManager().getPlayer().getInventory().changeActive();
+            } else if (e.getCode() == KeyCode.DOWN) {
+                if (handler.getWorld().getEntityManager().getPlayer().getInventory().isActive()) {
+                    handler.getWorld().getEntityManager().getPlayer().getInventory().scrollDown();
+                }
 
-        else if(e.getCode() == KeyCode.DOWN){
-            if(handler.getWorld().getEntityManager().getPlayer().getInventory().isActive()){
-                handler.getWorld().getEntityManager().getPlayer().getInventory().scrollDown();
-            }
-
-        }
-        else if(e.getCode() == KeyCode.UP){
-            if(handler.getWorld().getEntityManager().getPlayer().getInventory().isActive()){
-                handler.getWorld().getEntityManager().getPlayer().getInventory().scrollUp();
-            }
-        }
-        else if(e.getCode() == KeyCode.ENTER){
-            if(handler.getWorld().getEntityManager().getPlayer().getInventory().isActive()){
-                handler.getWorld().getEntityManager().getPlayer().getInventory().useItem();
+            } else if (e.getCode() == KeyCode.UP) {
+                if (handler.getWorld().getEntityManager().getPlayer().getInventory().isActive()) {
+                    handler.getWorld().getEntityManager().getPlayer().getInventory().scrollUp();
+                }
+            } else if (e.getCode() == KeyCode.ENTER) {
+                if (handler.getWorld().getEntityManager().getPlayer().getInventory().isActive()) {
+                    handler.getWorld().getEntityManager().getPlayer().getInventory().useItem();
+                }
             }
         }
     };

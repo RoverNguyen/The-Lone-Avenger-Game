@@ -19,6 +19,8 @@ public class VictoryState extends State{
 
     public VictoryState (Handler handler){
         super(handler);
+        handler.setInGame(false);
+
         uiManager = new UIManager(handler);
         handler.getMouseManager().setUiManager(uiManager);
 

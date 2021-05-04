@@ -16,6 +16,9 @@ public class Handler {
     private boolean tele = true;
     private boolean win = false;
 
+    // in game
+    private boolean inGame= false;
+
     public boolean isWin() {
         return win;
     }
@@ -88,5 +91,13 @@ public class Handler {
 
     public SoundManager getSoundManager(){
         return game.getSoundManager();
+    }
+
+    public boolean isInGame() {
+        return inGame;
+    }
+
+    public void setInGame(boolean inGame) {
+        this.inGame = inGame;
     }
 }

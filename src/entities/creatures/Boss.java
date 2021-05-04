@@ -58,8 +58,9 @@ public class Boss extends Enemy{
         bounds.setWidth(54 *3);
         bounds.setHeight(54 *3);
 
-        health = 500;
-        maxHealth = 500;
+        //health
+        health = 1500;
+        maxHealth = 1500;
 
         //range normal attack
         distanceA = 60 * 60 * 3 * 3;

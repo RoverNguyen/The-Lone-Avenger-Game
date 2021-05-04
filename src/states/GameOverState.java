@@ -15,6 +15,8 @@ public class GameOverState extends State{
 
     public GameOverState(Handler handler){
         super(handler);
+        handler.setInGame(false);
+
         uiManager = new UIManager(handler);
         handler.getMouseManager().setUiManager(uiManager);
 
